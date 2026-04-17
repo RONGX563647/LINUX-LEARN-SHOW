@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实战版 - Linux命令学习系统</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <div class="logo">🐧</div>
+            <span>Linux命令学习</span>
+        </div>
+        <ul class="navbar-nav">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="tutorial.html">教程版</a></li>
+            <li><a href="practice.html" class="active">实战版</a></li>
+        </ul>
+        <div class="navbar-actions">
+            <button class="btn btn-primary" id="randomBtn">🎲 随机</button>
+            <button class="btn btn-secondary" id="helpBtn">帮助</button>
+            <button class="btn btn-danger" id="resetBtn">重置</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-title">场景列表</div>
+            <div class="level-list" id="levelList"></div>
+        </div>
+
+        <div class="main-content">
+            <div class="task-card" id="taskCard">
+                <div class="task-header">
+                    <div class="task-title">选择场景</div>
+                </div>
+                <div class="task-description">
+                    请从左侧列表选择一个场景开始练习。
+                </div>
+            </div>
+
+            <div class="terminal-container">
+                <div id="terminalContainer"></div>
+            </div>
+
+            <div class="feedback-container" id="feedbackContainer">
+                <div class="feedback">
+                    <div class="feedback-title"></div>
+                    <div class="feedback-content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/commands.js"></script>
+    <script src="js/scenarios.js"></script>
+    <script src="js/validator.js"></script>
+    <script src="js/terminal.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
