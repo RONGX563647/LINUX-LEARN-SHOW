@@ -487,6 +487,17 @@ class CommandSimulator {
                 return this.help(args);
             case 'exit':
                 return this.exit(args);
+            case 'git':
+                return this.git(args);
+            case 'docker':
+                return this.docker(args);
+            case 'vim':
+            case 'vi':
+                return this.vim(args);
+            case 'systemctl':
+                return this.systemctl(args);
+            case 'journalctl':
+                return this.journalctl(args);
             default:
                 return {
                     success: false,
@@ -1338,27 +1349,33 @@ class CommandSimulator {
 
     help(args) {
         const commands = [
-            'ls      - 列出目录内容',
-            'pwd     - 显示当前工作目录',
-            'cd      - 切换目录',
-            'mkdir   - 创建目录',
-            'touch   - 创建文件',
-            'cat     - 显示文件内容',
-            'rm      - 删除文件',
-            'rmdir   - 删除空目录',
-            'cp      - 复制文件',
-            'mv      - 移动/重命名文件',
-            'grep    - 搜索文本',
-            'chmod   - 改变权限',
-            'find    - 查找文件',
-            'whereis - 查找命令位置',
-            'head    - 显示文件开头',
-            'tail    - 显示文件末尾',
-            'more    - 分页显示',
-            'less    - 分页显示',
-            'clear   - 清屏',
-            'help    - 显示帮助',
-            'exit    - 退出'
+            'ls        - 列出目录内容',
+            'pwd       - 显示当前工作目录',
+            'cd        - 切换目录',
+            'mkdir     - 创建目录',
+            'touch     - 创建文件',
+            'cat       - 显示文件内容',
+            'rm        - 删除文件',
+            'rmdir     - 删除空目录',
+            'cp        - 复制文件',
+            'mv        - 移动/重命名文件',
+            'grep      - 搜索文本',
+            'chmod     - 改变权限',
+            'find      - 查找文件',
+            'whereis   - 查找命令位置',
+            'head      - 显示文件开头',
+            'tail      - 显示文件末尾',
+            'more      - 分页显示',
+            'less      - 分页显示',
+            'tar       - 打包文件',
+            'git       - Git版本控制',
+            'docker    - Docker容器管理',
+            'vim/vi    - Vim编辑器',
+            'systemctl - 系统服务管理',
+            'journalctl- 查看系统日志',
+            'clear     - 清屏',
+            'help      - 显示帮助',
+            'exit      - 退出'
         ];
 
         return {
@@ -1372,6 +1389,580 @@ class CommandSimulator {
             success: true,
             output: '再见！',
             exit: true
+        };
+    }
+
+    git(args) {
+        if (args.length === 0) {
+            return {
+                success: false,
+                output: 'git: 缺少参数'
+            };
+        }
+
+        const subCommand = args[0];
+        const subArgs = args.slice(1);
+
+        switch (subCommand) {
+            case '--version':
+                return {
+                    success: true,
+                    output: 'git version 2.43.0'
+                };
+            case 'init':
+                return {
+                    success: true,
+                    output: '已初始化空的 Git 仓库于 /home/user/projects/.git/'
+                };
+            case 'clone':
+                if (subArgs.length === 0) {
+                    return {
+                        success: false,
+                        output: 'git clone: 缺少仓库地址'
+                    };
+                }
+                return {
+                    success: true,
+                    output: `正在克隆 '${subArgs[0]}'...\n远程: Counting objects: 100, done.\n远程: Compressing objects: 100% (50/50), done.\n远程: Total 100 (delta 25), reused 100 (delta 25)\n接收对象中: 100% (100/100), 完成.`
+                };
+            case 'status':
+                return {
+                    success: true,
+                    output: '位于分支 master\n您的分支与上游分支 \'origin/master\' 一致。\n\n尚未暂存以备提交的变更：\n  （使用 "git add <文件>..." 更新将要提交的内容）\n  （使用 "git restore <文件>..." 放弃工作区的改动）\n\t修改:     README.md\n\n尚未跟踪的文件:\n  （使用 "git add <文件>..." 以包含将要提交的内容）\n\tnewfile.txt\n\n提交为空，但存在尚未跟踪的文件（使用 "git add" 建立跟踪）'
+                };
+            case 'add':
+                return {
+                    success: true,
+                    output: ''
+                };
+            case 'commit':
+                const msgIndex = subArgs.indexOf('-m');
+                if (msgIndex !== -1 && subArgs[msgIndex + 1]) {
+                    return {
+                        success: true,
+                        output: `[master ${this.generateHash()}] ${subArgs[msgIndex + 1]}\n 2 files changed, 10 insertions(+)`
+                    };
+                }
+                return {
+                    success: true,
+                    output: `[master ${this.generateHash()}] 提交更改\n 2 files changed, 10 insertions(+)`
+                };
+            case 'log':
+                return {
+                    success: true,
+                    output: `commit ${this.generateHash()}\nAuthor: User <user@example.com>\nDate:   ${new Date().toDateString()}\n\n    初始提交\n\ncommit ${this.generateHash()}\nAuthor: User <user@example.com>\nDate:   ${new Date().toDateString()}\n\n    添加新功能`
+                };
+            case 'diff':
+                return {
+                    success: true,
+                    output: 'diff --git a/README.md b/README.md\nindex abc123..def456 100644\n--- a/README.md\n+++ b/README.md\n@@ -1,3 +1,4 @@\n# 项目名称\n+新添加的一行\n\n这是一个示例项目。'
+                };
+            case 'remote':
+                if (subArgs.includes('-v')) {
+                    return {
+                        success: true,
+                        output: 'origin  https://github.com/user/repo.git (fetch)\norigin  https://github.com/user/repo.git (push)'
+                    };
+                }
+                return {
+                    success: true,
+                    output: 'origin'
+                };
+            case 'push':
+                return {
+                    success: true,
+                    output: '枚举对象: 5, 完成.\n对象计数中: 100% (5/5), 完成.\n写入对象中: 100% (3/3), 300 bytes | 300.00 KiB/s, 完成.\n总共 3（差异 0），复用 0（差异 0），包复用 0\nTo https://github.com/user/repo.git\n   abc123..def456  master -> master'
+                };
+            case 'pull':
+                return {
+                    success: true,
+                    output: 'remote: Enumerating objects: 5, done.\nremote: Counting objects: 100% (5/5), done.\nremote: Compressing objects: 100% (3/3), done.\nremote: Total 5 (delta 1), reused 5 (delta 1), pack-reused 0\n展开对象中: 100% (5/5), 完成.\n来自 https://github.com/user/repo\n * branch            master     -> FETCH_HEAD\n   abc123..def456  master     -> origin/master\n更新 abc123..def456\nFast-forward\n README.md | 2 ++\n 1 file changed, 2 insertions(+)'
+                };
+            case 'branch':
+                if (subArgs.length === 0) {
+                    return {
+                        success: true,
+                        output: '* master\n  feature\n  develop'
+                    };
+                }
+                return {
+                    success: true,
+                    output: `分支 '${subArgs[0]}' 已创建。`
+                };
+            case 'checkout':
+                if (subArgs.includes('-b')) {
+                    const branchName = subArgs[subArgs.indexOf('-b') + 1];
+                    return {
+                        success: true,
+                        output: `切换到一个新分支 '${branchName}'`
+                    };
+                }
+                return {
+                    success: true,
+                    output: `切换到分支 '${subArgs[0]}'`
+                };
+            case 'merge':
+                return {
+                    success: true,
+                    output: `更新 ${this.generateHash()}..${this.generateHash()}\nFast-forward\n README.md | 2 ++\n 1 file changed, 2 insertions(+)`
+                };
+            case 'stash':
+                if (subArgs[0] === 'pop') {
+                    return {
+                        success: true,
+                        output: '位于分支 master\n您的分支与上游分支 \'origin/master\' 一致。\n已恢复工作区状态。\nDropped refs/stash@{0} (abc123)'
+                    };
+                }
+                return {
+                    success: true,
+                    output: '已保存工作区状态到 WIP on master: abc123 提交信息'
+                };
+            case 'reset':
+                return {
+                    success: true,
+                    output: ''
+                };
+            case 'config':
+                if (subArgs.includes('--list')) {
+                    return {
+                        success: true,
+                        output: 'user.name=User\nuser.email=user@example.com\ncore.repositoryformatversion=0\ncore.filemode=true'
+                    };
+                }
+                return {
+                    success: true,
+                    output: ''
+                };
+            default:
+                return {
+                    success: false,
+                    output: `git: '${subCommand}' 不是一个 git 命令。请参阅 'git --help'。`
+                };
+        }
+    }
+
+    generateHash() {
+        return Math.random().toString(16).substring(2, 10);
+    }
+
+    docker(args) {
+        if (args.length === 0) {
+            return {
+                success: false,
+                output: 'docker: 缺少参数'
+            };
+        }
+
+        const subCommand = args[0];
+        const subArgs = args.slice(1);
+
+        switch (subCommand) {
+            case '--version':
+                return {
+                    success: true,
+                    output: 'Docker version 24.0.7, build afdd53b'
+                };
+            case 'images':
+                return {
+                    success: true,
+                    output: 'REPOSITORY          TAG       IMAGE ID       CREATED        SIZE\nnginx               latest    abc123def456   2 days ago     142MB\nubuntu              22.04     def456abc123   5 days ago     77.8MB\nhello-world         latest    123456789abc   2 weeks ago    13.3kB'
+                };
+            case 'search':
+                if (subArgs.length === 0) {
+                    return {
+                        success: false,
+                        output: 'docker search: 缺少搜索关键词'
+                    };
+                }
+                return {
+                    success: true,
+                    output: `NAME                           DESCRIPTION                                     STARS     OFFICIAL\n${subArgs[0]}                  Official build.                                 15000     [OK]\n${subArgs[0]}-alpine           Official build.                                 5000      [OK]`
+                };
+            case 'pull':
+                if (subArgs.length === 0) {
+                    return {
+                        success: false,
+                        output: 'docker pull: 缺少镜像名'
+                    };
+                }
+                return {
+                    success: true,
+                    output: `Using default tag: latest\nlatest: Pulling from library/${subArgs[0]}\nDigest: sha256:abc123def456...\nStatus: Downloaded newer image for ${subArgs[0]}:latest\ndocker.io/library/${subArgs[0]}:latest`
+                };
+            case 'run':
+                return {
+                    success: true,
+                    output: `容器已启动，ID: ${this.generateHash().substring(0, 12)}`
+                };
+            case 'ps':
+                if (subArgs.includes('-a')) {
+                    return {
+                        success: true,
+                        output: 'CONTAINER ID   IMAGE     COMMAND   CREATED         STATUS                     PORTS     NAMES\nabc123def456   nginx     "nginx"   5 minutes ago   Exited (0) 2 minutes ago             web01\ndef456abc123   ubuntu    "bash"    10 minutes ago  Up 10 minutes                        test01'
+                    };
+                }
+                return {
+                    success: true,
+                    output: 'CONTAINER ID   IMAGE     COMMAND   CREATED         STATUS         PORTS     NAMES\nabc123def456   nginx     "nginx"   5 minutes ago   Up 5 minutes   80/tcp    web01'
+                };
+            case 'stop':
+                if (subArgs.length === 0) {
+                    return {
+                        success: false,
+                        output: 'docker stop: 缺少容器ID'
+                    };
+                }
+                return {
+                    success: true,
+                    output: subArgs[0]
+                };
+            case 'rm':
+                if (subArgs.length === 0) {
+                    return {
+                        success: false,
+                        output: 'docker rm: 缺少容器ID'
+                    };
+                }
+                return {
+                    success: true,
+                    output: subArgs[0]
+                };
+            case 'rmi':
+                if (subArgs.length === 0) {
+                    return {
+                        success: false,
+                        output: 'docker rmi: 缺少镜像ID'
+                    };
+                }
+                return {
+                    success: true,
+                    output: `Untagged: ${subArgs[0]}\nDeleted: sha256:abc123def456...`
+                };
+            case 'logs':
+                if (subArgs.length === 0) {
+                    return {
+                        success: false,
+                        output: 'docker logs: 缺少容器ID'
+                    };
+                }
+                return {
+                    success: true,
+                    output: `[${new Date().toISOString()}] Server started on port 80\n[${new Date().toISOString()}] Request received from 192.168.1.1\n[${new Date().toISOString()}] Response sent successfully`
+                };
+            case 'exec':
+                return {
+                    success: true,
+                    output: '命令执行成功'
+                };
+            case 'inspect':
+                if (subArgs.length === 0) {
+                    return {
+                        success: false,
+                        output: 'docker inspect: 缺少容器ID'
+                    };
+                }
+                return {
+                    success: true,
+                    output: `[\n    {\n        "Id": "${this.generateHash()}",\n        "Created": "${new Date().toISOString()}",\n        "Path": "/bin/bash",\n        "State": {\n            "Status": "running",\n            "Running": true\n        }\n    }\n]`
+                };
+            case 'stats':
+                return {
+                    success: true,
+                    output: 'CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT   MEM %     NET I/O           BLOCK I/O         PIDS\nabc123def456   web01     0.50%     50MiB / 2GiB        2.50%     1.5MB / 500kB    100MB / 50MB     5'
+                };
+            case 'top':
+                if (subArgs.length === 0) {
+                    return {
+                        success: false,
+                        output: 'docker top: 缺少容器ID'
+                    };
+                }
+                return {
+                    success: true,
+                    output: 'UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD\nroot                1234                5678                0                   10:00               ?                   00:00:00            nginx: master process'
+                };
+            case 'port':
+                if (subArgs.length === 0) {
+                    return {
+                        success: false,
+                        output: 'docker port: 缺少容器ID'
+                    };
+                }
+                return {
+                    success: true,
+                    output: '80/tcp -> 0.0.0.0:8080'
+                };
+            case 'restart':
+            case 'start':
+                if (subArgs.length === 0) {
+                    return {
+                        success: false,
+                        output: `docker ${subCommand}: 缺少容器ID`
+                    };
+                }
+                return {
+                    success: true,
+                    output: subArgs[0]
+                };
+            case 'pause':
+            case 'unpause':
+                if (subArgs.length === 0) {
+                    return {
+                        success: false,
+                        output: `docker ${subCommand}: 缺少容器ID`
+                    };
+                }
+                return {
+                    success: true,
+                    output: subArgs[0]
+                };
+            case 'network':
+                if (subArgs[0] === 'ls') {
+                    return {
+                        success: true,
+                        output: 'NETWORK ID     NAME      DRIVER    SCOPE\nabc123         bridge    bridge    local\ndef456         host      host      local\n123456         none      null      local'
+                    };
+                }
+                if (subArgs[0] === 'create') {
+                    return {
+                        success: true,
+                        output: `${this.generateHash().substring(0, 12)}\n网络 '${subArgs[1]}' 已创建`
+                    };
+                }
+                return {
+                    success: true,
+                    output: ''
+                };
+            case 'volume':
+                if (subArgs[0] === 'ls') {
+                    return {
+                        success: true,
+                        output: 'DRIVER    VOLUME NAME\nlocal     mydata\nlocal     app_data'
+                    };
+                }
+                if (subArgs[0] === 'create') {
+                    return {
+                        success: true,
+                        output: subArgs[1] || this.generateHash().substring(0, 12)
+                    };
+                }
+                return {
+                    success: true,
+                    output: ''
+                };
+            case 'save':
+                return {
+                    success: true,
+                    output: '镜像已保存到文件'
+                };
+            case 'load':
+                return {
+                    success: true,
+                    output: 'Loaded image: nginx:latest'
+                };
+            case 'export':
+                return {
+                    success: true,
+                    output: '容器文件系统已导出'
+                };
+            case 'build':
+                return {
+                    success: true,
+                    output: `[+] Building 5.0s (8/8) FINISHED\n => [internal] load build definition from Dockerfile\n => [internal] load .dockerignore\n => [internal] load metadata\n => [1/3] FROM docker.io/library/nginx\n => [2/3] COPY . /app\n => [3/3] RUN npm install\n => exporting to image\n => => writing image sha256:${this.generateHash()}`
+                };
+            case 'tag':
+                return {
+                    success: true,
+                    output: ''
+                };
+            case 'push':
+                return {
+                    success: true,
+                    output: 'The push refers to repository [docker.io/library/nginx]\nabc123: digest: sha256:def456 size: 1234'
+                };
+            case 'image':
+                if (subArgs[0] === 'prune') {
+                    return {
+                        success: true,
+                        output: 'Deleted Images:\nuntagged: old-image:latest\ndeleted: sha256:abc123...\nTotal reclaimed space: 100MB'
+                    };
+                }
+                return {
+                    success: true,
+                    output: ''
+                };
+            case 'container':
+                if (subArgs[0] === 'prune') {
+                    return {
+                        success: true,
+                        output: 'Deleted Containers:\nabc123\ndef456\nTotal reclaimed space: 50MB'
+                    };
+                }
+                return {
+                    success: true,
+                    output: ''
+                };
+            case 'info':
+                return {
+                    success: true,
+                    output: 'Client:\n Context:    default\n Debug Mode: false\n\nServer:\n Containers: 5\n Running: 2\n Paused: 0\n Stopped: 3\n Images: 10\n Server Version: 24.0.7\n Storage Driver: overlay2\n Operating System: Linux'
+                };
+            case 'system':
+                if (subArgs.includes('prune')) {
+                    return {
+                        success: true,
+                        output: 'Deleted Containers:\nabc123\nDeleted Images:\nuntagged: old-image:latest\nDeleted Networks:\ntest_net\nTotal reclaimed space: 500MB'
+                    };
+                }
+                return {
+                    success: true,
+                    output: ''
+                };
+            default:
+                return {
+                    success: false,
+                    output: `docker: '${subCommand}' 不是一个 docker 命令。`
+                };
+        }
+    }
+
+    vim(args) {
+        if (args.length === 0) {
+            return {
+                success: true,
+                output: 'Vim 编辑器已启动（模拟）\n按 i 进入插入模式\n按 ESC 退出插入模式\n输入 :w 保存\n输入 :q 退出\n输入 :wq 保存并退出'
+            };
+        }
+
+        const fileName = args[0];
+        const resolved = this.fs.resolvePath(fileName);
+        const normalized = this.fs.normalizePath(resolved);
+
+        if (this.fs.exists(normalized)) {
+            const item = this.fs.getItem(normalized);
+            if (item.type === 'file') {
+                return {
+                    success: true,
+                    output: `打开文件: ${fileName}\n\n${item.content}\n\n~\n~\n~\n"${fileName}" ${item.content.split('\n').length}L, ${item.content.length}B`
+                };
+            }
+        }
+
+        return {
+            success: true,
+            output: `创建新文件: ${fileName}\n\n~\n~\n~\n"${fileName}" [新文件]`
+        };
+    }
+
+    systemctl(args) {
+        if (args.length === 0) {
+            return {
+                success: false,
+                output: 'systemctl: 缺少参数'
+            };
+        }
+
+        const subCommand = args[0];
+        const serviceName = args[1] || 'nginx';
+
+        switch (subCommand) {
+            case 'status':
+                return {
+                    success: true,
+                    output: `● ${serviceName}.service - ${serviceName} Server\n   Loaded: loaded (/lib/systemd/system/${serviceName}.service; enabled; vendor preset: enabled)\n   Active: active (running) since ${new Date().toDateString()}; 5min ago\n Main PID: 1234 (${serviceName})\n    Tasks: 2 (limit: 4915)\n   Memory: 5.0M\n   CGroup: /system.slice/${serviceName}.service\n           └─1234 /usr/sbin/${serviceName}\n\n${new Date().toDateString()} ${serviceName}[1234]: Server started.`
+                };
+            case 'start':
+                return {
+                    success: true,
+                    output: ''
+                };
+            case 'stop':
+                return {
+                    success: true,
+                    output: ''
+                };
+            case 'restart':
+                return {
+                    success: true,
+                    output: ''
+                };
+            case 'reload':
+                return {
+                    success: true,
+                    output: ''
+                };
+            case 'enable':
+                return {
+                    success: true,
+                    output: `Created symlink /etc/systemd/system/multi-user.target.wants/${serviceName}.service → /lib/systemd/system/${serviceName}.service.`
+                };
+            case 'disable':
+                return {
+                    success: true,
+                    output: `Removed /etc/systemd/system/multi-user.target.wants/${serviceName}.service.`
+                };
+            case 'is-enabled':
+                return {
+                    success: true,
+                    output: 'enabled'
+                };
+            case 'is-active':
+                return {
+                    success: true,
+                    output: 'active'
+                };
+            case 'list-units':
+                if (args.includes('--type=service')) {
+                    return {
+                        success: true,
+                        output: '  UNIT                               LOAD   ACTIVE SUB     DESCRIPTION\n  nginx.service                      loaded active running nginx Server\n  ssh.service                        loaded active running OpenSSH Server\n  systemd-journald.service           loaded active running Journal Service\n\nLOAD   = Reflects whether the unit definition was properly loaded.\nACTIVE = The high-level unit activation state.\n\n3 loaded units listed.'
+                    };
+                }
+                return {
+                    success: true,
+                    output: 'UNIT                               LOAD   ACTIVE SUB     JOB   DESCRIPTION\nnginx.service                      loaded active running       nginx Server\nssh.service                        loaded active running       OpenSSH Server'
+                };
+            case 'daemon-reload':
+                return {
+                    success: true,
+                    output: ''
+                };
+            case '--failed':
+                return {
+                    success: true,
+                    output: '  UNIT          LOAD   ACTIVE SUB    DESCRIPTION\n\n0 loaded units listed.'
+                };
+            case 'cat':
+                return {
+                    success: true,
+                    output: `[Unit]\nDescription=${serviceName} Server\nAfter=network.target\n\n[Service]\nType=forking\nExecStart=/usr/sbin/${serviceName}\nExecReload=/bin/kill -s HUP $MAINPID\nExecStop=/bin/kill -s QUIT $MAINPID\n\n[Install]\nWantedBy=multi-user.target`
+                };
+            default:
+                return {
+                    success: false,
+                    output: `systemctl: 未知命令 '${subCommand}'`
+                };
+        }
+    }
+
+    journalctl(args) {
+        if (args.includes('-u')) {
+            const serviceIndex = args.indexOf('-u') + 1;
+            const serviceName = args[serviceIndex] || 'nginx';
+            return {
+                success: true,
+                output: `-- Logs begin at ${new Date().toDateString()}. --\n${new Date().toISOString()} ${serviceName}[1234]: Server started\n${new Date().toISOString()} ${serviceName}[1234]: Accepting connections\n${new Date().toISOString()} ${serviceName}[1234]: Request processed`
+            };
+        }
+        if (args.includes('-f')) {
+            return {
+                success: true,
+                output: `-- Logs begin at ${new Date().toDateString()}. --\n${new Date().toISOString()} systemd[1]: Started Session\n${new Date().toISOString()} kernel: [UFW BLOCK] IN=eth0\n（实时日志跟踪中...）`
+            };
+        }
+        return {
+            success: true,
+            output: `-- Logs begin at ${new Date().toDateString()}. --\n${new Date().toISOString()} systemd[1]: Starting System...\n${new Date().toISOString()} systemd[1]: Started System Logging Service.`
         };
     }
 }

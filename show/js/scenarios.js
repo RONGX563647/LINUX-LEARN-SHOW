@@ -6,6 +6,7 @@ const tutorialLevels = [
         name: '目录导航入门',
         description: '学习基本的目录导航命令：cd、pwd、ls',
         commands: ['cd', 'pwd', 'ls'],
+        startPath: '/home/user',
         tasks: [
             {
                 id: 1,
@@ -78,6 +79,7 @@ const tutorialLevels = [
         name: '文件管理基础',
         description: '学习文件和目录的创建、复制、删除和移动',
         commands: ['touch', 'mkdir', 'cp', 'mv', 'rm', 'rmdir'],
+        startPath: '/home/user',
         tasks: [
             {
                 id: 1,
@@ -164,6 +166,7 @@ const tutorialLevels = [
         name: '文件内容查看',
         description: '学习查看文件内容的各种命令',
         commands: ['cat', 'more', 'less', 'head', 'tail'],
+        startPath: '/home/user/documents',
         tasks: [
             {
                 id: 1,
@@ -175,7 +178,8 @@ const tutorialLevels = [
                 validation: {
                     type: 'contains',
                     command: 'cat',
-                    args: ['readme.txt']
+                    args: ['readme.txt'],
+                    requiredPath: '/home/user/documents'
                 }
             },
             {
@@ -189,7 +193,8 @@ const tutorialLevels = [
                     type: 'contains',
                     command: 'head',
                     options: ['-n'],
-                    args: ['5', 'app.log']
+                    args: ['5', 'app.log'],
+                    requiredPath: '/home/user/logs'
                 }
             },
             {
@@ -203,7 +208,8 @@ const tutorialLevels = [
                     type: 'contains',
                     command: 'tail',
                     options: ['-n'],
-                    args: ['3', 'app.log']
+                    args: ['3', 'app.log'],
+                    requiredPath: '/home/user/logs'
                 }
             },
             {
@@ -216,7 +222,8 @@ const tutorialLevels = [
                 validation: {
                     type: 'contains',
                     command: 'more',
-                    args: ['notes.txt']
+                    args: ['notes.txt'],
+                    requiredPath: '/home/user/documents'
                 }
             },
             {
@@ -229,7 +236,8 @@ const tutorialLevels = [
                 validation: {
                     type: 'contains',
                     command: 'less',
-                    args: ['notes.txt']
+                    args: ['notes.txt'],
+                    requiredPath: '/home/user/documents'
                 }
             }
         ]
@@ -239,6 +247,7 @@ const tutorialLevels = [
         name: '文件查找技巧',
         description: '学习查找文件和搜索文本的命令',
         commands: ['find', 'whereis', 'grep'],
+        startPath: '/home/user',
         tasks: [
             {
                 id: 1,
@@ -276,7 +285,8 @@ const tutorialLevels = [
                 validation: {
                     type: 'contains',
                     command: 'grep',
-                    args: ['ERROR', 'app.log']
+                    args: ['ERROR', 'app.log'],
+                    requiredPath: '/home/user/logs'
                 }
             },
             {
@@ -290,7 +300,8 @@ const tutorialLevels = [
                     type: 'contains',
                     command: 'grep',
                     options: ['-i'],
-                    args: ['error', 'app.log']
+                    args: ['error', 'app.log'],
+                    requiredPath: '/home/user/logs'
                 }
             }
         ]
@@ -300,6 +311,7 @@ const tutorialLevels = [
         name: '权限管理',
         description: '学习文件和目录权限的管理',
         commands: ['chmod'],
+        startPath: '/home/user',
         tasks: [
             {
                 id: 1,
@@ -360,6 +372,7 @@ const tutorialLevels = [
         name: '压缩与备份',
         description: '学习文件打包和压缩命令',
         commands: ['tar', 'gzip', 'bzip2'],
+        startPath: '/home/user',
         tasks: [
             {
                 id: 1,
@@ -423,6 +436,7 @@ const tutorialLevels = [
         name: 'Vim编辑器入门',
         description: '学习Vim编辑器的基本操作和常用命令',
         commands: ['vim', 'vi'],
+        startPath: '/home/user',
         tasks: [
             {
                 id: 1,
@@ -768,6 +782,7 @@ const tutorialLevels = [
         name: 'Docker容器基础',
         description: '学习Docker容器的基本操作命令',
         commands: ['docker'],
+        startPath: '/home/user',
         tasks: [
             {
                 id: 1,
@@ -1238,6 +1253,7 @@ const tutorialLevels = [
         name: 'Git版本控制',
         description: '学习Git版本控制系统的基本操作',
         commands: ['git'],
+        startPath: '/home/user/projects',
         tasks: [
             {
                 id: 1,
@@ -1559,6 +1575,7 @@ const tutorialLevels = [
         name: 'Systemctl服务管理',
         description: '学习使用systemctl管理系统服务',
         commands: ['systemctl'],
+        startPath: '/home/user',
         tasks: [
             {
                 id: 1,
@@ -1763,6 +1780,7 @@ const practiceScenarios = [
         description: '作为新员工，你需要熟悉公司的文件系统结构',
         story: '欢迎加入公司！作为新员工，你需要了解公司的文件系统结构，创建自己的工作目录，并熟悉基本的文件操作。',
         requiredLevels: [],
+        startPath: '/home/user',
         tasks: [
             {
                 id: 1,
@@ -1798,7 +1816,8 @@ const practiceScenarios = [
                 validation: {
                     type: 'contains',
                     command: 'mkdir',
-                    args: ['mywork']
+                    args: ['mywork'],
+                    requiredPath: '/home/user/projects'
                 }
             },
             {
@@ -1811,7 +1830,8 @@ const practiceScenarios = [
                 validation: {
                     type: 'contains',
                     command: 'touch',
-                    args: ['todo.txt']
+                    args: ['todo.txt'],
+                    requiredPath: '/home/user/projects/mywork'
                 }
             },
             {
@@ -1824,7 +1844,8 @@ const practiceScenarios = [
                 validation: {
                     type: 'contains',
                     command: 'cat',
-                    args: ['readme.txt']
+                    args: ['readme.txt'],
+                    requiredPath: '/home/user/documents'
                 }
             },
             {
@@ -1848,6 +1869,7 @@ const practiceScenarios = [
         description: '作为日志分析员，你需要分析系统日志文件',
         story: '公司服务器出现了一些问题，作为日志分析员，你需要分析日志文件找出问题所在。',
         requiredLevels: [1, 4],
+        startPath: '/home/user/logs',
         tasks: [
             {
                 id: 1,
@@ -1872,7 +1894,8 @@ const practiceScenarios = [
                 validation: {
                     type: 'contains',
                     command: 'cat',
-                    args: ['app.log']
+                    args: ['app.log'],
+                    requiredPath: '/home/user/logs'
                 }
             },
             {
@@ -1885,7 +1908,8 @@ const practiceScenarios = [
                 validation: {
                     type: 'contains',
                     command: 'grep',
-                    args: ['ERROR', 'app.log']
+                    args: ['ERROR', 'app.log'],
+                    requiredPath: '/home/user/logs'
                 }
             },
             {
@@ -1899,7 +1923,8 @@ const practiceScenarios = [
                     type: 'contains',
                     command: 'tail',
                     options: ['-n'],
-                    args: ['5', 'app.log']
+                    args: ['5', 'app.log'],
+                    requiredPath: '/home/user/logs'
                 }
             },
             {
@@ -1913,7 +1938,8 @@ const practiceScenarios = [
                     type: 'contains',
                     command: 'find',
                     options: ['-name'],
-                    args: ['*.log']
+                    args: ['*.log'],
+                    requiredPath: '/home/user/logs'
                 }
             }
         ]
@@ -1924,6 +1950,7 @@ const practiceScenarios = [
         description: '作为运维工程师，你需要部署一个新项目',
         story: '公司开发了一个新项目，需要你将项目文件打包部署到服务器上。',
         requiredLevels: [5, 6],
+        startPath: '/home/user/projects/myapp',
         tasks: [
             {
                 id: 1,
@@ -1947,7 +1974,8 @@ const practiceScenarios = [
                 expectedCommand: 'ls',
                 validation: {
                     type: 'contains',
-                    command: 'ls'
+                    command: 'ls',
+                    requiredPath: '/home/user/projects/myapp'
                 }
             },
             {
@@ -1960,7 +1988,8 @@ const practiceScenarios = [
                 validation: {
                     type: 'contains',
                     command: 'tar',
-                    options: ['-c', '-z', '-v', '-f']
+                    options: ['-c', '-z', '-v', '-f'],
+                    requiredPath: '/home/user/projects/myapp'
                 }
             },
             {
@@ -1973,7 +2002,8 @@ const practiceScenarios = [
                 validation: {
                     type: 'contains',
                     command: 'chmod',
-                    args: ['+x', 'main.c']
+                    args: ['+x', 'main.c'],
+                    requiredPath: '/home/user/projects/myapp'
                 }
             },
             {
@@ -1986,7 +2016,8 @@ const practiceScenarios = [
                 validation: {
                     type: 'contains',
                     command: 'mv',
-                    args: ['myapp.tar.gz', '..']
+                    args: ['myapp.tar.gz', '..'],
+                    requiredPath: '/home/user/projects/myapp'
                 }
             },
             {
@@ -2010,6 +2041,7 @@ const practiceScenarios = [
         description: '作为系统管理员，你需要清理和维护系统',
         story: '系统运行一段时间后，需要清理临时文件和备份重要数据。',
         requiredLevels: [2, 6],
+        startPath: '/home/user',
         tasks: [
             {
                 id: 1,
@@ -2048,7 +2080,8 @@ const practiceScenarios = [
                     type: 'contains',
                     command: 'cp',
                     options: ['-r'],
-                    args: ['documents', 'backup']
+                    args: ['documents', 'backup'],
+                    requiredPath: '/home/user'
                 }
             },
             {
@@ -2062,7 +2095,8 @@ const practiceScenarios = [
                     type: 'contains',
                     command: 'tar',
                     options: ['-c', '-z', '-v', '-f'],
-                    args: ['backup.tar.gz', 'backup']
+                    args: ['backup.tar.gz', 'backup'],
+                    requiredPath: '/home/user'
                 }
             },
             {
@@ -2075,7 +2109,8 @@ const practiceScenarios = [
                 validation: {
                     type: 'contains',
                     command: 'rm',
-                    options: ['-r', '-f']
+                    options: ['-r', '-f'],
+                    requiredPath: '/tmp'
                 }
             }
         ]
@@ -2086,6 +2121,7 @@ const practiceScenarios = [
         description: '作为开发人员，你需要使用Vim编辑配置文件',
         story: '项目需要修改配置文件，作为开发人员，你需要使用Vim编辑器快速修改配置。',
         requiredLevels: [7],
+        startPath: '/home/user',
         tasks: [
             {
                 id: 1,
@@ -2097,7 +2133,8 @@ const practiceScenarios = [
                 validation: {
                     type: 'contains',
                     command: 'vim',
-                    args: ['config.conf']
+                    args: ['config.conf'],
+                    checkExists: false
                 }
             },
             {
@@ -2144,6 +2181,7 @@ const practiceScenarios = [
         description: '作为DevOps工程师，你需要使用Docker部署应用',
         story: '公司需要将应用容器化部署，作为DevOps工程师，你需要使用Docker完成部署任务。',
         requiredLevels: [8],
+        startPath: '/home/user',
         tasks: [
             {
                 id: 1,
@@ -2228,6 +2266,7 @@ const practiceScenarios = [
         description: '作为开发人员，你需要使用Git进行项目协作',
         story: '团队正在开发一个新项目，你需要使用Git进行代码管理和团队协作。',
         requiredLevels: [9],
+        startPath: '/home/user/projects',
         tasks: [
             {
                 id: 1,
@@ -2362,6 +2401,7 @@ const practiceScenarios = [
         description: '作为系统管理员，你需要管理服务器服务',
         story: '服务器上的服务需要管理和维护，作为系统管理员，你需要确保服务正常运行。',
         requiredLevels: [10],
+        startPath: '/home/user',
         tasks: [
             {
                 id: 1,

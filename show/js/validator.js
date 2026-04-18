@@ -1,7 +1,9 @@
 /* 命令验证引擎 - Linux命令学习页面 */
 
 class CommandValidator {
-    constructor() {
+    constructor(fileSystem = null) {
+        this.fs = fileSystem;
+        
         this.commandAliases = {
             'ls': ['ls', 'dir'],
             'pwd': ['pwd'],
@@ -23,7 +25,13 @@ class CommandValidator {
             'less': ['less'],
             'tar': ['tar'],
             'gzip': ['gzip'],
-            'bzip2': ['bzip2']
+            'bzip2': ['bzip2'],
+            'git': ['git'],
+            'docker': ['docker'],
+            'vim': ['vim', 'vi'],
+            'vi': ['vim', 'vi'],
+            'systemctl': ['systemctl'],
+            'journalctl': ['journalctl']
         };
 
         this.optionAliases = {
@@ -85,10 +93,45 @@ class CommandValidator {
         };
     }
 
-    validate(userInput, validationRule) {
+    validate(userInput, validationRule, context = {}) {
         const parsed = this.parseCommand(userInput);
+        const currentPath = context.currentPath || '/home/user';
+        const fs = context.fileSystem || this.fs;
 
-        const smartValidation = this.smartValidate(parsed, validationRule);
+        if (validationRule.requiredPath) {
+            const normalizedRequired = this.normalizePath(validationRule.requiredPath);
+            const normalizedCurrent = this.normalizePath(currentPath);
+            if (normalizedCurrent !== normalizedRequired) {
+                return {
+                    success: false,
+                    message: `请在正确的目录下执行此命令。\n当前目录: ${currentPath}\n需要目录: ${validationRule.requiredPath}`,
+                    hint: `先使用 cd ${validationRule.requiredPath} 切换到目标目录`
+                };
+            }
+        }
+
+        if (fs && validationRule.args && validationRule.args.length > 0) {
+            for (const arg of validationRule.args) {
+                if (arg.startsWith('/') || arg.startsWith('~') || arg === '..' || arg === '.') continue;
+                if (arg.includes('*')) continue;
+                if (arg.match(/^\d+$/)) continue;
+                if (arg.match(/^[a-zA-Z0-9_\-\.]+$/)) {
+                    const resolvedPath = this.resolveArgPath(arg, currentPath);
+                    if (!fs.exists(resolvedPath)) {
+                        const shouldExist = validationRule.checkExists !== false;
+                        if (shouldExist && validationRule.type !== 'contains') {
+                            return {
+                                success: false,
+                                message: `文件或目录 '${arg}' 不存在于当前目录。\n当前目录: ${currentPath}`,
+                                hint: `请确认文件路径是否正确，或先创建该文件/目录`
+                            };
+                        }
+                    }
+                }
+            }
+        }
+
+        const smartValidation = this.smartValidate(parsed, validationRule, context);
         if (smartValidation) {
             return smartValidation;
         }
@@ -112,7 +155,39 @@ class CommandValidator {
         }
     }
 
-    smartValidate(parsed, rule) {
+    resolveArgPath(arg, currentPath) {
+        if (arg.startsWith('/')) return arg;
+        if (arg.startsWith('~')) return '/home/user' + arg.substring(1);
+        if (arg === '..') {
+            const parts = currentPath.split('/');
+            parts.pop();
+            return parts.join('/') || '/';
+        }
+        if (arg === '.') return currentPath;
+        return currentPath + '/' + arg;
+    }
+
+    normalizePath(path) {
+        const parts = path.split('/').filter(p => p);
+        const result = [];
+        for (const part of parts) {
+            if (part === '..') {
+                result.pop();
+            } else if (part !== '.') {
+                result.push(part);
+            }
+        }
+        return '/' + result.join('/');
+    }
+
+    setFileSystem(fs) {
+        this.fs = fs;
+    }
+
+    smartValidate(parsed, rule, context = {}) {
+        const currentPath = context.currentPath || '/home/user';
+        const fs = context.fileSystem || this.fs;
+        
         if (parsed.command !== rule.command) {
             return null;
         }
@@ -514,7 +589,13 @@ class CommandValidator {
             'whereis': 'whereis命令查找命令位置',
             'head': 'head命令显示文件开头',
             'tail': 'tail命令显示文件末尾',
-            'tar': 'tar命令打包文件'
+            'tar': 'tar命令打包文件',
+            'git': 'git命令用于版本控制',
+            'docker': 'docker命令用于容器管理',
+            'vim': 'vim是文本编辑器',
+            'vi': 'vi是文本编辑器',
+            'systemctl': 'systemctl命令管理系统服务',
+            'journalctl': 'journalctl命令查看系统日志'
         };
 
         return hints[command] || '请参考命令手册';
