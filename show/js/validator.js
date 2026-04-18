@@ -535,7 +535,7 @@ class CommandValidator {
           hint: this.getHint(rule.command),
         };
       }
-      if (fs && parsed.args.length >= 2) {
+      if (fs && totalParts >= 2) {
         const fileArg = parsed.args[parsed.args.length - 1];
         const resolvedPath = this.resolveArgPath(fileArg, currentPath);
         if (!fs.exists(resolvedPath)) {
@@ -553,22 +553,25 @@ class CommandValidator {
     }
 
     if (rule.command === "chmod") {
-      if (parsed.args.length < 2) {
+      const totalParts = parsed.options.length + parsed.args.length;
+      if (totalParts < 2) {
         return {
           success: false,
           message: `缺少必要的参数。\n正确答案：${rule.command} 权限 文件名`,
           hint: this.getHint(rule.command),
         };
       }
-      if (fs && parsed.args.length >= 2) {
-        const fileArg = parsed.args[parsed.args.length - 1];
-        const resolvedPath = this.resolveArgPath(fileArg, currentPath);
-        if (!fs.exists(resolvedPath)) {
-          return {
-            success: false,
-            message: `文件 '${fileArg}' 不存在。\n当前目录: ${currentPath}`,
-            hint: `请确认文件路径是否正确，或先创建该文件`,
-          };
+      if (fs && totalParts >= 2) {
+        const fileArg = parsed.args.length > 0 ? parsed.args[parsed.args.length - 1] : null;
+        if (fileArg) {
+          const resolvedPath = this.resolveArgPath(fileArg, currentPath);
+          if (!fs.exists(resolvedPath)) {
+            return {
+              success: false,
+              message: `文件 '${fileArg}' 不存在。\n当前目录: ${currentPath}`,
+              hint: `请确认文件路径是否正确，或先创建该文件`,
+            };
+          }
         }
       }
       return {
@@ -789,7 +792,7 @@ class CommandValidator {
 
   validateArgs(parsed, rule) {
     let userArgs = parsed.args;
-    
+
     if (!this.isCommandValid(parsed.command, rule.command)) {
       if (rule.command.includes(" ")) {
         const ruleParts = rule.command.split(" ");

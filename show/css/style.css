@@ -451,6 +451,29 @@ body {
   border-radius: 10px;
 }
 
+/* 右上角链接 */
+.header-links {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.header-link {
+  color: var(--text-dim);
+  font-size: 11px;
+  text-decoration: none;
+  padding: 2px 8px;
+  border-radius: 4px;
+  transition: all 0.2s;
+  border: 1px solid var(--border);
+}
+
+.header-link:hover {
+  color: var(--text-bright);
+  background: var(--bg-tertiary);
+  border-color: var(--text-dim);
+}
+
 /* ===== 终端主体 ===== */
 .terminal {
   display: flex;

@@ -929,7 +929,12 @@ class App {
       }
 
       this.saveProgress();
-      this.loadLevel(this.progress.tutorial.currentLevel);
+
+      if (levelScore.completed < this.currentLevel.tasks.length) {
+        this.loadLevel(levelId);
+      } else {
+        this.loadLevel(this.progress.tutorial.currentLevel);
+      }
     } else if (this.mode === "practice") {
       const scenarioId = this.currentScenario.id;
       const scenarioProgress = this.progress.practice.scenarioProgress[scenarioId] || {
@@ -947,7 +952,12 @@ class App {
       }
 
       this.saveProgress();
-      this.loadScenario(this.progress.practice.currentScenario);
+
+      if (scenarioProgress.completedTasks < this.currentScenario.tasks.length) {
+        this.loadScenario(scenarioId);
+      } else {
+        this.loadScenario(this.progress.practice.currentScenario);
+      }
     }
 
     this.updateProgressBadge();
