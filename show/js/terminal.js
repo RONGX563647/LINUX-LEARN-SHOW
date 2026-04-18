@@ -37,10 +37,11 @@ class Terminal {
                     <div class="terminal-dot yellow"></div>
                     <div class="terminal-dot green"></div>
                 </div>
+                <div class="terminal-task-fixed" id="terminalTaskFixed"></div>
                 <div class="terminal-output" id="terminalOutput"></div>
                 <div class="terminal-input-line">
                     <span class="terminal-prompt" id="terminalPrompt">${this.options.prompt}</span>
-                    <input type="text" class="terminal-input" id="terminalInput" 
+                    <input type="text" class="terminal-input" id="terminalInput"
                            placeholder="输入命令..." autocomplete="off" autofocus>
                 </div>
             </div>
@@ -49,6 +50,7 @@ class Terminal {
         this.outputElement = document.getElementById('terminalOutput');
         this.inputElement = document.getElementById('terminalInput');
         this.promptElement = document.getElementById('terminalPrompt');
+        this.taskFixedElement = document.getElementById('terminalTaskFixed');
     }
 
     bindEvents() {
@@ -183,7 +185,8 @@ class Terminal {
         if (parts.length === 1) {
             const commands = ['ls', 'pwd', 'cd', 'mkdir', 'touch', 'cat', 'rm', 'rmdir', 
                              'cp', 'mv', 'grep', 'chmod', 'find', 'whereis', 'head', 
-                             'tail', 'more', 'less', 'tar', 'gzip', 'bzip2', 'clear', 'help'];
+                             'tail', 'more', 'less', 'tar', 'gzip', 'bzip2', 'clear', 'help',
+                             'git', 'docker', 'vim', 'vi', 'systemctl', 'journalctl'];
             const matches = commands.filter(cmd => cmd.startsWith(lastPart));
             if (matches.length === 1) {
                 this.inputElement.value = matches[0] + ' ';
@@ -267,6 +270,38 @@ class Terminal {
         }
     }
 
+    showTaskInfo(task, currentIndex, totalTasks, hasPrev, hasNext) {
+        if (!task) {
+            this.taskFixedElement.innerHTML = `
+                <div class="terminal-task-wrapper">
+                    <div class="terminal-task-info">
+                        <span class="terminal-task-title">📌 请选择关卡</span>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        this.taskFixedElement.innerHTML = `
+            <div class="terminal-task-wrapper">
+                <div class="terminal-task-info">
+                    <span class="terminal-task-title">🎯 ${task.title}</span>
+                    <span class="terminal-task-progress">[${currentIndex}/${totalTasks}]</span>
+                    <span class="terminal-task-goal">▸ ${task.goal}</span>
+                    <span class="terminal-task-hint">💡 ${task.hint}</span>
+                    <span class="terminal-task-nav">
+                        <button class="terminal-task-nav-btn" onclick="app.prevTask()" ${!hasPrev ? 'disabled' : ''}>←</button>
+                        <button class="terminal-task-nav-btn" onclick="app.nextTask()" ${!hasNext ? 'disabled' : ''}>→</button>
+                    </span>
+                </div>
+            </div>
+        `;
+    }
+
+    clearTaskInfo() {
+        this.taskFixedElement.innerHTML = '';
+    }
+
     focus() {
         this.inputElement.focus();
     }
@@ -274,6 +309,15 @@ class Terminal {
     setPrompt(prompt) {
         this.options.prompt = prompt;
         this.promptElement.textContent = prompt;
+    }
+
+    setCurrentPath(path) {
+        if (this.fs.exists(path) && this.fs.isDirectory(path)) {
+            this.fs.currentPath = path;
+            this.updatePrompt();
+            return true;
+        }
+        return false;
     }
 
     disable() {
