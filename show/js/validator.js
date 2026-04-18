@@ -562,7 +562,8 @@ class CommandValidator {
         };
       }
       if (fs && totalParts >= 2) {
-        const fileArg = parsed.args.length > 0 ? parsed.args[parsed.args.length - 1] : null;
+        const fileArg =
+          parsed.args.length > 0 ? parsed.args[parsed.args.length - 1] : null;
         if (fileArg) {
           const resolvedPath = this.resolveArgPath(fileArg, currentPath);
           if (!fs.exists(resolvedPath)) {
@@ -638,12 +639,36 @@ class CommandValidator {
     }
 
     if (rule.command === "tar") {
+      if (rule.options && rule.options.length > 0) {
+        const hasOption = this.hasRequiredOptions(
+          parsed.command,
+          parsed.options,
+          rule.options,
+        );
+        if (!hasOption) {
+          return {
+            success: false,
+            message: `缺少必要的选项。\n正确答案：${rule.command} ${rule.options.join(" ")} ${rule.args ? rule.args.join(" ") : ""}`,
+            hint: this.getHint(rule.command),
+          };
+        }
+      }
       if (parsed.args.length === 0) {
         return {
           success: false,
           message: `缺少必要的参数。\n正确答案：${rule.command} ${rule.args ? rule.args.join(" ") : "选项 文件名"}`,
           hint: this.getHint(rule.command),
         };
+      }
+      if (rule.args && rule.args.length > 0) {
+        const hasArg = this.hasRequiredArgs(parsed.args, rule.args);
+        if (!hasArg) {
+          return {
+            success: false,
+            message: `缺少必要的参数。\n正确答案：${rule.command} ${rule.args ? rule.args.join(" ") : ""}`,
+            hint: this.getHint(rule.command),
+          };
+        }
       }
       return {
         success: true,
@@ -696,6 +721,33 @@ class CommandValidator {
         return {
           success: false,
           message: `命令不正确。\n正确答案：${rule.command}${rule.options && rule.options.length > 0 ? " " + rule.options[0] : ""}${rule.args && rule.args.length > 0 ? " " + rule.args.join(" ") : ""}`,
+          hint: this.getHint(rule.command),
+        };
+      }
+    }
+
+    if (rule.options && rule.options.length > 0) {
+      const hasRequiredOption = this.hasRequiredOptions(
+        parsed.command,
+        parsed.options,
+        rule.options,
+      );
+      if (!hasRequiredOption) {
+        return {
+          success: false,
+          message: `缺少必要的选项。\n正确答案：${rule.command}${rule.options && rule.options.length > 0 ? " " + rule.options[0] : ""}${rule.args && rule.args.length > 0 ? " " + rule.args.join(" ") : ""}`,
+          hint: this.getHint(rule.command),
+        };
+      }
+    }
+
+    if (rule.args && rule.args.length > 0) {
+      const userArgs = rule.command.includes(" ") ? parsed.args.slice(1) : parsed.args;
+      const hasRequiredArg = this.hasRequiredArgs(userArgs, rule.args);
+      if (!hasRequiredArg) {
+        return {
+          success: false,
+          message: `缺少必要的参数。\n正确答案：${rule.command}${rule.options && rule.options.length > 0 ? " " + rule.options[0] : ""}${rule.args && rule.args.length > 0 ? " " + rule.args.join(" ") : ""}`,
           hint: this.getHint(rule.command),
         };
       }
@@ -849,28 +901,28 @@ class CommandValidator {
   hasRequiredOptions(command, userOptions, requiredOptions) {
     const aliases = this.optionAliases[command] || {};
 
-    const allAliases = [];
     for (const required of requiredOptions) {
       const optionAliases = aliases[required] || [required];
-      allAliases.push(...optionAliases);
+      const matched = userOptions.some((opt) => {
+        if (optionAliases.includes(opt)) {
+          return true;
+        }
+        for (const alias of optionAliases) {
+          if (opt.length > 1 && opt.includes(alias)) {
+            return true;
+          }
+          if (opt === "-" + alias.charAt(1) && alias.startsWith("-")) {
+            return true;
+          }
+        }
+        return false;
+      });
+      if (!matched) {
+        return false;
+      }
     }
 
-    const hasOption = userOptions.some((opt) => {
-      if (allAliases.includes(opt)) {
-        return true;
-      }
-      for (const required of requiredOptions) {
-        if (opt.length > 1 && opt.includes(required)) {
-          return true;
-        }
-        if (opt === "-" + required.charAt(1) && required.startsWith("-")) {
-          return true;
-        }
-      }
-      return false;
-    });
-
-    return hasOption;
+    return true;
   }
 
   hasRequiredArgs(userArgs, requiredArgs) {
@@ -1035,47 +1087,73 @@ class CommandValidator {
   validateSubCommand(parsed, rule, commandName) {
     const subCommand = rule.command.substring(commandName.length + 1);
 
-    if (parsed.args.length === 0) {
+    if (subCommand.startsWith("-")) {
+      const hasOption = parsed.options.some(
+        (opt) => opt === subCommand || opt.startsWith(subCommand),
+      );
+      if (hasOption) {
+        return {
+          success: true,
+          message: "命令正确！",
+        };
+      }
       return {
         success: false,
-        message: `缺少必要的参数。\n正确答案：${rule.command}`,
+        message: `命令不正确。\n正确答案：${rule.command}`,
         hint: this.getHint(commandName),
       };
     }
 
-    const userSubCommand = parsed.args[0];
-    if (userSubCommand === subCommand) {
-      if (rule.options && rule.options.length > 0) {
-        const hasOption = parsed.options.some((opt) =>
-          rule.options.includes(opt),
-        );
-        if (!hasOption) {
-          return {
-            success: false,
-            message: `缺少必要的选项。\n正确答案：${rule.command}`,
-            hint: this.getHint(commandName),
-          };
-        }
+    const subCommandParts = subCommand.split(" ");
+    const requiredSubCommands = subCommandParts;
+
+    const userSubCommands = parsed.args;
+
+    for (let i = 0; i < requiredSubCommands.length; i++) {
+      if (i >= userSubCommands.length) {
+        return {
+          success: false,
+          message: `缺少必要的参数。\n正确答案：${rule.command}`,
+          hint: this.getHint(commandName),
+        };
       }
-      if (rule.args && rule.args.length > 0) {
-        const hasArg = this.hasRequiredArgs(parsed.args.slice(1), rule.args);
-        if (!hasArg) {
-          return {
-            success: false,
-            message: `缺少必要的参数。\n正确答案：${rule.command}`,
-            hint: this.getHint(commandName),
-          };
-        }
+
+      if (userSubCommands[i] !== requiredSubCommands[i]) {
+        return {
+          success: false,
+          message: `命令不正确。\n正确答案：${rule.command}`,
+          hint: this.getHint(commandName),
+        };
       }
-      return {
-        success: true,
-        message: "命令正确！",
-      };
     }
+
+    if (rule.options && rule.options.length > 0) {
+      const hasOption = parsed.options.some((opt) =>
+        rule.options.includes(opt),
+      );
+      if (!hasOption) {
+        return {
+          success: false,
+          message: `缺少必要的选项。\n正确答案：${rule.command}`,
+          hint: this.getHint(commandName),
+        };
+      }
+    }
+
+    if (rule.args && rule.args.length > 0) {
+      const hasArg = this.hasRequiredArgs(parsed.args.slice(requiredSubCommands.length), rule.args);
+      if (!hasArg) {
+        return {
+          success: false,
+          message: `缺少必要的参数。\n正确答案：${rule.command}`,
+          hint: this.getHint(commandName),
+        };
+      }
+    }
+
     return {
-      success: false,
-      message: `命令不正确。\n正确答案：${rule.command}`,
-      hint: this.getHint(commandName),
+      success: true,
+      message: "命令正确！",
     };
   }
 }

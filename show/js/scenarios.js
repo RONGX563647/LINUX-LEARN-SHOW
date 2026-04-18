@@ -1,2513 +1,6433 @@
 /* 场景/关卡数据 - Linux命令学习页面 */
 
 const tutorialLevels = [
-    {
+  {
+    id: 1,
+    name: "目录导航入门",
+    description: "学习基本的目录导航命令：cd、pwd、ls",
+    difficulty: "basic",
+    commands: ["cd", "pwd", "ls"],
+    startPath: "/home/user",
+    tasks: [
+      {
         id: 1,
-        name: '目录导航入门',
-        description: '学习基本的目录导航命令：cd、pwd、ls',
-        commands: ['cd', 'pwd', 'ls'],
-        startPath: '/home/user',
-        tasks: [
-            {
-                id: 1,
-                title: '显示当前目录',
-                description: '使用pwd命令显示当前工作目录的完整路径',
-                goal: '显示当前所在的目录路径',
-                hint: 'pwd命令可以显示当前工作目录',
-                expectedCommand: 'pwd',
-                validation: {
-                    type: 'exact',
-                    command: 'pwd'
-                }
-            },
-            {
-                id: 2,
-                title: '列出目录内容',
-                description: '使用ls命令列出当前目录的内容',
-                goal: '列出当前目录下的所有文件和子目录',
-                hint: 'ls命令可以列出目录内容',
-                expectedCommand: 'ls',
-                validation: {
-                    type: 'contains',
-                    command: 'ls',
-                    options: []
-                }
-            },
-            {
-                id: 3,
-                title: '显示隐藏文件',
-                description: '使用ls -a命令显示当前目录的所有文件（包括隐藏文件）',
-                goal: '列出当前目录下的所有文件，包括以.开头的隐藏文件',
-                hint: '-a选项可以显示隐藏文件',
-                expectedCommand: 'ls -a',
-                validation: {
-                    type: 'contains',
-                    command: 'ls',
-                    options: ['-a', '--all']
-                }
-            },
-            {
-                id: 4,
-                title: '切换到上级目录',
-                description: '使用cd ..命令切换到上一级目录',
-                goal: '从当前目录切换到父目录',
-                hint: '..表示上一级目录',
-                expectedCommand: 'cd ..',
-                validation: {
-                    type: 'contains',
-                    command: 'cd',
-                    args: ['..']
-                }
-            },
-            {
-                id: 5,
-                title: '切换到指定目录',
-                description: '使用cd命令切换到/home/user目录',
-                goal: '切换到/home/user目录',
-                hint: 'cd命令后跟目录路径',
-                expectedCommand: 'cd /home/user',
-                validation: {
-                    type: 'contains',
-                    command: 'cd',
-                    args: ['/home/user', '~']
-                }
-            }
-        ]
-    },
-    {
+        title: "显示当前目录",
+        description: "使用pwd命令显示当前工作目录的完整路径",
+        goal: "显示当前所在的目录路径",
+        hint: "pwd命令可以显示当前工作目录",
+        expectedCommand: "pwd",
+        validation: {
+          type: "exact",
+          command: "pwd",
+        },
+      },
+      {
         id: 2,
-        name: '文件管理基础',
-        description: '学习文件和目录的创建、复制、删除和移动',
-        commands: ['touch', 'mkdir', 'cp', 'mv', 'rm', 'rmdir'],
-        startPath: '/home/user',
-        tasks: [
-            {
-                id: 1,
-                title: '创建空文件',
-                description: '使用touch命令创建一个名为test.txt的空文件',
-                goal: '在当前目录创建test.txt文件',
-                hint: 'touch命令可以创建空文件',
-                expectedCommand: 'touch test.txt',
-                validation: {
-                    type: 'contains',
-                    command: 'touch',
-                    args: ['test.txt']
-                }
-            },
-            {
-                id: 2,
-                title: '创建目录',
-                description: '使用mkdir命令创建一个名为mydir的目录',
-                goal: '在当前目录创建mydir目录',
-                hint: 'mkdir命令可以创建目录',
-                expectedCommand: 'mkdir mydir',
-                validation: {
-                    type: 'contains',
-                    command: 'mkdir',
-                    args: ['mydir']
-                }
-            },
-            {
-                id: 3,
-                title: '复制文件',
-                description: '使用cp命令将test.txt复制到mydir目录中',
-                goal: '将test.txt复制到mydir目录',
-                hint: 'cp命令后跟源文件和目标目录',
-                expectedCommand: 'cp test.txt mydir',
-                validation: {
-                    type: 'contains',
-                    command: 'cp',
-                    args: ['test.txt', 'mydir']
-                }
-            },
-            {
-                id: 4,
-                title: '移动文件',
-                description: '使用mv命令将test.txt重命名为newtest.txt',
-                goal: '将test.txt重命名为newtest.txt',
-                hint: 'mv命令可以重命名文件',
-                expectedCommand: 'mv test.txt newtest.txt',
-                validation: {
-                    type: 'contains',
-                    command: 'mv',
-                    args: ['test.txt', 'newtest.txt']
-                }
-            },
-            {
-                id: 5,
-                title: '删除文件',
-                description: '使用rm命令删除newtest.txt文件',
-                goal: '删除newtest.txt文件',
-                hint: 'rm命令可以删除文件',
-                expectedCommand: 'rm newtest.txt',
-                validation: {
-                    type: 'contains',
-                    command: 'rm',
-                    args: ['newtest.txt']
-                }
-            },
-            {
-                id: 6,
-                title: '删除空目录',
-                description: '使用rmdir命令删除mydir目录',
-                goal: '删除mydir目录（目录必须为空）',
-                hint: 'rmdir只能删除空目录',
-                expectedCommand: 'rmdir mydir',
-                validation: {
-                    type: 'contains',
-                    command: 'rmdir',
-                    args: ['mydir']
-                }
-            }
-        ]
-    },
-    {
+        title: "列出目录内容",
+        description: "使用ls命令列出当前目录的内容",
+        goal: "列出当前目录下的所有文件和子目录",
+        hint: "ls命令可以列出目录内容",
+        expectedCommand: "ls",
+        validation: {
+          type: "contains",
+          command: "ls",
+          options: [],
+        },
+      },
+      {
         id: 3,
-        name: '文件内容查看',
-        description: '学习查看文件内容的各种命令',
-        commands: ['cat', 'more', 'less', 'head', 'tail'],
-        startPath: '/home/user/documents',
-        tasks: [
-            {
-                id: 1,
-                title: '显示文件内容',
-                description: '使用cat命令显示readme.txt文件的内容',
-                goal: '查看documents目录下的readme.txt文件内容',
-                hint: '先切换到documents目录，然后使用cat命令',
-                expectedCommand: 'cat readme.txt',
-                validation: {
-                    type: 'contains',
-                    command: 'cat',
-                    args: ['readme.txt'],
-                    requiredPath: '/home/user/documents'
-                }
-            },
-            {
-                id: 2,
-                title: '显示文件开头',
-                description: '使用head命令显示app.log文件的前5行',
-                goal: '查看logs目录下app.log文件的前5行内容',
-                hint: 'head -n 5可以显示前5行',
-                expectedCommand: 'head -n 5 app.log',
-                validation: {
-                    type: 'contains',
-                    command: 'head',
-                    options: ['-n'],
-                    args: ['5', 'app.log'],
-                    requiredPath: '/home/user/logs'
-                }
-            },
-            {
-                id: 3,
-                title: '显示文件末尾',
-                description: '使用tail命令显示app.log文件的最后3行',
-                goal: '查看app.log文件的最后3行内容',
-                hint: 'tail -n 3可以显示最后3行',
-                expectedCommand: 'tail -n 3 app.log',
-                validation: {
-                    type: 'contains',
-                    command: 'tail',
-                    options: ['-n'],
-                    args: ['3', 'app.log'],
-                    requiredPath: '/home/user/logs'
-                }
-            },
-            {
-                id: 4,
-                title: '分页显示文件',
-                description: '使用more命令分页显示notes.txt文件',
-                goal: '使用分页方式查看notes.txt文件',
-                hint: 'more命令可以分页显示文件内容',
-                expectedCommand: 'more notes.txt',
-                validation: {
-                    type: 'contains',
-                    command: 'more',
-                    args: ['notes.txt'],
-                    requiredPath: '/home/user/documents'
-                }
-            },
-            {
-                id: 5,
-                title: '使用less查看文件',
-                description: '使用less命令查看notes.txt文件',
-                goal: '使用less命令查看文件内容（支持向前翻页）',
-                hint: 'less命令比more更强大，支持向前翻页',
-                expectedCommand: 'less notes.txt',
-                validation: {
-                    type: 'contains',
-                    command: 'less',
-                    args: ['notes.txt'],
-                    requiredPath: '/home/user/documents'
-                }
-            }
-        ]
-    },
-    {
+        title: "显示隐藏文件",
+        description: "使用ls -a命令显示当前目录的所有文件（包括隐藏文件）",
+        goal: "列出当前目录下的所有文件，包括以.开头的隐藏文件",
+        hint: "-a选项可以显示隐藏文件",
+        expectedCommand: "ls -a",
+        validation: {
+          type: "contains",
+          command: "ls",
+          options: ["-a", "--all"],
+        },
+      },
+      {
         id: 4,
-        name: '文件查找技巧',
-        description: '学习查找文件和搜索文本的命令',
-        commands: ['find', 'whereis', 'grep'],
-        startPath: '/home/user',
-        tasks: [
-            {
-                id: 1,
-                title: '查找文件',
-                description: '使用find命令在当前目录查找名为readme.txt的文件',
-                goal: '查找readme.txt文件的位置',
-                hint: 'find . -name readme.txt可以在当前目录查找文件',
-                expectedCommand: 'find . -name readme.txt',
-                validation: {
-                    type: 'contains',
-                    command: 'find',
-                    options: ['-name'],
-                    args: ['readme.txt']
-                }
-            },
-            {
-                id: 2,
-                title: '查找命令位置',
-                description: '使用whereis命令查找ls命令的位置',
-                goal: '查找ls命令所在的目录',
-                hint: 'whereis命令可以查找命令的位置',
-                expectedCommand: 'whereis ls',
-                validation: {
-                    type: 'exact',
-                    command: 'whereis ls'
-                }
-            },
-            {
-                id: 3,
-                title: '搜索文本内容',
-                description: '使用grep命令在app.log中搜索ERROR关键字',
-                goal: '在app.log文件中查找包含ERROR的行',
-                hint: 'grep ERROR app.log可以搜索文本',
-                expectedCommand: 'grep ERROR app.log',
-                validation: {
-                    type: 'contains',
-                    command: 'grep',
-                    args: ['ERROR', 'app.log'],
-                    requiredPath: '/home/user/logs'
-                }
-            },
-            {
-                id: 4,
-                title: '忽略大小写搜索',
-                description: '使用grep -i命令在app.log中搜索error（忽略大小写）',
-                goal: '在app.log中搜索error，不区分大小写',
-                hint: '-i选项可以忽略大小写',
-                expectedCommand: 'grep -i error app.log',
-                validation: {
-                    type: 'contains',
-                    command: 'grep',
-                    options: ['-i'],
-                    args: ['error', 'app.log'],
-                    requiredPath: '/home/user/logs'
-                }
-            }
-        ]
-    },
-    {
+        title: "切换到上级目录",
+        description: "使用cd ..命令切换到上一级目录",
+        goal: "从当前目录切换到父目录",
+        hint: "..表示上一级目录",
+        expectedCommand: "cd ..",
+        validation: {
+          type: "contains",
+          command: "cd",
+          args: [".."],
+        },
+      },
+      {
         id: 5,
-        name: '权限管理',
-        description: '学习文件和目录权限的管理',
-        commands: ['chmod'],
-        startPath: '/home/user',
-        tasks: [
-            {
-                id: 1,
-                title: '数字方式设置权限',
-                description: '使用chmod 755命令设置test.txt的权限',
-                goal: '将test.txt的权限设置为rwxr-xr-x（755）',
-                hint: 'chmod 755 file可以设置权限',
-                expectedCommand: 'chmod 755 test.txt',
-                validation: {
-                    type: 'contains',
-                    command: 'chmod',
-                    args: ['755', 'test.txt']
-                }
-            },
-            {
-                id: 2,
-                title: '添加执行权限',
-                description: '使用chmod +x命令给test.txt添加执行权限',
-                goal: '给test.txt添加执行权限',
-                hint: '+x表示添加执行权限',
-                expectedCommand: 'chmod +x test.txt',
-                validation: {
-                    type: 'contains',
-                    command: 'chmod',
-                    args: ['+x', 'test.txt']
-                }
-            },
-            {
-                id: 3,
-                title: '移除写权限',
-                description: '使用chmod -w命令移除test.txt的写权限',
-                goal: '移除test.txt的写权限',
-                hint: '-w表示移除写权限',
-                expectedCommand: 'chmod -w test.txt',
-                validation: {
-                    type: 'contains',
-                    command: 'chmod',
-                    args: ['-w', 'test.txt']
-                }
-            },
-            {
-                id: 4,
-                title: '设置所有用户权限',
-                description: '使用chmod a+r命令给所有用户添加读权限',
-                goal: '给所有用户添加读权限',
-                hint: 'a表示所有用户，+r表示添加读权限',
-                expectedCommand: 'chmod a+r test.txt',
-                validation: {
-                    type: 'contains',
-                    command: 'chmod',
-                    args: ['a+r', 'test.txt']
-                }
-            }
-        ]
-    },
-    {
+        title: "切换到指定目录",
+        description: "使用cd命令切换到/home/user目录",
+        goal: "切换到/home/user目录",
+        hint: "cd命令后跟目录路径",
+        expectedCommand: "cd /home/user",
+        validation: {
+          type: "contains",
+          command: "cd",
+          args: ["/home/user", "~"],
+        },
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "文件管理基础",
+    description: "学习文件和目录的创建、复制、删除和移动",
+    difficulty: "basic",
+    commands: ["touch", "mkdir", "cp", "mv", "rm", "rmdir"],
+    startPath: "/home/user",
+    tasks: [
+      {
+        id: 1,
+        title: "创建空文件",
+        description: "使用touch命令创建一个名为test.txt的空文件",
+        goal: "在当前目录创建test.txt文件",
+        hint: "touch命令可以创建空文件",
+        expectedCommand: "touch test.txt",
+        validation: {
+          type: "contains",
+          command: "touch",
+          args: ["test.txt"],
+        },
+      },
+      {
+        id: 2,
+        title: "创建目录",
+        description: "使用mkdir命令创建一个名为mydir的目录",
+        goal: "在当前目录创建mydir目录",
+        hint: "mkdir命令可以创建目录",
+        expectedCommand: "mkdir mydir",
+        validation: {
+          type: "contains",
+          command: "mkdir",
+          args: ["mydir"],
+        },
+      },
+      {
+        id: 3,
+        title: "复制文件",
+        description: "使用cp命令将test.txt复制到mydir目录中",
+        goal: "将test.txt复制到mydir目录",
+        hint: "cp命令后跟源文件和目标目录",
+        expectedCommand: "cp test.txt mydir",
+        validation: {
+          type: "contains",
+          command: "cp",
+          args: ["test.txt", "mydir"],
+        },
+      },
+      {
+        id: 4,
+        title: "移动文件",
+        description: "使用mv命令将test.txt重命名为newtest.txt",
+        goal: "将test.txt重命名为newtest.txt",
+        hint: "mv命令可以重命名文件",
+        expectedCommand: "mv test.txt newtest.txt",
+        validation: {
+          type: "contains",
+          command: "mv",
+          args: ["test.txt", "newtest.txt"],
+        },
+      },
+      {
+        id: 5,
+        title: "删除文件",
+        description: "使用rm命令删除newtest.txt文件",
+        goal: "删除newtest.txt文件",
+        hint: "rm命令可以删除文件",
+        expectedCommand: "rm newtest.txt",
+        validation: {
+          type: "contains",
+          command: "rm",
+          args: ["newtest.txt"],
+        },
+      },
+      {
         id: 6,
-        name: '压缩与备份',
-        description: '学习文件打包和压缩命令',
-        commands: ['tar', 'gzip', 'bzip2'],
-        startPath: '/home/user',
-        tasks: [
-            {
-                id: 1,
-                title: '打包文件',
-                description: '使用tar命令打包documents目录',
-                goal: '将documents目录打包为documents.tar',
-                hint: 'tar -cvf documents.tar documents可以打包目录',
-                expectedCommand: 'tar -cvf documents.tar documents',
-                validation: {
-                    type: 'contains',
-                    command: 'tar',
-                    options: ['-c', '-v', '-f'],
-                    args: ['documents.tar', 'documents']
-                }
-            },
-            {
-                id: 2,
-                title: '打包并压缩',
-                description: '使用tar命令打包并用gzip压缩documents目录',
-                goal: '将documents目录打包并压缩为documents.tar.gz',
-                hint: '-z选项使用gzip压缩',
-                expectedCommand: 'tar -czvf documents.tar.gz documents',
-                validation: {
-                    type: 'contains',
-                    command: 'tar',
-                    options: ['-c', '-z', '-v', '-f'],
-                    args: ['documents.tar.gz', 'documents']
-                }
-            },
-            {
-                id: 3,
-                title: '解压文件',
-                description: '使用tar命令解压documents.tar.gz文件',
-                goal: '解压documents.tar.gz文件',
-                hint: '-x选项解压文件',
-                expectedCommand: 'tar -xzvf documents.tar.gz',
-                validation: {
-                    type: 'contains',
-                    command: 'tar',
-                    options: ['-x', '-z', '-v', '-f'],
-                    args: ['documents.tar.gz']
-                }
-            },
-            {
-                id: 4,
-                title: '使用gzip压缩',
-                description: '使用gzip命令压缩test.txt文件',
-                goal: '将test.txt压缩为test.txt.gz',
-                hint: 'gzip命令可以直接压缩文件',
-                expectedCommand: 'gzip test.txt',
-                validation: {
-                    type: 'contains',
-                    command: 'gzip',
-                    args: ['test.txt']
-                }
-            }
-        ]
-    },
-    {
+        title: "删除空目录",
+        description: "使用rmdir命令删除mydir目录",
+        goal: "删除mydir目录（目录必须为空）",
+        hint: "rmdir只能删除空目录",
+        expectedCommand: "rmdir mydir",
+        validation: {
+          type: "contains",
+          command: "rmdir",
+          args: ["mydir"],
+        },
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: "文件内容查看",
+    description: "学习查看文件内容的各种命令",
+    difficulty: "basic",
+    commands: ["cat", "more", "less", "head", "tail"],
+    startPath: "/home/user/documents",
+    tasks: [
+      {
+        id: 1,
+        title: "显示文件内容",
+        description: "使用cat命令显示readme.txt文件的内容",
+        goal: "查看documents目录下的readme.txt文件内容",
+        hint: "先切换到documents目录，然后使用cat命令",
+        expectedCommand: "cat readme.txt",
+        validation: {
+          type: "contains",
+          command: "cat",
+          args: ["readme.txt"],
+          requiredPath: "/home/user/documents",
+        },
+      },
+      {
+        id: 2,
+        title: "显示文件开头",
+        description: "使用head命令显示app.log文件的前5行",
+        goal: "查看logs目录下app.log文件的前5行内容",
+        hint: "head -n 5可以显示前5行",
+        expectedCommand: "head -n 5 app.log",
+        validation: {
+          type: "contains",
+          command: "head",
+          options: ["-n"],
+          args: ["5", "app.log"],
+          requiredPath: "/home/user/logs",
+        },
+      },
+      {
+        id: 3,
+        title: "显示文件末尾",
+        description: "使用tail命令显示app.log文件的最后3行",
+        goal: "查看app.log文件的最后3行内容",
+        hint: "tail -n 3可以显示最后3行",
+        expectedCommand: "tail -n 3 app.log",
+        validation: {
+          type: "contains",
+          command: "tail",
+          options: ["-n"],
+          args: ["3", "app.log"],
+          requiredPath: "/home/user/logs",
+        },
+      },
+      {
+        id: 4,
+        title: "分页显示文件",
+        description: "使用more命令分页显示notes.txt文件",
+        goal: "使用分页方式查看notes.txt文件",
+        hint: "more命令可以分页显示文件内容",
+        expectedCommand: "more notes.txt",
+        validation: {
+          type: "contains",
+          command: "more",
+          args: ["notes.txt"],
+          requiredPath: "/home/user/documents",
+        },
+      },
+      {
+        id: 5,
+        title: "使用less查看文件",
+        description: "使用less命令查看notes.txt文件",
+        goal: "使用less命令查看文件内容（支持向前翻页）",
+        hint: "less命令比more更强大，支持向前翻页",
+        expectedCommand: "less notes.txt",
+        validation: {
+          type: "contains",
+          command: "less",
+          args: ["notes.txt"],
+          requiredPath: "/home/user/documents",
+        },
+      },
+    ],
+  },
+  {
+    id: 4,
+    name: "文件查找技巧",
+    description: "学习查找文件和搜索文本的命令",
+    difficulty: "basic",
+    commands: ["find", "whereis", "grep"],
+    startPath: "/home/user",
+    tasks: [
+      {
+        id: 1,
+        title: "查找文件",
+        description: "使用find命令在当前目录查找名为readme.txt的文件",
+        goal: "查找readme.txt文件的位置",
+        hint: "find . -name readme.txt可以在当前目录查找文件",
+        expectedCommand: "find . -name readme.txt",
+        validation: {
+          type: "contains",
+          command: "find",
+          options: ["-name"],
+          args: ["readme.txt"],
+        },
+      },
+      {
+        id: 2,
+        title: "查找命令位置",
+        description: "使用whereis命令查找ls命令的位置",
+        goal: "查找ls命令所在的目录",
+        hint: "whereis命令可以查找命令的位置",
+        expectedCommand: "whereis ls",
+        validation: {
+          type: "exact",
+          command: "whereis ls",
+        },
+      },
+      {
+        id: 3,
+        title: "搜索文本内容",
+        description: "使用grep命令在app.log中搜索ERROR关键字",
+        goal: "在app.log文件中查找包含ERROR的行",
+        hint: "grep ERROR app.log可以搜索文本",
+        expectedCommand: "grep ERROR app.log",
+        validation: {
+          type: "contains",
+          command: "grep",
+          args: ["ERROR", "app.log"],
+          requiredPath: "/home/user/logs",
+        },
+      },
+      {
+        id: 4,
+        title: "忽略大小写搜索",
+        description: "使用grep -i命令在app.log中搜索error（忽略大小写）",
+        goal: "在app.log中搜索error，不区分大小写",
+        hint: "-i选项可以忽略大小写",
+        expectedCommand: "grep -i error app.log",
+        validation: {
+          type: "contains",
+          command: "grep",
+          options: ["-i"],
+          args: ["error", "app.log"],
+          requiredPath: "/home/user/logs",
+        },
+      },
+    ],
+  },
+  {
+    id: 5,
+    name: "权限管理",
+    description: "学习文件和目录权限的管理",
+    difficulty: "basic",
+    commands: ["chmod"],
+    startPath: "/home/user",
+    tasks: [
+      {
+        id: 1,
+        title: "数字方式设置权限",
+        description: "使用chmod 755命令设置test.txt的权限",
+        goal: "将test.txt的权限设置为rwxr-xr-x（755）",
+        hint: "chmod 755 file可以设置权限",
+        expectedCommand: "chmod 755 test.txt",
+        validation: {
+          type: "contains",
+          command: "chmod",
+          args: ["755", "test.txt"],
+        },
+      },
+      {
+        id: 2,
+        title: "添加执行权限",
+        description: "使用chmod +x命令给test.txt添加执行权限",
+        goal: "给test.txt添加执行权限",
+        hint: "+x表示添加执行权限",
+        expectedCommand: "chmod +x test.txt",
+        validation: {
+          type: "contains",
+          command: "chmod",
+          args: ["+x", "test.txt"],
+        },
+      },
+      {
+        id: 3,
+        title: "移除写权限",
+        description: "使用chmod -w命令移除test.txt的写权限",
+        goal: "移除test.txt的写权限",
+        hint: "-w表示移除写权限",
+        expectedCommand: "chmod -w test.txt",
+        validation: {
+          type: "contains",
+          command: "chmod",
+          args: ["-w", "test.txt"],
+        },
+      },
+      {
+        id: 4,
+        title: "设置所有用户权限",
+        description: "使用chmod a+r命令给所有用户添加读权限",
+        goal: "给所有用户添加读权限",
+        hint: "a表示所有用户，+r表示添加读权限",
+        expectedCommand: "chmod a+r test.txt",
+        validation: {
+          type: "contains",
+          command: "chmod",
+          args: ["a+r", "test.txt"],
+        },
+      },
+    ],
+  },
+  {
+    id: 6,
+    name: "压缩与备份",
+    description: "学习文件打包和压缩命令",
+    difficulty: "basic",
+    commands: ["tar", "gzip", "bzip2"],
+    startPath: "/home/user",
+    tasks: [
+      {
+        id: 1,
+        title: "打包文件",
+        description: "使用tar命令打包documents目录",
+        goal: "将documents目录打包为documents.tar",
+        hint: "tar -cvf documents.tar documents可以打包目录",
+        expectedCommand: "tar -cvf documents.tar documents",
+        validation: {
+          type: "contains",
+          command: "tar",
+          options: ["-c", "-v", "-f"],
+          args: ["documents.tar", "documents"],
+        },
+      },
+      {
+        id: 2,
+        title: "打包并压缩",
+        description: "使用tar命令打包并用gzip压缩documents目录",
+        goal: "将documents目录打包并压缩为documents.tar.gz",
+        hint: "-z选项使用gzip压缩",
+        expectedCommand: "tar -czvf documents.tar.gz documents",
+        validation: {
+          type: "contains",
+          command: "tar",
+          options: ["-c", "-z", "-v", "-f"],
+          args: ["documents.tar.gz", "documents"],
+        },
+      },
+      {
+        id: 3,
+        title: "解压文件",
+        description: "使用tar命令解压documents.tar.gz文件",
+        goal: "解压documents.tar.gz文件",
+        hint: "-x选项解压文件",
+        expectedCommand: "tar -xzvf documents.tar.gz",
+        validation: {
+          type: "contains",
+          command: "tar",
+          options: ["-x", "-z", "-v", "-f"],
+          args: ["documents.tar.gz"],
+        },
+      },
+      {
+        id: 4,
+        title: "使用gzip压缩",
+        description: "使用gzip命令压缩test.txt文件",
+        goal: "将test.txt压缩为test.txt.gz",
+        hint: "gzip命令可以直接压缩文件",
+        expectedCommand: "gzip test.txt",
+        validation: {
+          type: "contains",
+          command: "gzip",
+          args: ["test.txt"],
+        },
+      },
+    ],
+  },
+  {
+    id: 7,
+    name: "Vim编辑器入门",
+    description: "学习Vim编辑器的基本操作和常用命令",
+    difficulty: "intermediate",
+    commands: ["vim", "vi"],
+    startPath: "/home/user",
+    tasks: [
+      {
+        id: 1,
+        title: "启动Vim",
+        description: "使用vim命令启动Vim编辑器",
+        goal: "打开Vim编辑器",
+        hint: "输入vim命令即可启动",
+        expectedCommand: "vim",
+        validation: {
+          type: "exact",
+          command: "vim",
+        },
+      },
+      {
+        id: 2,
+        title: "打开文件",
+        description: "使用vim打开test.txt文件",
+        goal: "用Vim打开test.txt文件进行编辑",
+        hint: "vim 文件名 可以打开文件",
+        expectedCommand: "vim test.txt",
+        validation: {
+          type: "contains",
+          command: "vim",
+          args: ["test.txt"],
+        },
+      },
+      {
+        id: 3,
+        title: "进入插入模式",
+        description: "在Vim中按i键进入插入模式",
+        goal: "进入插入模式以便编辑文本",
+        hint: "在普通模式下按i键",
+        expectedCommand: "i",
+        validation: {
+          type: "exact",
+          command: "i",
+        },
+      },
+      {
+        id: 4,
+        title: "保存并退出",
+        description: "在Vim中保存文件并退出（输入:wq）",
+        goal: "保存文件并退出Vim",
+        hint: "在普通模式下输入:wq",
+        expectedCommand: ":wq",
+        validation: {
+          type: "exact",
+          command: ":wq",
+        },
+      },
+      {
+        id: 5,
+        title: "退出不保存",
+        description: "在Vim中不保存直接退出（输入:q!）",
+        goal: "放弃修改并退出Vim",
+        hint: "在普通模式下输入:q!",
+        expectedCommand: ":q!",
+        validation: {
+          type: "exact",
+          command: ":q!",
+        },
+      },
+      {
+        id: 6,
+        title: "删除一行",
+        description: "在Vim普通模式下删除当前行（按dd）",
+        goal: "删除光标所在的整行",
+        hint: "在普通模式下按dd",
+        expectedCommand: "dd",
+        validation: {
+          type: "exact",
+          command: "dd",
+        },
+      },
+      {
         id: 7,
-        name: 'Vim编辑器入门',
-        description: '学习Vim编辑器的基本操作和常用命令',
-        commands: ['vim', 'vi'],
-        startPath: '/home/user',
-        tasks: [
-            {
-                id: 1,
-                title: '启动Vim',
-                description: '使用vim命令启动Vim编辑器',
-                goal: '打开Vim编辑器',
-                hint: '输入vim命令即可启动',
-                expectedCommand: 'vim',
-                validation: {
-                    type: 'exact',
-                    command: 'vim'
-                }
-            },
-            {
-                id: 2,
-                title: '打开文件',
-                description: '使用vim打开test.txt文件',
-                goal: '用Vim打开test.txt文件进行编辑',
-                hint: 'vim 文件名 可以打开文件',
-                expectedCommand: 'vim test.txt',
-                validation: {
-                    type: 'contains',
-                    command: 'vim',
-                    args: ['test.txt']
-                }
-            },
-            {
-                id: 3,
-                title: '进入插入模式',
-                description: '在Vim中按i键进入插入模式',
-                goal: '进入插入模式以便编辑文本',
-                hint: '在普通模式下按i键',
-                expectedCommand: 'i',
-                validation: {
-                    type: 'exact',
-                    command: 'i'
-                }
-            },
-            {
-                id: 4,
-                title: '保存并退出',
-                description: '在Vim中保存文件并退出（输入:wq）',
-                goal: '保存文件并退出Vim',
-                hint: '在普通模式下输入:wq',
-                expectedCommand: ':wq',
-                validation: {
-                    type: 'exact',
-                    command: ':wq'
-                }
-            },
-            {
-                id: 5,
-                title: '退出不保存',
-                description: '在Vim中不保存直接退出（输入:q!）',
-                goal: '放弃修改并退出Vim',
-                hint: '在普通模式下输入:q!',
-                expectedCommand: ':q!',
-                validation: {
-                    type: 'exact',
-                    command: ':q!'
-                }
-            },
-            {
-                id: 6,
-                title: '删除一行',
-                description: '在Vim普通模式下删除当前行（按dd）',
-                goal: '删除光标所在的整行',
-                hint: '在普通模式下按dd',
-                expectedCommand: 'dd',
-                validation: {
-                    type: 'exact',
-                    command: 'dd'
-                }
-            },
-            {
-                id: 7,
-                title: '复制粘贴',
-                description: '在Vim中复制当前行并粘贴（yy和p）',
-                goal: '复制一行并粘贴到下一行',
-                hint: 'yy复制，p粘贴',
-                expectedCommand: 'yy',
-                validation: {
-                    type: 'exact',
-                    command: 'yy'
-                }
-            },
-            {
-                id: 8,
-                title: '跳转到行首',
-                description: '在Vim中跳转到当前行的行首（按0）',
-                goal: '快速移动到行首',
-                hint: '在普通模式下按0',
-                expectedCommand: '0',
-                validation: {
-                    type: 'exact',
-                    command: '0'
-                }
-            },
-            {
-                id: 9,
-                title: '跳转到行尾',
-                description: '在Vim中跳转到当前行的行尾（按$）',
-                goal: '快速移动到行尾',
-                hint: '在普通模式下按$',
-                expectedCommand: '$',
-                validation: {
-                    type: 'exact',
-                    command: '$'
-                }
-            },
-            {
-                id: 10,
-                title: '向下翻页',
-                description: '在Vim中向下翻页（按Ctrl+f）',
-                goal: '向下翻一页',
-                hint: '按Ctrl+f向下翻页',
-                expectedCommand: 'Ctrl+f',
-                validation: {
-                    type: 'exact',
-                    command: 'Ctrl+f'
-                }
-            },
-            {
-                id: 11,
-                title: '向上翻页',
-                description: '在Vim中向上翻页（按Ctrl+b）',
-                goal: '向上翻一页',
-                hint: '按Ctrl+b向上翻页',
-                expectedCommand: 'Ctrl+b',
-                validation: {
-                    type: 'exact',
-                    command: 'Ctrl+b'
-                }
-            },
-            {
-                id: 12,
-                title: '跳转到文件开头',
-                description: '在Vim中跳转到文件开头（按gg）',
-                goal: '快速跳转到文件第一行',
-                hint: '按gg跳转到文件开头',
-                expectedCommand: 'gg',
-                validation: {
-                    type: 'exact',
-                    command: 'gg'
-                }
-            },
-            {
-                id: 13,
-                title: '跳转到文件末尾',
-                description: '在Vim中跳转到文件末尾（按G）',
-                goal: '快速跳转到文件最后一行',
-                hint: '按G跳转到文件末尾',
-                expectedCommand: 'G',
-                validation: {
-                    type: 'exact',
-                    command: 'G'
-                }
-            },
-            {
-                id: 14,
-                title: '搜索文本',
-                description: '在Vim中搜索文本（输入/hello）',
-                goal: '向下搜索hello关键字',
-                hint: '在普通模式下输入/hello进行搜索',
-                expectedCommand: '/hello',
-                validation: {
-                    type: 'contains',
-                    command: '/hello'
-                }
-            },
-            {
-                id: 15,
-                title: '查找下一个',
-                description: '在Vim中查找下一个匹配项（按n）',
-                goal: '跳转到下一个搜索结果',
-                hint: '按n查找下一个匹配项',
-                expectedCommand: 'n',
-                validation: {
-                    type: 'exact',
-                    command: 'n'
-                }
-            },
-            {
-                id: 16,
-                title: '查找上一个',
-                description: '在Vim中查找上一个匹配项（按N）',
-                goal: '跳转到上一个搜索结果',
-                hint: '按N查找上一个匹配项',
-                expectedCommand: 'N',
-                validation: {
-                    type: 'exact',
-                    command: 'N'
-                }
-            },
-            {
-                id: 17,
-                title: '替换当前行',
-                description: '在Vim中替换当前行的第一个匹配（输入:s/old/new/）',
-                goal: '将当前行的第一个old替换为new',
-                hint: '输入:s/old/new/进行替换',
-                expectedCommand: ':s/old/new/',
-                validation: {
-                    type: 'contains',
-                    command: ':s/old/new/'
-                }
-            },
-            {
-                id: 18,
-                title: '替换整行所有',
-                description: '在Vim中替换当前行所有匹配（输入:s/old/new/g）',
-                goal: '将当前行所有的old替换为new',
-                hint: '添加g标志替换所有匹配',
-                expectedCommand: ':s/old/new/g',
-                validation: {
-                    type: 'contains',
-                    command: ':s/old/new/g'
-                }
-            },
-            {
-                id: 19,
-                title: '全局替换',
-                description: '在Vim中替换整个文件的所有匹配（输入:%s/old/new/g）',
-                goal: '将文件中所有的old替换为new',
-                hint: '使用%s进行全局替换',
-                expectedCommand: ':%s/old/new/g',
-                validation: {
-                    type: 'contains',
-                    command: ':%s/old/new/g'
-                }
-            },
-            {
-                id: 20,
-                title: '撤销操作',
-                description: '在Vim中撤销上一步操作（按u）',
-                goal: '撤销最近的修改',
-                hint: '按u撤销操作',
-                expectedCommand: 'u',
-                validation: {
-                    type: 'exact',
-                    command: 'u'
-                }
-            },
-            {
-                id: 21,
-                title: '重做操作',
-                description: '在Vim中重做被撤销的操作（按Ctrl+r）',
-                goal: '重做被撤销的操作',
-                hint: '按Ctrl+r重做',
-                expectedCommand: 'Ctrl+r',
-                validation: {
-                    type: 'exact',
-                    command: 'Ctrl+r'
-                }
-            },
-            {
-                id: 22,
-                title: '显示行号',
-                description: '在Vim中显示行号（输入:set number）',
-                goal: '在编辑器中显示行号',
-                hint: '输入:set number显示行号',
-                expectedCommand: ':set number',
-                validation: {
-                    type: 'exact',
-                    command: ':set number'
-                }
-            },
-            {
-                id: 23,
-                title: '跳转到指定行',
-                description: '在Vim中跳转到第10行（输入:10）',
-                goal: '快速跳转到指定行号',
-                hint: '输入:行号跳转到指定行',
-                expectedCommand: ':10',
-                validation: {
-                    type: 'exact',
-                    command: ':10'
-                }
-            },
-            {
-                id: 24,
-                title: '删除到行尾',
-                description: '在Vim中删除从光标到行尾的内容（按D）',
-                goal: '删除光标后的所有内容',
-                hint: '按D删除到行尾',
-                expectedCommand: 'D',
-                validation: {
-                    type: 'exact',
-                    command: 'D'
-                }
-            },
-            {
-                id: 25,
-                title: '删除单词',
-                description: '在Vim中删除一个单词（按dw）',
-                goal: '删除光标所在的单词',
-                hint: '按dw删除单词',
-                expectedCommand: 'dw',
-                validation: {
-                    type: 'exact',
-                    command: 'dw'
-                }
-            },
-            {
-                id: 26,
-                title: '追加文本',
-                description: '在Vim中在行尾追加文本（按A）',
-                goal: '在当前行末尾插入文本',
-                hint: '按A进入行尾插入模式',
-                expectedCommand: 'A',
-                validation: {
-                    type: 'exact',
-                    command: 'A'
-                }
-            },
-            {
-                id: 27,
-                title: '新开一行',
-                description: '在Vim中在当前行下方新开一行（按o）',
-                goal: '在当前行下方插入新行',
-                hint: '按o在下方插入新行',
-                expectedCommand: 'o',
-                validation: {
-                    type: 'exact',
-                    command: 'o'
-                }
-            },
-            {
-                id: 28,
-                title: '在上方新开一行',
-                description: '在Vim中在当前行上方新开一行（按O）',
-                goal: '在当前行上方插入新行',
-                hint: '按O在上方插入新行',
-                expectedCommand: 'O',
-                validation: {
-                    type: 'exact',
-                    command: 'O'
-                }
-            }
-        ]
-    },
-    {
+        title: "复制粘贴",
+        description: "在Vim中复制当前行并粘贴（yy和p）",
+        goal: "复制一行并粘贴到下一行",
+        hint: "yy复制，p粘贴",
+        expectedCommand: "yy",
+        validation: {
+          type: "exact",
+          command: "yy",
+        },
+      },
+      {
         id: 8,
-        name: 'Docker容器基础',
-        description: '学习Docker容器的基本操作命令',
-        commands: ['docker'],
-        startPath: '/home/user',
-        tasks: [
-            {
-                id: 1,
-                title: '查看Docker版本',
-                description: '使用docker --version查看Docker版本信息',
-                goal: '显示当前安装的Docker版本',
-                hint: 'docker --version 可以查看版本',
-                expectedCommand: 'docker --version',
-                validation: {
-                    type: 'exact',
-                    command: 'docker --version'
-                }
-            },
-            {
-                id: 2,
-                title: '查看本地镜像',
-                description: '使用docker images列出本地所有镜像',
-                goal: '列出本地Docker镜像列表',
-                hint: 'docker images 命令查看镜像',
-                expectedCommand: 'docker images',
-                validation: {
-                    type: 'exact',
-                    command: 'docker images'
-                }
-            },
-            {
-                id: 3,
-                title: '搜索镜像',
-                description: '使用docker search在Docker Hub搜索nginx镜像',
-                goal: '搜索nginx镜像',
-                hint: 'docker search 镜像名',
-                expectedCommand: 'docker search nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'docker search',
-                    args: ['nginx']
-                }
-            },
-            {
-                id: 4,
-                title: '拉取镜像',
-                description: '使用docker pull拉取hello-world镜像',
-                goal: '从Docker Hub下载hello-world镜像',
-                hint: 'docker pull 镜像名',
-                expectedCommand: 'docker pull hello-world',
-                validation: {
-                    type: 'contains',
-                    command: 'docker pull',
-                    args: ['hello-world']
-                }
-            },
-            {
-                id: 5,
-                title: '运行容器',
-                description: '使用docker run运行hello-world容器',
-                goal: '运行hello-world容器并查看输出',
-                hint: 'docker run 镜像名',
-                expectedCommand: 'docker run hello-world',
-                validation: {
-                    type: 'contains',
-                    command: 'docker run',
-                    args: ['hello-world']
-                }
-            },
-            {
-                id: 6,
-                title: '查看运行容器',
-                description: '使用docker ps查看正在运行的容器',
-                goal: '列出所有正在运行的容器',
-                hint: 'docker ps 显示运行中的容器',
-                expectedCommand: 'docker ps',
-                validation: {
-                    type: 'exact',
-                    command: 'docker ps'
-                }
-            },
-            {
-                id: 7,
-                title: '查看所有容器',
-                description: '使用docker ps -a查看所有容器（包括停止的）',
-                goal: '列出所有容器，包括已停止的',
-                hint: '-a 选项显示所有容器',
-                expectedCommand: 'docker ps -a',
-                validation: {
-                    type: 'contains',
-                    command: 'docker ps',
-                    options: ['-a']
-                }
-            },
-            {
-                id: 8,
-                title: '停止容器',
-                description: '使用docker stop停止容器（容器ID为abc123）',
-                goal: '停止运行中的容器',
-                hint: 'docker stop 容器ID',
-                expectedCommand: 'docker stop abc123',
-                validation: {
-                    type: 'contains',
-                    command: 'docker stop',
-                    args: ['abc123']
-                }
-            },
-            {
-                id: 9,
-                title: '删除容器',
-                description: '使用docker rm删除容器（容器ID为abc123）',
-                goal: '删除已停止的容器',
-                hint: 'docker rm 容器ID',
-                expectedCommand: 'docker rm abc123',
-                validation: {
-                    type: 'contains',
-                    command: 'docker rm',
-                    args: ['abc123']
-                }
-            },
-            {
-                id: 10,
-                title: '删除镜像',
-                description: '使用docker rmi删除镜像（镜像ID为xyz789）',
-                goal: '删除本地Docker镜像',
-                hint: 'docker rmi 镜像ID',
-                expectedCommand: 'docker rmi xyz789',
-                validation: {
-                    type: 'contains',
-                    command: 'docker rmi',
-                    args: ['xyz789']
-                }
-            },
-            {
-                id: 11,
-                title: '查看容器日志',
-                description: '使用docker logs查看容器日志（容器ID为web01）',
-                goal: '查看容器的标准输出日志',
-                hint: 'docker logs 容器ID',
-                expectedCommand: 'docker logs web01',
-                validation: {
-                    type: 'contains',
-                    command: 'docker logs',
-                    args: ['web01']
-                }
-            },
-            {
-                id: 12,
-                title: '实时查看日志',
-                description: '使用docker logs -f实时跟踪容器日志',
-                goal: '实时查看容器日志输出',
-                hint: '添加-f选项实时跟踪日志',
-                expectedCommand: 'docker logs -f web01',
-                validation: {
-                    type: 'contains',
-                    command: 'docker logs',
-                    options: ['-f'],
-                    args: ['web01']
-                }
-            },
-            {
-                id: 13,
-                title: '进入运行中的容器',
-                description: '使用docker exec进入容器（容器ID为web01）',
-                goal: '在运行中的容器内执行命令',
-                hint: 'docker exec -it 容器ID /bin/bash',
-                expectedCommand: 'docker exec -it web01 /bin/bash',
-                validation: {
-                    type: 'contains',
-                    command: 'docker exec',
-                    options: ['-it'],
-                    args: ['web01', '/bin/bash']
-                }
-            },
-            {
-                id: 14,
-                title: '在容器中执行命令',
-                description: '使用docker exec在容器中执行ls命令',
-                goal: '在容器内执行单个命令',
-                hint: 'docker exec 容器ID ls',
-                expectedCommand: 'docker exec web01 ls',
-                validation: {
-                    type: 'contains',
-                    command: 'docker exec',
-                    args: ['web01', 'ls']
-                }
-            },
-            {
-                id: 15,
-                title: '查看容器详细信息',
-                description: '使用docker inspect查看容器详细信息',
-                goal: '查看容器的完整配置信息',
-                hint: 'docker inspect 容器ID',
-                expectedCommand: 'docker inspect web01',
-                validation: {
-                    type: 'contains',
-                    command: 'docker inspect',
-                    args: ['web01']
-                }
-            },
-            {
-                id: 16,
-                title: '查看容器资源使用',
-                description: '使用docker stats查看容器资源使用情况',
-                goal: '实时显示容器的CPU、内存等资源使用',
-                hint: 'docker stats 显示资源使用',
-                expectedCommand: 'docker stats',
-                validation: {
-                    type: 'exact',
-                    command: 'docker stats'
-                }
-            },
-            {
-                id: 17,
-                title: '查看容器进程',
-                description: '使用docker top查看容器内运行的进程',
-                goal: '查看容器内的进程列表',
-                hint: 'docker top 容器ID',
-                expectedCommand: 'docker top web01',
-                validation: {
-                    type: 'contains',
-                    command: 'docker top',
-                    args: ['web01']
-                }
-            },
-            {
-                id: 18,
-                title: '查看容器端口映射',
-                description: '使用docker port查看容器端口映射',
-                goal: '查看容器的端口映射关系',
-                hint: 'docker port 容器ID',
-                expectedCommand: 'docker port web01',
-                validation: {
-                    type: 'contains',
-                    command: 'docker port',
-                    args: ['web01']
-                }
-            },
-            {
-                id: 19,
-                title: '重启容器',
-                description: '使用docker restart重启容器',
-                goal: '重启运行中的容器',
-                hint: 'docker restart 容器ID',
-                expectedCommand: 'docker restart web01',
-                validation: {
-                    type: 'contains',
-                    command: 'docker restart',
-                    args: ['web01']
-                }
-            },
-            {
-                id: 20,
-                title: '暂停容器',
-                description: '使用docker pause暂停容器',
-                goal: '暂停容器中的所有进程',
-                hint: 'docker pause 容器ID',
-                expectedCommand: 'docker pause web01',
-                validation: {
-                    type: 'contains',
-                    command: 'docker pause',
-                    args: ['web01']
-                }
-            },
-            {
-                id: 21,
-                title: '恢复容器',
-                description: '使用docker unpause恢复容器',
-                goal: '恢复被暂停的容器',
-                hint: 'docker unpause 容器ID',
-                expectedCommand: 'docker unpause web01',
-                validation: {
-                    type: 'contains',
-                    command: 'docker unpause',
-                    args: ['web01']
-                }
-            },
-            {
-                id: 22,
-                title: '查看Docker网络',
-                description: '使用docker network ls查看Docker网络',
-                goal: '列出所有Docker网络',
-                hint: 'docker network ls',
-                expectedCommand: 'docker network ls',
-                validation: {
-                    type: 'exact',
-                    command: 'docker network ls'
-                }
-            },
-            {
-                id: 23,
-                title: '创建网络',
-                description: '使用docker network create创建自定义网络',
-                goal: '创建一个名为mynet的网络',
-                hint: 'docker network create 网络名',
-                expectedCommand: 'docker network create mynet',
-                validation: {
-                    type: 'contains',
-                    command: 'docker network create',
-                    args: ['mynet']
-                }
-            },
-            {
-                id: 24,
-                title: '查看Docker卷',
-                description: '使用docker volume ls查看数据卷',
-                goal: '列出所有Docker数据卷',
-                hint: 'docker volume ls',
-                expectedCommand: 'docker volume ls',
-                validation: {
-                    type: 'exact',
-                    command: 'docker volume ls'
-                }
-            },
-            {
-                id: 25,
-                title: '创建数据卷',
-                description: '使用docker volume create创建数据卷',
-                goal: '创建一个名为mydata的数据卷',
-                hint: 'docker volume create 卷名',
-                expectedCommand: 'docker volume create mydata',
-                validation: {
-                    type: 'contains',
-                    command: 'docker volume create',
-                    args: ['mydata']
-                }
-            },
-            {
-                id: 26,
-                title: '挂载数据卷运行容器',
-                description: '运行容器并挂载数据卷',
-                goal: '运行容器时挂载数据卷',
-                hint: 'docker run -v 卷名:容器路径 镜像名',
-                expectedCommand: 'docker run -v mydata:/data nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'docker run',
-                    options: ['-v']
-                }
-            },
-            {
-                id: 27,
-                title: '保存镜像为文件',
-                description: '使用docker save保存镜像为tar文件',
-                goal: '将镜像导出为tar文件',
-                hint: 'docker save -o 文件名 镜像名',
-                expectedCommand: 'docker save -o nginx.tar nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'docker save',
-                    options: ['-o']
-                }
-            },
-            {
-                id: 28,
-                title: '从文件加载镜像',
-                description: '使用docker load从tar文件加载镜像',
-                goal: '从tar文件导入镜像',
-                hint: 'docker load -i 文件名',
-                expectedCommand: 'docker load -i nginx.tar',
-                validation: {
-                    type: 'contains',
-                    command: 'docker load',
-                    options: ['-i']
-                }
-            },
-            {
-                id: 29,
-                title: '导出容器',
-                description: '使用docker export导出容器文件系统',
-                goal: '将容器文件系统导出为tar文件',
-                hint: 'docker export -o 文件名 容器ID',
-                expectedCommand: 'docker export -o container.tar web01',
-                validation: {
-                    type: 'contains',
-                    command: 'docker export',
-                    options: ['-o']
-                }
-            },
-            {
-                id: 30,
-                title: '构建镜像',
-                description: '使用docker build从Dockerfile构建镜像',
-                goal: '根据Dockerfile构建新镜像',
-                hint: 'docker build -t 镜像名 .',
-                expectedCommand: 'docker build -t myapp .',
-                validation: {
-                    type: 'contains',
-                    command: 'docker build',
-                    options: ['-t']
-                }
-            },
-            {
-                id: 31,
-                title: '给镜像打标签',
-                description: '使用docker tag给镜像打标签',
-                goal: '为镜像添加新的标签',
-                hint: 'docker tag 旧标签 新标签',
-                expectedCommand: 'docker tag nginx myregistry/nginx:v1',
-                validation: {
-                    type: 'contains',
-                    command: 'docker tag',
-                    args: ['nginx', 'myregistry/nginx:v1']
-                }
-            },
-            {
-                id: 32,
-                title: '推送镜像',
-                description: '使用docker push推送镜像到仓库',
-                goal: '将镜像推送到Docker仓库',
-                hint: 'docker push 镜像名',
-                expectedCommand: 'docker push myregistry/nginx:v1',
-                validation: {
-                    type: 'contains',
-                    command: 'docker push',
-                    args: ['myregistry/nginx:v1']
-                }
-            },
-            {
-                id: 33,
-                title: '清理无用镜像',
-                description: '使用docker image prune清理未使用的镜像',
-                goal: '删除所有未被容器使用的镜像',
-                hint: 'docker image prune -a',
-                expectedCommand: 'docker image prune -a',
-                validation: {
-                    type: 'contains',
-                    command: 'docker image prune',
-                    options: ['-a']
-                }
-            },
-            {
-                id: 34,
-                title: '清理停止的容器',
-                description: '使用docker container prune清理停止的容器',
-                goal: '删除所有已停止的容器',
-                hint: 'docker container prune',
-                expectedCommand: 'docker container prune',
-                validation: {
-                    type: 'exact',
-                    command: 'docker container prune'
-                }
-            },
-            {
-                id: 35,
-                title: '查看Docker系统信息',
-                description: '使用docker info查看Docker系统信息',
-                goal: '显示Docker系统的详细信息',
-                hint: 'docker info',
-                expectedCommand: 'docker info',
-                validation: {
-                    type: 'exact',
-                    command: 'docker info'
-                }
-            },
-            {
-                id: 36,
-                title: '清理Docker系统',
-                description: '使用docker system prune清理Docker系统',
-                goal: '清理未使用的容器、网络、镜像等',
-                hint: 'docker system prune -a',
-                expectedCommand: 'docker system prune -a',
-                validation: {
-                    type: 'contains',
-                    command: 'docker system prune',
-                    options: ['-a']
-                }
-            }
-        ]
-    },
-    {
+        title: "跳转到行首",
+        description: "在Vim中跳转到当前行的行首（按0）",
+        goal: "快速移动到行首",
+        hint: "在普通模式下按0",
+        expectedCommand: "0",
+        validation: {
+          type: "exact",
+          command: "0",
+        },
+      },
+      {
         id: 9,
-        name: 'Git版本控制',
-        description: '学习Git版本控制系统的基本操作',
-        commands: ['git'],
-        startPath: '/home/user/projects',
-        tasks: [
-            {
-                id: 1,
-                title: '查看Git版本',
-                description: '使用git --version查看Git版本',
-                goal: '显示当前安装的Git版本',
-                hint: 'git --version',
-                expectedCommand: 'git --version',
-                validation: {
-                    type: 'exact',
-                    command: 'git --version'
-                }
-            },
-            {
-                id: 2,
-                title: '配置用户名',
-                description: '使用git config配置用户名',
-                goal: '设置Git用户名',
-                hint: 'git config --global user.name "Your Name"',
-                expectedCommand: 'git config --global user.name "张三"',
-                validation: {
-                    type: 'contains',
-                    command: 'git config',
-                    options: ['--global'],
-                    args: ['user.name']
-                }
-            },
-            {
-                id: 3,
-                title: '配置邮箱',
-                description: '使用git config配置邮箱',
-                goal: '设置Git用户邮箱',
-                hint: 'git config --global user.email "email@example.com"',
-                expectedCommand: 'git config --global user.email "zhangsan@example.com"',
-                validation: {
-                    type: 'contains',
-                    command: 'git config',
-                    options: ['--global'],
-                    args: ['user.email']
-                }
-            },
-            {
-                id: 4,
-                title: '初始化仓库',
-                description: '使用git init初始化Git仓库',
-                goal: '在当前目录创建Git仓库',
-                hint: 'git init',
-                expectedCommand: 'git init',
-                validation: {
-                    type: 'exact',
-                    command: 'git init'
-                }
-            },
-            {
-                id: 5,
-                title: '克隆仓库',
-                description: '使用git clone克隆远程仓库',
-                goal: '从远程地址克隆仓库',
-                hint: 'git clone 仓库地址',
-                expectedCommand: 'git clone https://github.com/user/repo.git',
-                validation: {
-                    type: 'contains',
-                    command: 'git clone'
-                }
-            },
-            {
-                id: 6,
-                title: '查看状态',
-                description: '使用git status查看仓库状态',
-                goal: '查看工作区和暂存区状态',
-                hint: 'git status',
-                expectedCommand: 'git status',
-                validation: {
-                    type: 'exact',
-                    command: 'git status'
-                }
-            },
-            {
-                id: 7,
-                title: '添加文件到暂存区',
-                description: '使用git add添加文件到暂存区',
-                goal: '将文件添加到暂存区',
-                hint: 'git add 文件名 或 git add .',
-                expectedCommand: 'git add .',
-                validation: {
-                    type: 'contains',
-                    command: 'git add'
-                }
-            },
-            {
-                id: 8,
-                title: '提交更改',
-                description: '使用git commit提交更改',
-                goal: '将暂存区的更改提交到仓库',
-                hint: 'git commit -m "提交信息"',
-                expectedCommand: 'git commit -m "初始提交"',
-                validation: {
-                    type: 'contains',
-                    command: 'git commit',
-                    options: ['-m']
-                }
-            },
-            {
-                id: 9,
-                title: '查看提交历史',
-                description: '使用git log查看提交历史',
-                goal: '查看仓库的提交记录',
-                hint: 'git log',
-                expectedCommand: 'git log',
-                validation: {
-                    type: 'exact',
-                    command: 'git log'
-                }
-            },
-            {
-                id: 10,
-                title: '查看差异',
-                description: '使用git diff查看工作区差异',
-                goal: '查看工作区和暂存区的差异',
-                hint: 'git diff',
-                expectedCommand: 'git diff',
-                validation: {
-                    type: 'exact',
-                    command: 'git diff'
-                }
-            },
-            {
-                id: 11,
-                title: '查看远程仓库',
-                description: '使用git remote查看远程仓库',
-                goal: '查看已配置的远程仓库',
-                hint: 'git remote -v',
-                expectedCommand: 'git remote -v',
-                validation: {
-                    type: 'contains',
-                    command: 'git remote',
-                    options: ['-v']
-                }
-            },
-            {
-                id: 12,
-                title: '添加远程仓库',
-                description: '使用git remote add添加远程仓库',
-                goal: '添加一个新的远程仓库',
-                hint: 'git remote add origin 仓库地址',
-                expectedCommand: 'git remote add origin https://github.com/user/repo.git',
-                validation: {
-                    type: 'contains',
-                    command: 'git remote add'
-                }
-            },
-            {
-                id: 13,
-                title: '推送到远程',
-                description: '使用git push推送到远程仓库',
-                goal: '将本地提交推送到远程仓库',
-                hint: 'git push origin master',
-                expectedCommand: 'git push origin master',
-                validation: {
-                    type: 'contains',
-                    command: 'git push'
-                }
-            },
-            {
-                id: 14,
-                title: '拉取更新',
-                description: '使用git pull拉取远程更新',
-                goal: '从远程仓库拉取最新更改',
-                hint: 'git pull origin master',
-                expectedCommand: 'git pull origin master',
-                validation: {
-                    type: 'contains',
-                    command: 'git pull'
-                }
-            },
-            {
-                id: 15,
-                title: '创建分支',
-                description: '使用git branch创建新分支',
-                goal: '创建一个新分支',
-                hint: 'git branch 分支名',
-                expectedCommand: 'git branch feature',
-                validation: {
-                    type: 'contains',
-                    command: 'git branch',
-                    args: ['feature']
-                }
-            },
-            {
-                id: 16,
-                title: '切换分支',
-                description: '使用git checkout切换分支',
-                goal: '切换到指定分支',
-                hint: 'git checkout 分支名',
-                expectedCommand: 'git checkout feature',
-                validation: {
-                    type: 'contains',
-                    command: 'git checkout',
-                    args: ['feature']
-                }
-            },
-            {
-                id: 17,
-                title: '创建并切换分支',
-                description: '使用git checkout -b创建并切换分支',
-                goal: '创建新分支并立即切换',
-                hint: 'git checkout -b 分支名',
-                expectedCommand: 'git checkout -b feature',
-                validation: {
-                    type: 'contains',
-                    command: 'git checkout',
-                    options: ['-b']
-                }
-            },
-            {
-                id: 18,
-                title: '查看所有分支',
-                description: '使用git branch查看所有分支',
-                goal: '列出所有本地分支',
-                hint: 'git branch',
-                expectedCommand: 'git branch',
-                validation: {
-                    type: 'exact',
-                    command: 'git branch'
-                }
-            },
-            {
-                id: 19,
-                title: '合并分支',
-                description: '使用git merge合并分支',
-                goal: '将指定分支合并到当前分支',
-                hint: 'git merge 分支名',
-                expectedCommand: 'git merge feature',
-                validation: {
-                    type: 'contains',
-                    command: 'git merge',
-                    args: ['feature']
-                }
-            },
-            {
-                id: 20,
-                title: '删除分支',
-                description: '使用git branch -d删除分支',
-                goal: '删除已合并的分支',
-                hint: 'git branch -d 分支名',
-                expectedCommand: 'git branch -d feature',
-                validation: {
-                    type: 'contains',
-                    command: 'git branch',
-                    options: ['-d']
-                }
-            },
-            {
-                id: 21,
-                title: '暂存工作区',
-                description: '使用git stash暂存工作区更改',
-                goal: '临时保存工作区的更改',
-                hint: 'git stash',
-                expectedCommand: 'git stash',
-                validation: {
-                    type: 'exact',
-                    command: 'git stash'
-                }
-            },
-            {
-                id: 22,
-                title: '恢复暂存',
-                description: '使用git stash pop恢复暂存的更改',
-                goal: '恢复之前暂存的更改',
-                hint: 'git stash pop',
-                expectedCommand: 'git stash pop',
-                validation: {
-                    type: 'exact',
-                    command: 'git stash pop'
-                }
-            },
-            {
-                id: 23,
-                title: '撤销工作区修改',
-                description: '使用git checkout撤销工作区修改',
-                goal: '撤销文件的修改',
-                hint: 'git checkout -- 文件名',
-                expectedCommand: 'git checkout -- test.txt',
-                validation: {
-                    type: 'contains',
-                    command: 'git checkout',
-                    args: ['--']
-                }
-            },
-            {
-                id: 24,
-                title: '重置暂存区',
-                description: '使用git reset重置暂存区',
-                goal: '取消已暂存的文件',
-                hint: 'git reset 文件名',
-                expectedCommand: 'git reset test.txt',
-                validation: {
-                    type: 'contains',
-                    command: 'git reset',
-                    args: ['test.txt']
-                }
-            },
-            {
-                id: 25,
-                title: '查看配置',
-                description: '使用git config --list查看所有配置',
-                goal: '显示所有Git配置',
-                hint: 'git config --list',
-                expectedCommand: 'git config --list',
-                validation: {
-                    type: 'exact',
-                    command: 'git config --list'
-                }
-            }
-        ]
-    },
-    {
+        title: "跳转到行尾",
+        description: "在Vim中跳转到当前行的行尾（按$）",
+        goal: "快速移动到行尾",
+        hint: "在普通模式下按$",
+        expectedCommand: "$",
+        validation: {
+          type: "exact",
+          command: "$",
+        },
+      },
+      {
         id: 10,
-        name: 'Systemctl服务管理',
-        description: '学习使用systemctl管理系统服务',
-        commands: ['systemctl'],
-        startPath: '/home/user',
-        tasks: [
-            {
-                id: 1,
-                title: '查看服务状态',
-                description: '使用systemctl status查看服务状态',
-                goal: '查看指定服务的运行状态',
-                hint: 'systemctl status 服务名',
-                expectedCommand: 'systemctl status nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'systemctl status',
-                    args: ['nginx']
-                }
-            },
-            {
-                id: 2,
-                title: '启动服务',
-                description: '使用systemctl start启动服务',
-                goal: '启动指定的系统服务',
-                hint: 'systemctl start 服务名',
-                expectedCommand: 'systemctl start nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'systemctl start',
-                    args: ['nginx']
-                }
-            },
-            {
-                id: 3,
-                title: '停止服务',
-                description: '使用systemctl stop停止服务',
-                goal: '停止运行中的服务',
-                hint: 'systemctl stop 服务名',
-                expectedCommand: 'systemctl stop nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'systemctl stop',
-                    args: ['nginx']
-                }
-            },
-            {
-                id: 4,
-                title: '重启服务',
-                description: '使用systemctl restart重启服务',
-                goal: '重新启动服务',
-                hint: 'systemctl restart 服务名',
-                expectedCommand: 'systemctl restart nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'systemctl restart',
-                    args: ['nginx']
-                }
-            },
-            {
-                id: 5,
-                title: '重载服务配置',
-                description: '使用systemctl reload重载服务配置',
-                goal: '重新加载服务配置而不中断服务',
-                hint: 'systemctl reload 服务名',
-                expectedCommand: 'systemctl reload nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'systemctl reload',
-                    args: ['nginx']
-                }
-            },
-            {
-                id: 6,
-                title: '启用开机自启',
-                description: '使用systemctl enable设置开机自启',
-                goal: '设置服务开机自动启动',
-                hint: 'systemctl enable 服务名',
-                expectedCommand: 'systemctl enable nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'systemctl enable',
-                    args: ['nginx']
-                }
-            },
-            {
-                id: 7,
-                title: '禁用开机自启',
-                description: '使用systemctl disable禁用开机自启',
-                goal: '取消服务的开机自动启动',
-                hint: 'systemctl disable 服务名',
-                expectedCommand: 'systemctl disable nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'systemctl disable',
-                    args: ['nginx']
-                }
-            },
-            {
-                id: 8,
-                title: '查看所有服务',
-                description: '使用systemctl list-units查看所有服务',
-                goal: '列出所有正在运行的服务',
-                hint: 'systemctl list-units --type=service',
-                expectedCommand: 'systemctl list-units --type=service',
-                validation: {
-                    type: 'contains',
-                    command: 'systemctl list-units',
-                    options: ['--type=service']
-                }
-            },
-            {
-                id: 9,
-                title: '查看服务是否启用',
-                description: '使用systemctl is-enabled查看服务是否开机自启',
-                goal: '检查服务是否设置为开机自启',
-                hint: 'systemctl is-enabled 服务名',
-                expectedCommand: 'systemctl is-enabled nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'systemctl is-enabled',
-                    args: ['nginx']
-                }
-            },
-            {
-                id: 10,
-                title: '查看服务是否运行',
-                description: '使用systemctl is-active查看服务是否运行',
-                goal: '检查服务当前是否正在运行',
-                hint: 'systemctl is-active 服务名',
-                expectedCommand: 'systemctl is-active nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'systemctl is-active',
-                    args: ['nginx']
-                }
-            },
-            {
-                id: 11,
-                title: '查看服务日志',
-                description: '使用journalctl查看服务日志',
-                goal: '查看指定服务的日志',
-                hint: 'journalctl -u 服务名',
-                expectedCommand: 'journalctl -u nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'journalctl',
-                    options: ['-u']
-                }
-            },
-            {
-                id: 12,
-                title: '实时查看日志',
-                description: '使用journalctl -f实时查看日志',
-                goal: '实时跟踪系统日志',
-                hint: 'journalctl -f',
-                expectedCommand: 'journalctl -f',
-                validation: {
-                    type: 'exact',
-                    command: 'journalctl -f'
-                }
-            },
-            {
-                id: 13,
-                title: '重载systemd配置',
-                description: '使用systemctl daemon-reload重载配置',
-                goal: '重新加载systemd管理器配置',
-                hint: 'systemctl daemon-reload',
-                expectedCommand: 'systemctl daemon-reload',
-                validation: {
-                    type: 'exact',
-                    command: 'systemctl daemon-reload'
-                }
-            },
-            {
-                id: 14,
-                title: '查看失败的服务',
-                description: '使用systemctl查看失败的服务',
-                goal: '列出所有启动失败的服务',
-                hint: 'systemctl --failed',
-                expectedCommand: 'systemctl --failed',
-                validation: {
-                    type: 'exact',
-                    command: 'systemctl --failed'
-                }
-            },
-            {
-                id: 15,
-                title: '查看服务文件',
-                description: '使用systemctl cat查看服务配置文件',
-                goal: '显示服务的配置文件内容',
-                hint: 'systemctl cat 服务名',
-                expectedCommand: 'systemctl cat nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'systemctl cat',
-                    args: ['nginx']
-                }
-            }
-        ]
-    }
+        title: "向下翻页",
+        description: "在Vim中向下翻页（按Ctrl+f）",
+        goal: "向下翻一页",
+        hint: "按Ctrl+f向下翻页",
+        expectedCommand: "Ctrl+f",
+        validation: {
+          type: "exact",
+          command: "Ctrl+f",
+        },
+      },
+      {
+        id: 11,
+        title: "向上翻页",
+        description: "在Vim中向上翻页（按Ctrl+b）",
+        goal: "向上翻一页",
+        hint: "按Ctrl+b向上翻页",
+        expectedCommand: "Ctrl+b",
+        validation: {
+          type: "exact",
+          command: "Ctrl+b",
+        },
+      },
+      {
+        id: 12,
+        title: "跳转到文件开头",
+        description: "在Vim中跳转到文件开头（按gg）",
+        goal: "快速跳转到文件第一行",
+        hint: "按gg跳转到文件开头",
+        expectedCommand: "gg",
+        validation: {
+          type: "exact",
+          command: "gg",
+        },
+      },
+      {
+        id: 13,
+        title: "跳转到文件末尾",
+        description: "在Vim中跳转到文件末尾（按G）",
+        goal: "快速跳转到文件最后一行",
+        hint: "按G跳转到文件末尾",
+        expectedCommand: "G",
+        validation: {
+          type: "exact",
+          command: "G",
+        },
+      },
+      {
+        id: 14,
+        title: "搜索文本",
+        description: "在Vim中搜索文本（输入/hello）",
+        goal: "向下搜索hello关键字",
+        hint: "在普通模式下输入/hello进行搜索",
+        expectedCommand: "/hello",
+        validation: {
+          type: "contains",
+          command: "/hello",
+        },
+      },
+      {
+        id: 15,
+        title: "查找下一个",
+        description: "在Vim中查找下一个匹配项（按n）",
+        goal: "跳转到下一个搜索结果",
+        hint: "按n查找下一个匹配项",
+        expectedCommand: "n",
+        validation: {
+          type: "exact",
+          command: "n",
+        },
+      },
+      {
+        id: 16,
+        title: "查找上一个",
+        description: "在Vim中查找上一个匹配项（按N）",
+        goal: "跳转到上一个搜索结果",
+        hint: "按N查找上一个匹配项",
+        expectedCommand: "N",
+        validation: {
+          type: "exact",
+          command: "N",
+        },
+      },
+      {
+        id: 17,
+        title: "替换当前行",
+        description: "在Vim中替换当前行的第一个匹配（输入:s/old/new/）",
+        goal: "将当前行的第一个old替换为new",
+        hint: "输入:s/old/new/进行替换",
+        expectedCommand: ":s/old/new/",
+        validation: {
+          type: "contains",
+          command: ":s/old/new/",
+        },
+      },
+      {
+        id: 18,
+        title: "替换整行所有",
+        description: "在Vim中替换当前行所有匹配（输入:s/old/new/g）",
+        goal: "将当前行所有的old替换为new",
+        hint: "添加g标志替换所有匹配",
+        expectedCommand: ":s/old/new/g",
+        validation: {
+          type: "contains",
+          command: ":s/old/new/g",
+        },
+      },
+      {
+        id: 19,
+        title: "全局替换",
+        description: "在Vim中替换整个文件的所有匹配（输入:%s/old/new/g）",
+        goal: "将文件中所有的old替换为new",
+        hint: "使用%s进行全局替换",
+        expectedCommand: ":%s/old/new/g",
+        validation: {
+          type: "contains",
+          command: ":%s/old/new/g",
+        },
+      },
+      {
+        id: 20,
+        title: "撤销操作",
+        description: "在Vim中撤销上一步操作（按u）",
+        goal: "撤销最近的修改",
+        hint: "按u撤销操作",
+        expectedCommand: "u",
+        validation: {
+          type: "exact",
+          command: "u",
+        },
+      },
+      {
+        id: 21,
+        title: "重做操作",
+        description: "在Vim中重做被撤销的操作（按Ctrl+r）",
+        goal: "重做被撤销的操作",
+        hint: "按Ctrl+r重做",
+        expectedCommand: "Ctrl+r",
+        validation: {
+          type: "exact",
+          command: "Ctrl+r",
+        },
+      },
+      {
+        id: 22,
+        title: "显示行号",
+        description: "在Vim中显示行号（输入:set number）",
+        goal: "在编辑器中显示行号",
+        hint: "输入:set number显示行号",
+        expectedCommand: ":set number",
+        validation: {
+          type: "exact",
+          command: ":set number",
+        },
+      },
+      {
+        id: 23,
+        title: "跳转到指定行",
+        description: "在Vim中跳转到第10行（输入:10）",
+        goal: "快速跳转到指定行号",
+        hint: "输入:行号跳转到指定行",
+        expectedCommand: ":10",
+        validation: {
+          type: "exact",
+          command: ":10",
+        },
+      },
+      {
+        id: 24,
+        title: "删除到行尾",
+        description: "在Vim中删除从光标到行尾的内容（按D）",
+        goal: "删除光标后的所有内容",
+        hint: "按D删除到行尾",
+        expectedCommand: "D",
+        validation: {
+          type: "exact",
+          command: "D",
+        },
+      },
+      {
+        id: 25,
+        title: "删除单词",
+        description: "在Vim中删除一个单词（按dw）",
+        goal: "删除光标所在的单词",
+        hint: "按dw删除单词",
+        expectedCommand: "dw",
+        validation: {
+          type: "exact",
+          command: "dw",
+        },
+      },
+      {
+        id: 26,
+        title: "追加文本",
+        description: "在Vim中在行尾追加文本（按A）",
+        goal: "在当前行末尾插入文本",
+        hint: "按A进入行尾插入模式",
+        expectedCommand: "A",
+        validation: {
+          type: "exact",
+          command: "A",
+        },
+      },
+      {
+        id: 27,
+        title: "新开一行",
+        description: "在Vim中在当前行下方新开一行（按o）",
+        goal: "在当前行下方插入新行",
+        hint: "按o在下方插入新行",
+        expectedCommand: "o",
+        validation: {
+          type: "exact",
+          command: "o",
+        },
+      },
+      {
+        id: 28,
+        title: "在上方新开一行",
+        description: "在Vim中在当前行上方新开一行（按O）",
+        goal: "在当前行上方插入新行",
+        hint: "按O在上方插入新行",
+        expectedCommand: "O",
+        validation: {
+          type: "exact",
+          command: "O",
+        },
+      },
+    ],
+  },
+  {
+    id: 8,
+    name: "Docker容器基础",
+    description: "学习Docker容器的基本操作命令",
+    difficulty: "intermediate",
+    commands: ["docker"],
+    startPath: "/home/user",
+    tasks: [
+      {
+        id: 1,
+        title: "查看Docker版本",
+        description: "使用docker --version查看Docker版本信息",
+        goal: "显示当前安装的Docker版本",
+        hint: "docker --version 可以查看版本",
+        expectedCommand: "docker --version",
+        validation: {
+          type: "exact",
+          command: "docker --version",
+        },
+      },
+      {
+        id: 2,
+        title: "查看本地镜像",
+        description: "使用docker images列出本地所有镜像",
+        goal: "列出本地Docker镜像列表",
+        hint: "docker images 命令查看镜像",
+        expectedCommand: "docker images",
+        validation: {
+          type: "exact",
+          command: "docker images",
+        },
+      },
+      {
+        id: 3,
+        title: "搜索镜像",
+        description: "使用docker search在Docker Hub搜索nginx镜像",
+        goal: "搜索nginx镜像",
+        hint: "docker search 镜像名",
+        expectedCommand: "docker search nginx",
+        validation: {
+          type: "contains",
+          command: "docker search",
+          args: ["nginx"],
+        },
+      },
+      {
+        id: 4,
+        title: "拉取镜像",
+        description: "使用docker pull拉取hello-world镜像",
+        goal: "从Docker Hub下载hello-world镜像",
+        hint: "docker pull 镜像名",
+        expectedCommand: "docker pull hello-world",
+        validation: {
+          type: "contains",
+          command: "docker pull",
+          args: ["hello-world"],
+        },
+      },
+      {
+        id: 5,
+        title: "运行容器",
+        description: "使用docker run运行hello-world容器",
+        goal: "运行hello-world容器并查看输出",
+        hint: "docker run 镜像名",
+        expectedCommand: "docker run hello-world",
+        validation: {
+          type: "contains",
+          command: "docker run",
+          args: ["hello-world"],
+        },
+      },
+      {
+        id: 6,
+        title: "查看运行容器",
+        description: "使用docker ps查看正在运行的容器",
+        goal: "列出所有正在运行的容器",
+        hint: "docker ps 显示运行中的容器",
+        expectedCommand: "docker ps",
+        validation: {
+          type: "exact",
+          command: "docker ps",
+        },
+      },
+      {
+        id: 7,
+        title: "查看所有容器",
+        description: "使用docker ps -a查看所有容器（包括停止的）",
+        goal: "列出所有容器，包括已停止的",
+        hint: "-a 选项显示所有容器",
+        expectedCommand: "docker ps -a",
+        validation: {
+          type: "contains",
+          command: "docker ps",
+          options: ["-a"],
+        },
+      },
+      {
+        id: 8,
+        title: "停止容器",
+        description: "使用docker stop停止容器（容器ID为abc123）",
+        goal: "停止运行中的容器",
+        hint: "docker stop 容器ID",
+        expectedCommand: "docker stop abc123",
+        validation: {
+          type: "contains",
+          command: "docker stop",
+          args: ["abc123"],
+        },
+      },
+      {
+        id: 9,
+        title: "删除容器",
+        description: "使用docker rm删除容器（容器ID为abc123）",
+        goal: "删除已停止的容器",
+        hint: "docker rm 容器ID",
+        expectedCommand: "docker rm abc123",
+        validation: {
+          type: "contains",
+          command: "docker rm",
+          args: ["abc123"],
+        },
+      },
+      {
+        id: 10,
+        title: "删除镜像",
+        description: "使用docker rmi删除镜像（镜像ID为xyz789）",
+        goal: "删除本地Docker镜像",
+        hint: "docker rmi 镜像ID",
+        expectedCommand: "docker rmi xyz789",
+        validation: {
+          type: "contains",
+          command: "docker rmi",
+          args: ["xyz789"],
+        },
+      },
+      {
+        id: 11,
+        title: "查看容器日志",
+        description: "使用docker logs查看容器日志（容器ID为web01）",
+        goal: "查看容器的标准输出日志",
+        hint: "docker logs 容器ID",
+        expectedCommand: "docker logs web01",
+        validation: {
+          type: "contains",
+          command: "docker logs",
+          args: ["web01"],
+        },
+      },
+      {
+        id: 12,
+        title: "实时查看日志",
+        description: "使用docker logs -f实时跟踪容器日志",
+        goal: "实时查看容器日志输出",
+        hint: "添加-f选项实时跟踪日志",
+        expectedCommand: "docker logs -f web01",
+        validation: {
+          type: "contains",
+          command: "docker logs",
+          options: ["-f"],
+          args: ["web01"],
+        },
+      },
+      {
+        id: 13,
+        title: "进入运行中的容器",
+        description: "使用docker exec进入容器（容器ID为web01）",
+        goal: "在运行中的容器内执行命令",
+        hint: "docker exec -it 容器ID /bin/bash",
+        expectedCommand: "docker exec -it web01 /bin/bash",
+        validation: {
+          type: "contains",
+          command: "docker exec",
+          options: ["-it"],
+          args: ["web01", "/bin/bash"],
+        },
+      },
+      {
+        id: 14,
+        title: "在容器中执行命令",
+        description: "使用docker exec在容器中执行ls命令",
+        goal: "在容器内执行单个命令",
+        hint: "docker exec 容器ID ls",
+        expectedCommand: "docker exec web01 ls",
+        validation: {
+          type: "contains",
+          command: "docker exec",
+          args: ["web01", "ls"],
+        },
+      },
+      {
+        id: 15,
+        title: "查看容器详细信息",
+        description: "使用docker inspect查看容器详细信息",
+        goal: "查看容器的完整配置信息",
+        hint: "docker inspect 容器ID",
+        expectedCommand: "docker inspect web01",
+        validation: {
+          type: "contains",
+          command: "docker inspect",
+          args: ["web01"],
+        },
+      },
+      {
+        id: 16,
+        title: "查看容器资源使用",
+        description: "使用docker stats查看容器资源使用情况",
+        goal: "实时显示容器的CPU、内存等资源使用",
+        hint: "docker stats 显示资源使用",
+        expectedCommand: "docker stats",
+        validation: {
+          type: "exact",
+          command: "docker stats",
+        },
+      },
+      {
+        id: 17,
+        title: "查看容器进程",
+        description: "使用docker top查看容器内运行的进程",
+        goal: "查看容器内的进程列表",
+        hint: "docker top 容器ID",
+        expectedCommand: "docker top web01",
+        validation: {
+          type: "contains",
+          command: "docker top",
+          args: ["web01"],
+        },
+      },
+      {
+        id: 18,
+        title: "查看容器端口映射",
+        description: "使用docker port查看容器端口映射",
+        goal: "查看容器的端口映射关系",
+        hint: "docker port 容器ID",
+        expectedCommand: "docker port web01",
+        validation: {
+          type: "contains",
+          command: "docker port",
+          args: ["web01"],
+        },
+      },
+      {
+        id: 19,
+        title: "重启容器",
+        description: "使用docker restart重启容器",
+        goal: "重启运行中的容器",
+        hint: "docker restart 容器ID",
+        expectedCommand: "docker restart web01",
+        validation: {
+          type: "contains",
+          command: "docker restart",
+          args: ["web01"],
+        },
+      },
+      {
+        id: 20,
+        title: "暂停容器",
+        description: "使用docker pause暂停容器",
+        goal: "暂停容器中的所有进程",
+        hint: "docker pause 容器ID",
+        expectedCommand: "docker pause web01",
+        validation: {
+          type: "contains",
+          command: "docker pause",
+          args: ["web01"],
+        },
+      },
+      {
+        id: 21,
+        title: "恢复容器",
+        description: "使用docker unpause恢复容器",
+        goal: "恢复被暂停的容器",
+        hint: "docker unpause 容器ID",
+        expectedCommand: "docker unpause web01",
+        validation: {
+          type: "contains",
+          command: "docker unpause",
+          args: ["web01"],
+        },
+      },
+      {
+        id: 22,
+        title: "查看Docker网络",
+        description: "使用docker network ls查看Docker网络",
+        goal: "列出所有Docker网络",
+        hint: "docker network ls",
+        expectedCommand: "docker network ls",
+        validation: {
+          type: "exact",
+          command: "docker network ls",
+        },
+      },
+      {
+        id: 23,
+        title: "创建网络",
+        description: "使用docker network create创建自定义网络",
+        goal: "创建一个名为mynet的网络",
+        hint: "docker network create 网络名",
+        expectedCommand: "docker network create mynet",
+        validation: {
+          type: "contains",
+          command: "docker network create",
+          args: ["mynet"],
+        },
+      },
+      {
+        id: 24,
+        title: "查看Docker卷",
+        description: "使用docker volume ls查看数据卷",
+        goal: "列出所有Docker数据卷",
+        hint: "docker volume ls",
+        expectedCommand: "docker volume ls",
+        validation: {
+          type: "exact",
+          command: "docker volume ls",
+        },
+      },
+      {
+        id: 25,
+        title: "创建数据卷",
+        description: "使用docker volume create创建数据卷",
+        goal: "创建一个名为mydata的数据卷",
+        hint: "docker volume create 卷名",
+        expectedCommand: "docker volume create mydata",
+        validation: {
+          type: "contains",
+          command: "docker volume create",
+          args: ["mydata"],
+        },
+      },
+      {
+        id: 26,
+        title: "挂载数据卷运行容器",
+        description: "运行容器并挂载数据卷",
+        goal: "运行容器时挂载数据卷",
+        hint: "docker run -v 卷名:容器路径 镜像名",
+        expectedCommand: "docker run -v mydata:/data nginx",
+        validation: {
+          type: "contains",
+          command: "docker run",
+          options: ["-v"],
+        },
+      },
+      {
+        id: 27,
+        title: "保存镜像为文件",
+        description: "使用docker save保存镜像为tar文件",
+        goal: "将镜像导出为tar文件",
+        hint: "docker save -o 文件名 镜像名",
+        expectedCommand: "docker save -o nginx.tar nginx",
+        validation: {
+          type: "contains",
+          command: "docker save",
+          options: ["-o"],
+        },
+      },
+      {
+        id: 28,
+        title: "从文件加载镜像",
+        description: "使用docker load从tar文件加载镜像",
+        goal: "从tar文件导入镜像",
+        hint: "docker load -i 文件名",
+        expectedCommand: "docker load -i nginx.tar",
+        validation: {
+          type: "contains",
+          command: "docker load",
+          options: ["-i"],
+        },
+      },
+      {
+        id: 29,
+        title: "导出容器",
+        description: "使用docker export导出容器文件系统",
+        goal: "将容器文件系统导出为tar文件",
+        hint: "docker export -o 文件名 容器ID",
+        expectedCommand: "docker export -o container.tar web01",
+        validation: {
+          type: "contains",
+          command: "docker export",
+          options: ["-o"],
+        },
+      },
+      {
+        id: 30,
+        title: "构建镜像",
+        description: "使用docker build从Dockerfile构建镜像",
+        goal: "根据Dockerfile构建新镜像",
+        hint: "docker build -t 镜像名 .",
+        expectedCommand: "docker build -t myapp .",
+        validation: {
+          type: "contains",
+          command: "docker build",
+          options: ["-t"],
+        },
+      },
+      {
+        id: 31,
+        title: "给镜像打标签",
+        description: "使用docker tag给镜像打标签",
+        goal: "为镜像添加新的标签",
+        hint: "docker tag 旧标签 新标签",
+        expectedCommand: "docker tag nginx myregistry/nginx:v1",
+        validation: {
+          type: "contains",
+          command: "docker tag",
+          args: ["nginx", "myregistry/nginx:v1"],
+        },
+      },
+      {
+        id: 32,
+        title: "推送镜像",
+        description: "使用docker push推送镜像到仓库",
+        goal: "将镜像推送到Docker仓库",
+        hint: "docker push 镜像名",
+        expectedCommand: "docker push myregistry/nginx:v1",
+        validation: {
+          type: "contains",
+          command: "docker push",
+          args: ["myregistry/nginx:v1"],
+        },
+      },
+      {
+        id: 33,
+        title: "清理无用镜像",
+        description: "使用docker image prune清理未使用的镜像",
+        goal: "删除所有未被容器使用的镜像",
+        hint: "docker image prune -a",
+        expectedCommand: "docker image prune -a",
+        validation: {
+          type: "contains",
+          command: "docker image prune",
+          options: ["-a"],
+        },
+      },
+      {
+        id: 34,
+        title: "清理停止的容器",
+        description: "使用docker container prune清理停止的容器",
+        goal: "删除所有已停止的容器",
+        hint: "docker container prune",
+        expectedCommand: "docker container prune",
+        validation: {
+          type: "exact",
+          command: "docker container prune",
+        },
+      },
+      {
+        id: 35,
+        title: "查看Docker系统信息",
+        description: "使用docker info查看Docker系统信息",
+        goal: "显示Docker系统的详细信息",
+        hint: "docker info",
+        expectedCommand: "docker info",
+        validation: {
+          type: "exact",
+          command: "docker info",
+        },
+      },
+      {
+        id: 36,
+        title: "清理Docker系统",
+        description: "使用docker system prune清理Docker系统",
+        goal: "清理未使用的容器、网络、镜像等",
+        hint: "docker system prune -a",
+        expectedCommand: "docker system prune -a",
+        validation: {
+          type: "contains",
+          command: "docker system prune",
+          options: ["-a"],
+        },
+      },
+    ],
+  },
+  {
+    id: 9,
+    name: "Git版本控制",
+    description: "学习Git版本控制系统的基本操作",
+    difficulty: "intermediate",
+    commands: ["git"],
+    startPath: "/home/user/projects",
+    tasks: [
+      {
+        id: 1,
+        title: "查看Git版本",
+        description: "使用git --version查看Git版本",
+        goal: "显示当前安装的Git版本",
+        hint: "git --version",
+        expectedCommand: "git --version",
+        validation: {
+          type: "exact",
+          command: "git --version",
+        },
+      },
+      {
+        id: 2,
+        title: "配置用户名",
+        description: "使用git config配置用户名",
+        goal: "设置Git用户名",
+        hint: 'git config --global user.name "Your Name"',
+        expectedCommand: 'git config --global user.name "张三"',
+        validation: {
+          type: "contains",
+          command: "git config",
+          options: ["--global"],
+          args: ["user.name"],
+        },
+      },
+      {
+        id: 3,
+        title: "配置邮箱",
+        description: "使用git config配置邮箱",
+        goal: "设置Git用户邮箱",
+        hint: 'git config --global user.email "email@example.com"',
+        expectedCommand:
+          'git config --global user.email "zhangsan@example.com"',
+        validation: {
+          type: "contains",
+          command: "git config",
+          options: ["--global"],
+          args: ["user.email"],
+        },
+      },
+      {
+        id: 4,
+        title: "初始化仓库",
+        description: "使用git init初始化Git仓库",
+        goal: "在当前目录创建Git仓库",
+        hint: "git init",
+        expectedCommand: "git init",
+        validation: {
+          type: "exact",
+          command: "git init",
+        },
+      },
+      {
+        id: 5,
+        title: "克隆仓库",
+        description: "使用git clone克隆远程仓库",
+        goal: "从远程地址克隆仓库",
+        hint: "git clone 仓库地址",
+        expectedCommand: "git clone https://github.com/user/repo.git",
+        validation: {
+          type: "contains",
+          command: "git clone",
+        },
+      },
+      {
+        id: 6,
+        title: "查看状态",
+        description: "使用git status查看仓库状态",
+        goal: "查看工作区和暂存区状态",
+        hint: "git status",
+        expectedCommand: "git status",
+        validation: {
+          type: "exact",
+          command: "git status",
+        },
+      },
+      {
+        id: 7,
+        title: "添加文件到暂存区",
+        description: "使用git add添加文件到暂存区",
+        goal: "将文件添加到暂存区",
+        hint: "git add 文件名 或 git add .",
+        expectedCommand: "git add .",
+        validation: {
+          type: "contains",
+          command: "git add",
+        },
+      },
+      {
+        id: 8,
+        title: "提交更改",
+        description: "使用git commit提交更改",
+        goal: "将暂存区的更改提交到仓库",
+        hint: 'git commit -m "提交信息"',
+        expectedCommand: 'git commit -m "初始提交"',
+        validation: {
+          type: "contains",
+          command: "git commit",
+          options: ["-m"],
+        },
+      },
+      {
+        id: 9,
+        title: "查看提交历史",
+        description: "使用git log查看提交历史",
+        goal: "查看仓库的提交记录",
+        hint: "git log",
+        expectedCommand: "git log",
+        validation: {
+          type: "exact",
+          command: "git log",
+        },
+      },
+      {
+        id: 10,
+        title: "查看差异",
+        description: "使用git diff查看工作区差异",
+        goal: "查看工作区和暂存区的差异",
+        hint: "git diff",
+        expectedCommand: "git diff",
+        validation: {
+          type: "exact",
+          command: "git diff",
+        },
+      },
+      {
+        id: 11,
+        title: "查看远程仓库",
+        description: "使用git remote查看远程仓库",
+        goal: "查看已配置的远程仓库",
+        hint: "git remote -v",
+        expectedCommand: "git remote -v",
+        validation: {
+          type: "contains",
+          command: "git remote",
+          options: ["-v"],
+        },
+      },
+      {
+        id: 12,
+        title: "添加远程仓库",
+        description: "使用git remote add添加远程仓库",
+        goal: "添加一个新的远程仓库",
+        hint: "git remote add origin 仓库地址",
+        expectedCommand:
+          "git remote add origin https://github.com/user/repo.git",
+        validation: {
+          type: "contains",
+          command: "git remote add",
+        },
+      },
+      {
+        id: 13,
+        title: "推送到远程",
+        description: "使用git push推送到远程仓库",
+        goal: "将本地提交推送到远程仓库",
+        hint: "git push origin master",
+        expectedCommand: "git push origin master",
+        validation: {
+          type: "contains",
+          command: "git push",
+        },
+      },
+      {
+        id: 14,
+        title: "拉取更新",
+        description: "使用git pull拉取远程更新",
+        goal: "从远程仓库拉取最新更改",
+        hint: "git pull origin master",
+        expectedCommand: "git pull origin master",
+        validation: {
+          type: "contains",
+          command: "git pull",
+        },
+      },
+      {
+        id: 15,
+        title: "创建分支",
+        description: "使用git branch创建新分支",
+        goal: "创建一个新分支",
+        hint: "git branch 分支名",
+        expectedCommand: "git branch feature",
+        validation: {
+          type: "contains",
+          command: "git branch",
+          args: ["feature"],
+        },
+      },
+      {
+        id: 16,
+        title: "切换分支",
+        description: "使用git checkout切换分支",
+        goal: "切换到指定分支",
+        hint: "git checkout 分支名",
+        expectedCommand: "git checkout feature",
+        validation: {
+          type: "contains",
+          command: "git checkout",
+          args: ["feature"],
+        },
+      },
+      {
+        id: 17,
+        title: "创建并切换分支",
+        description: "使用git checkout -b创建并切换分支",
+        goal: "创建新分支并立即切换",
+        hint: "git checkout -b 分支名",
+        expectedCommand: "git checkout -b feature",
+        validation: {
+          type: "contains",
+          command: "git checkout",
+          options: ["-b"],
+        },
+      },
+      {
+        id: 18,
+        title: "查看所有分支",
+        description: "使用git branch查看所有分支",
+        goal: "列出所有本地分支",
+        hint: "git branch",
+        expectedCommand: "git branch",
+        validation: {
+          type: "exact",
+          command: "git branch",
+        },
+      },
+      {
+        id: 19,
+        title: "合并分支",
+        description: "使用git merge合并分支",
+        goal: "将指定分支合并到当前分支",
+        hint: "git merge 分支名",
+        expectedCommand: "git merge feature",
+        validation: {
+          type: "contains",
+          command: "git merge",
+          args: ["feature"],
+        },
+      },
+      {
+        id: 20,
+        title: "删除分支",
+        description: "使用git branch -d删除分支",
+        goal: "删除已合并的分支",
+        hint: "git branch -d 分支名",
+        expectedCommand: "git branch -d feature",
+        validation: {
+          type: "contains",
+          command: "git branch",
+          options: ["-d"],
+        },
+      },
+      {
+        id: 21,
+        title: "暂存工作区",
+        description: "使用git stash暂存工作区更改",
+        goal: "临时保存工作区的更改",
+        hint: "git stash",
+        expectedCommand: "git stash",
+        validation: {
+          type: "exact",
+          command: "git stash",
+        },
+      },
+      {
+        id: 22,
+        title: "恢复暂存",
+        description: "使用git stash pop恢复暂存的更改",
+        goal: "恢复之前暂存的更改",
+        hint: "git stash pop",
+        expectedCommand: "git stash pop",
+        validation: {
+          type: "exact",
+          command: "git stash pop",
+        },
+      },
+      {
+        id: 23,
+        title: "撤销工作区修改",
+        description: "使用git checkout撤销工作区修改",
+        goal: "撤销文件的修改",
+        hint: "git checkout -- 文件名",
+        expectedCommand: "git checkout -- test.txt",
+        validation: {
+          type: "contains",
+          command: "git checkout",
+          args: ["--"],
+        },
+      },
+      {
+        id: 24,
+        title: "重置暂存区",
+        description: "使用git reset重置暂存区",
+        goal: "取消已暂存的文件",
+        hint: "git reset 文件名",
+        expectedCommand: "git reset test.txt",
+        validation: {
+          type: "contains",
+          command: "git reset",
+          args: ["test.txt"],
+        },
+      },
+      {
+        id: 25,
+        title: "查看配置",
+        description: "使用git config --list查看所有配置",
+        goal: "显示所有Git配置",
+        hint: "git config --list",
+        expectedCommand: "git config --list",
+        validation: {
+          type: "exact",
+          command: "git config --list",
+        },
+      },
+    ],
+  },
+  {
+    id: 10,
+    name: "Systemctl服务管理",
+    description: "学习使用systemctl管理系统服务",
+    difficulty: "intermediate",
+    commands: ["systemctl"],
+    startPath: "/home/user",
+    tasks: [
+      {
+        id: 1,
+        title: "查看服务状态",
+        description: "使用systemctl status查看服务状态",
+        goal: "查看指定服务的运行状态",
+        hint: "systemctl status 服务名",
+        expectedCommand: "systemctl status nginx",
+        validation: {
+          type: "contains",
+          command: "systemctl status",
+          args: ["nginx"],
+        },
+      },
+      {
+        id: 2,
+        title: "启动服务",
+        description: "使用systemctl start启动服务",
+        goal: "启动指定的系统服务",
+        hint: "systemctl start 服务名",
+        expectedCommand: "systemctl start nginx",
+        validation: {
+          type: "contains",
+          command: "systemctl start",
+          args: ["nginx"],
+        },
+      },
+      {
+        id: 3,
+        title: "停止服务",
+        description: "使用systemctl stop停止服务",
+        goal: "停止运行中的服务",
+        hint: "systemctl stop 服务名",
+        expectedCommand: "systemctl stop nginx",
+        validation: {
+          type: "contains",
+          command: "systemctl stop",
+          args: ["nginx"],
+        },
+      },
+      {
+        id: 4,
+        title: "重启服务",
+        description: "使用systemctl restart重启服务",
+        goal: "重新启动服务",
+        hint: "systemctl restart 服务名",
+        expectedCommand: "systemctl restart nginx",
+        validation: {
+          type: "contains",
+          command: "systemctl restart",
+          args: ["nginx"],
+        },
+      },
+      {
+        id: 5,
+        title: "重载服务配置",
+        description: "使用systemctl reload重载服务配置",
+        goal: "重新加载服务配置而不中断服务",
+        hint: "systemctl reload 服务名",
+        expectedCommand: "systemctl reload nginx",
+        validation: {
+          type: "contains",
+          command: "systemctl reload",
+          args: ["nginx"],
+        },
+      },
+      {
+        id: 6,
+        title: "启用开机自启",
+        description: "使用systemctl enable设置开机自启",
+        goal: "设置服务开机自动启动",
+        hint: "systemctl enable 服务名",
+        expectedCommand: "systemctl enable nginx",
+        validation: {
+          type: "contains",
+          command: "systemctl enable",
+          args: ["nginx"],
+        },
+      },
+      {
+        id: 7,
+        title: "禁用开机自启",
+        description: "使用systemctl disable禁用开机自启",
+        goal: "取消服务的开机自动启动",
+        hint: "systemctl disable 服务名",
+        expectedCommand: "systemctl disable nginx",
+        validation: {
+          type: "contains",
+          command: "systemctl disable",
+          args: ["nginx"],
+        },
+      },
+      {
+        id: 8,
+        title: "查看所有服务",
+        description: "使用systemctl list-units查看所有服务",
+        goal: "列出所有正在运行的服务",
+        hint: "systemctl list-units --type=service",
+        expectedCommand: "systemctl list-units --type=service",
+        validation: {
+          type: "contains",
+          command: "systemctl list-units",
+          options: ["--type=service"],
+        },
+      },
+      {
+        id: 9,
+        title: "查看服务是否启用",
+        description: "使用systemctl is-enabled查看服务是否开机自启",
+        goal: "检查服务是否设置为开机自启",
+        hint: "systemctl is-enabled 服务名",
+        expectedCommand: "systemctl is-enabled nginx",
+        validation: {
+          type: "contains",
+          command: "systemctl is-enabled",
+          args: ["nginx"],
+        },
+      },
+      {
+        id: 10,
+        title: "查看服务是否运行",
+        description: "使用systemctl is-active查看服务是否运行",
+        goal: "检查服务当前是否正在运行",
+        hint: "systemctl is-active 服务名",
+        expectedCommand: "systemctl is-active nginx",
+        validation: {
+          type: "contains",
+          command: "systemctl is-active",
+          args: ["nginx"],
+        },
+      },
+      {
+        id: 11,
+        title: "查看服务日志",
+        description: "使用journalctl查看服务日志",
+        goal: "查看指定服务的日志",
+        hint: "journalctl -u 服务名",
+        expectedCommand: "journalctl -u nginx",
+        validation: {
+          type: "contains",
+          command: "journalctl",
+          options: ["-u"],
+        },
+      },
+      {
+        id: 12,
+        title: "实时查看日志",
+        description: "使用journalctl -f实时查看日志",
+        goal: "实时跟踪系统日志",
+        hint: "journalctl -f",
+        expectedCommand: "journalctl -f",
+        validation: {
+          type: "exact",
+          command: "journalctl -f",
+        },
+      },
+      {
+        id: 13,
+        title: "重载systemd配置",
+        description: "使用systemctl daemon-reload重载配置",
+        goal: "重新加载systemd管理器配置",
+        hint: "systemctl daemon-reload",
+        expectedCommand: "systemctl daemon-reload",
+        validation: {
+          type: "exact",
+          command: "systemctl daemon-reload",
+        },
+      },
+      {
+        id: 14,
+        title: "查看失败的服务",
+        description: "使用systemctl查看失败的服务",
+        goal: "列出所有启动失败的服务",
+        hint: "systemctl --failed",
+        expectedCommand: "systemctl --failed",
+        validation: {
+          type: "exact",
+          command: "systemctl --failed",
+        },
+      },
+      {
+        id: 15,
+        title: "查看服务文件",
+        description: "使用systemctl cat查看服务配置文件",
+        goal: "显示服务的配置文件内容",
+        hint: "systemctl cat 服务名",
+        expectedCommand: "systemctl cat nginx",
+        validation: {
+          type: "contains",
+          command: "systemctl cat",
+          args: ["nginx"],
+        },
+      },
+    ],
+  },
+  {
+    id: 11,
+    name: "Git分支管理实战",
+    description: "深入学习Git分支的创建、切换、重命名与删除",
+    difficulty: "intermediate",
+    commands: ["git"],
+    startPath: "/home/user/projects",
+    tasks: [
+      {
+        id: 1,
+        title: "创建功能分支",
+        description: "使用git checkout -b创建名为feature/user-auth的功能分支",
+        goal: "创建并切换到特性分支",
+        hint: "git checkout -b feature/user-auth",
+        expectedCommand: "git checkout -b feature/user-auth",
+        validation: {
+          type: "contains",
+          command: "git checkout",
+          options: ["-b"],
+          args: ["feature/user-auth"],
+        },
+      },
+      {
+        id: 2,
+        title: "创建修复分支",
+        description: "基于master创建名为bugfix/login-error的修复分支",
+        goal: "从主分支创建bug修复分支",
+        hint: "先切换回master，再创建分支",
+        expectedCommand: "git checkout -b bugfix/login-error master",
+        validation: {
+          type: "contains",
+          command: "git checkout",
+          options: ["-b"],
+          args: ["bugfix/login-error", "master"],
+        },
+      },
+      {
+        id: 3,
+        title: "列出所有分支",
+        description: "使用git branch -a查看本地和远程所有分支",
+        goal: "查看完整分支列表",
+        hint: "添加-a选项查看远程分支",
+        expectedCommand: "git branch -a",
+        validation: {
+          type: "contains",
+          command: "git branch",
+          options: ["-a"],
+        },
+      },
+      {
+        id: 4,
+        title: "重命名分支",
+        description: "将当前分支重命名为feature/new-auth",
+        goal: "使用git branch -m重命名分支",
+        hint: "git branch -m 新名称",
+        expectedCommand: "git branch -m feature/new-auth",
+        validation: {
+          type: "contains",
+          command: "git branch",
+          options: ["-m"],
+          args: ["feature/new-auth"],
+        },
+      },
+      {
+        id: 5,
+        title: "删除本地分支",
+        description: "删除已合并的feature/old-feature分支",
+        goal: "使用git branch -d删除分支",
+        hint: "git branch -d 分支名",
+        expectedCommand: "git branch -d feature/old-feature",
+        validation: {
+          type: "contains",
+          command: "git branch",
+          options: ["-d"],
+          args: ["feature/old-feature"],
+        },
+      },
+      {
+        id: 6,
+        title: "强制删除分支",
+        description: "强制删除未合并的分支feature/experiment",
+        goal: "使用git branch -D强制删除",
+        hint: "-D可以强制删除未合并分支",
+        expectedCommand: "git branch -D feature/experiment",
+        validation: {
+          type: "contains",
+          command: "git branch",
+          options: ["-D"],
+          args: ["feature/experiment"],
+        },
+      },
+      {
+        id: 7,
+        title: "查看分支合并状态",
+        description: "使用git branch --merged查看已合并分支",
+        goal: "了解哪些分支已合并到当前分支",
+        hint: "--merged选项显示已合并分支",
+        expectedCommand: "git branch --merged",
+        validation: {
+          type: "contains",
+          command: "git branch",
+          options: ["--merged"],
+        },
+      },
+      {
+        id: 8,
+        title: "查看未合并分支",
+        description: "使用git branch --no-merged查看未合并分支",
+        goal: "了解哪些分支尚未合并",
+        hint: "--no-merged显示未合并分支",
+        expectedCommand: "git branch --no-merged",
+        validation: {
+          type: "contains",
+          command: "git branch",
+          options: ["--no-merged"],
+        },
+      },
+      {
+        id: 9,
+        title: "基于提交创建分支",
+        description: "基于特定提交hash创建分支",
+        goal: "使用git branch 分支名 提交ID",
+        hint: "git branch hotfix-001 abc1234",
+        expectedCommand: "git branch hotfix-001 abc1234",
+        validation: {
+          type: "contains",
+          command: "git branch",
+          args: ["hotfix-001", "abc1234"],
+        },
+      },
+      {
+        id: 10,
+        title: "切换到上次分支",
+        description: "使用git checkout -快速切换到上一个分支",
+        goal: "快速切换回上一个分支",
+        hint: "git checkout - 等同于checkout @{-1}",
+        expectedCommand: "git checkout -",
+        validation: {
+          type: "contains",
+          command: "git checkout",
+          args: ["-"],
+        },
+      },
+    ],
+  },
+  {
+    id: 12,
+    name: "Git合并与冲突解决",
+    description: "掌握分支合并策略和冲突解决方法",
+    difficulty: "advanced",
+    commands: ["git"],
+    startPath: "/home/user/projects",
+    tasks: [
+      {
+        id: 1,
+        title: "执行快速合并",
+        description: "将feature分支合并到当前分支",
+        goal: "使用git merge合并分支",
+        hint: "git merge feature",
+        expectedCommand: "git merge feature",
+        validation: {
+          type: "contains",
+          command: "git merge",
+          args: ["feature"],
+        },
+      },
+      {
+        id: 2,
+        title: "创建合并提交",
+        description: "使用--no-ff选项创建合并提交",
+        goal: "保留分支历史，使用非快速向前合并",
+        hint: "git merge --no-ff feature",
+        expectedCommand: "git merge --no-ff feature",
+        validation: {
+          type: "contains",
+          command: "git merge",
+          options: ["--no-ff"],
+          args: ["feature"],
+        },
+      },
+      {
+        id: 3,
+        title: "使用Squash合并",
+        description: "将feature分支的所有提交压缩为一个",
+        goal: "使用--squash选项简化提交历史",
+        hint: "git merge --squash feature",
+        expectedCommand: "git merge --squash feature",
+        validation: {
+          type: "contains",
+          command: "git merge",
+          options: ["--squash"],
+          args: ["feature"],
+        },
+      },
+      {
+        id: 4,
+        title: "查看冲突文件",
+        description: "使用git status查看合并冲突状态",
+        goal: "识别哪些文件存在冲突",
+        hint: "git status显示冲突文件",
+        expectedCommand: "git status",
+        validation: {
+          type: "exact",
+          command: "git status",
+        },
+      },
+      {
+        id: 5,
+        title: "查看冲突详情",
+        description: "使用git diff查看具体冲突内容",
+        goal: "查看冲突的差异",
+        hint: "git diff显示冲突标记",
+        expectedCommand: "git diff",
+        validation: {
+          type: "exact",
+          command: "git diff",
+        },
+      },
+      {
+        id: 6,
+        title: "标记冲突已解决",
+        description: "解决冲突后使用git add标记",
+        goal: "将解决冲突的文件添加到暂存区",
+        hint: "git add 冲突文件",
+        expectedCommand: "git add .",
+        validation: {
+          type: "contains",
+          command: "git add",
+        },
+      },
+      {
+        id: 7,
+        title: "完成合并提交",
+        description: "冲突解决后提交合并结果",
+        goal: "完成合并操作",
+        hint: 'git commit -m "解决冲突"',
+        expectedCommand: 'git commit -m "解决合并冲突"',
+        validation: {
+          type: "contains",
+          command: "git commit",
+          options: ["-m"],
+        },
+      },
+      {
+        id: 8,
+        title: "中止合并",
+        description: "使用git merge --abort中止合并操作",
+        goal: "回到合并前的状态",
+        hint: "git merge --abort取消合并",
+        expectedCommand: "git merge --abort",
+        validation: {
+          type: "contains",
+          command: "git merge",
+          options: ["--abort"],
+        },
+      },
+      {
+        id: 9,
+        title: "使用Rebase合并",
+        description: "使用git rebase变基到master分支",
+        goal: "使用rebase保持线性历史",
+        hint: "git rebase master",
+        expectedCommand: "git rebase master",
+        validation: {
+          type: "contains",
+          command: "git rebase",
+          args: ["master"],
+        },
+      },
+      {
+        id: 10,
+        title: "中止Rebase",
+        description: "使用git rebase --abort中止变基",
+        goal: "取消rebase操作",
+        hint: "git rebase --abort",
+        expectedCommand: "git rebase --abort",
+        validation: {
+          type: "contains",
+          command: "git rebase",
+          options: ["--abort"],
+        },
+      },
+      {
+        id: 11,
+        title: "继续Rebase",
+        description: "解决冲突后使用git rebase --continue继续",
+        goal: "继续rebase操作",
+        hint: "git rebase --continue",
+        expectedCommand: "git rebase --continue",
+        validation: {
+          type: "contains",
+          command: "git rebase",
+          options: ["--continue"],
+        },
+      },
+      {
+        id: 12,
+        title: "查看合并历史",
+        description: "使用git log --oneline --graph查看合并图形",
+        goal: "可视化分支合并历史",
+        hint: "git log --oneline --graph --all",
+        expectedCommand: "git log --oneline --graph --all",
+        validation: {
+          type: "contains",
+          command: "git log",
+          options: ["--oneline", "--graph", "--all"],
+        },
+      },
+    ],
+  },
+  {
+    id: 13,
+    name: "Git远程协作与PR规范",
+    description: "学习GitHub/GitLab远程仓库协作和Pull Request流程",
+    difficulty: "intermediate",
+    commands: ["git"],
+    startPath: "/home/user/projects",
+    tasks: [
+      {
+        id: 1,
+        title: "查看远程仓库",
+        description: "使用git remote -v查看远程仓库地址",
+        goal: "查看所有远程仓库",
+        hint: "git remote -v",
+        expectedCommand: "git remote -v",
+        validation: {
+          type: "contains",
+          command: "git remote",
+          options: ["-v"],
+        },
+      },
+      {
+        id: 2,
+        title: "拉取远程更新",
+        description: "使用git fetch拉取远程更新但不合并",
+        goal: "获取远程最新代码",
+        hint: "git fetch origin",
+        expectedCommand: "git fetch origin",
+        validation: {
+          type: "contains",
+          command: "git fetch",
+          args: ["origin"],
+        },
+      },
+      {
+        id: 3,
+        title: "推送到远程分支",
+        description: "将本地feature分支推送到远程",
+        goal: "首次推送并建立跟踪关系",
+        hint: "git push -u origin feature/user-auth",
+        expectedCommand: "git push -u origin feature/user-auth",
+        validation: {
+          type: "contains",
+          command: "git push",
+          options: ["-u"],
+          args: ["origin", "feature/user-auth"],
+        },
+      },
+      {
+        id: 4,
+        title: "查看远程分支",
+        description: "使用git branch -r查看所有远程分支",
+        goal: "列出远程仓库的分支",
+        hint: "git branch -r",
+        expectedCommand: "git branch -r",
+        validation: {
+          type: "contains",
+          command: "git branch",
+          options: ["-r"],
+        },
+      },
+      {
+        id: 5,
+        title: "删除远程分支",
+        description: "使用git push删除远程已合并的分支",
+        goal: "清理远程过期分支",
+        hint: "git push origin --delete 分支名",
+        expectedCommand: "git push origin --delete feature/old",
+        validation: {
+          type: "contains",
+          command: "git push",
+          options: ["--delete"],
+        },
+      },
+      {
+        id: 6,
+        title: "跟踪远程分支",
+        description: "创建本地分支跟踪远程分支",
+        goal: "使用git checkout -b跟踪远程",
+        hint: "git checkout -b feature origin/feature",
+        expectedCommand: "git checkout -b feature origin/feature",
+        validation: {
+          type: "contains",
+          command: "git checkout",
+          options: ["-b"],
+        },
+      },
+      {
+        id: 7,
+        title: "比较分支差异",
+        description: "比较当前分支与master的差异",
+        goal: "查看准备PR的变更内容",
+        hint: "git diff master",
+        expectedCommand: "git diff master",
+        validation: {
+          type: "contains",
+          command: "git diff",
+          args: ["master"],
+        },
+      },
+      {
+        id: 8,
+        title: "查看提交统计",
+        description: "使用git shortstat查看变更统计",
+        goal: "了解PR涉及的变更量",
+        hint: "git diff --stat master",
+        expectedCommand: "git diff --stat master",
+        validation: {
+          type: "contains",
+          command: "git diff",
+          options: ["--stat"],
+        },
+      },
+      {
+        id: 9,
+        title: "生成变更日志",
+        description: "使用git log生成PR描述所需的变更日志",
+        goal: "查看提交历史用于编写PR描述",
+        hint: "git log --oneline master..HEAD",
+        expectedCommand: "git log --oneline master..HEAD",
+        validation: {
+          type: "contains",
+          command: "git log",
+          options: ["--oneline"],
+        },
+      },
+      {
+        id: 10,
+        title: "添加Fork远程",
+        description: "添加Fork仓库作为远程源",
+        goal: "配置多个远程仓库",
+        hint: "git remote add fork URL",
+        expectedCommand: "git remote add fork https://github.com/user/repo.git",
+        validation: {
+          type: "contains",
+          command: "git remote add",
+          args: ["fork"],
+        },
+      },
+      {
+        id: 11,
+        title: "从Fork拉取更新",
+        description: "从fork仓库拉取最新代码",
+        goal: "同步fork的变更",
+        hint: "git pull fork main",
+        expectedCommand: "git pull fork main",
+        validation: {
+          type: "contains",
+          command: "git pull",
+          args: ["fork", "main"],
+        },
+      },
+      {
+        id: 12,
+        title: "使用Rebase更新分支",
+        description: "变基到最新的master分支",
+        goal: "保持PR与主分支同步",
+        hint: "git rebase origin/master",
+        expectedCommand: "git rebase origin/master",
+        validation: {
+          type: "contains",
+          command: "git rebase",
+          args: ["origin/master"],
+        },
+      },
+    ],
+  },
+  {
+    id: 14,
+    name: "代码审查与提交规范",
+    description: "学习代码审查流程、提交信息规范和最佳实践",
+    difficulty: "intermediate",
+    commands: ["git"],
+    startPath: "/home/user/projects",
+    tasks: [
+      {
+        id: 1,
+        title: "查看提交详情",
+        description: "使用git show查看最近提交的完整内容",
+        goal: "查看提交的详细变更",
+        hint: "git show",
+        expectedCommand: "git show",
+        validation: {
+          type: "exact",
+          command: "git show",
+        },
+      },
+      {
+        id: 2,
+        title: "修改上次提交",
+        description: "使用git commit --amend修改最近一次提交",
+        goal: "修改提交信息或添加遗漏的文件",
+        hint: "git commit --amend",
+        expectedCommand: "git commit --amend",
+        validation: {
+          type: "contains",
+          command: "git commit",
+          options: ["--amend"],
+        },
+      },
+      {
+        id: 3,
+        title: "查看提交日志",
+        description: "使用git log --oneline查看简洁提交历史",
+        goal: "简洁显示提交记录",
+        hint: "git log --oneline -10",
+        expectedCommand: "git log --oneline -10",
+        validation: {
+          type: "contains",
+          command: "git log",
+          options: ["--oneline"],
+        },
+      },
+      {
+        id: 4,
+        title: "查看作者提交",
+        description: "使用git log --author查看特定作者提交",
+        goal: "过滤指定作者的提交",
+        hint: 'git log --author="张三"',
+        expectedCommand: 'git log --author="张三"',
+        validation: {
+          type: "contains",
+          command: "git log",
+          options: ["--author"],
+        },
+      },
+      {
+        id: 5,
+        title: "交互式暂存",
+        description: "使用git add -i进行交互式暂存",
+        goal: "选择性地暂存部分更改",
+        hint: "git add -i",
+        expectedCommand: "git add -i",
+        validation: {
+          type: "contains",
+          command: "git add",
+          options: ["-i"],
+        },
+      },
+      {
+        id: 6,
+        title: "补丁模式添加",
+        description: "使用git add -p逐块暂存",
+        goal: "精细控制暂存内容",
+        hint: "git add -p",
+        expectedCommand: "git add -p",
+        validation: {
+          type: "contains",
+          command: "git add",
+          options: ["-p"],
+        },
+      },
+      {
+        id: 7,
+        title: "创建提交标签",
+        description: "使用git tag创建版本标签",
+        goal: "标记重要版本",
+        hint: 'git tag -a v1.0.0 -m "第一个版本"',
+        expectedCommand: 'git tag -a v1.0.0 -m "版本发布"',
+        validation: {
+          type: "contains",
+          command: "git tag",
+          options: ["-a", "-m"],
+        },
+      },
+      {
+        id: 8,
+        title: "推送标签",
+        description: "将标签推送到远程仓库",
+        goal: "同步标签到远程",
+        hint: "git push origin v1.0.0",
+        expectedCommand: "git push origin v1.0.0",
+        validation: {
+          type: "contains",
+          command: "git push",
+          args: ["origin", "v1.0.0"],
+        },
+      },
+      {
+        id: 9,
+        title: "查看文件历史",
+        description: "使用git log --follow查看文件完整历史",
+        goal: "追踪文件的所有变更",
+        hint: "git log --follow -- src/app.js",
+        expectedCommand: "git log --follow -- src/app.js",
+        validation: {
+          type: "contains",
+          command: "git log",
+          options: ["--follow"],
+        },
+      },
+      {
+        id: 10,
+        title: "搜索提交",
+        description: "使用git log --grep搜索提交信息",
+        goal: "根据关键词查找相关提交",
+        hint: 'git log --grep="修复"',
+        expectedCommand: 'git log --grep="修复"',
+        validation: {
+          type: "contains",
+          command: "git log",
+          options: ["--grep"],
+        },
+      },
+      {
+        id: 11,
+        title: "查看谁修改了代码",
+        description: "使用git blame查看文件每行的修改者",
+        goal: "追溯代码变更责任人",
+        hint: "git blame src/app.js",
+        expectedCommand: "git blame src/app.js",
+        validation: {
+          type: "contains",
+          command: "git blame",
+          args: ["src/app.js"],
+        },
+      },
+      {
+        id: 12,
+        title: "cherry-pick提交",
+        description: "从其他分支挑选特定提交应用",
+        goal: "使用git cherry-pick复制提交",
+        hint: "git cherry-pick abc1234",
+        expectedCommand: "git cherry-pick abc1234",
+        validation: {
+          type: "contains",
+          command: "git cherry-pick",
+          args: ["abc1234"],
+        },
+      },
+    ],
+  },
+  {
+    id: 15,
+    name: "Git进阶技巧",
+    description: "掌握Git高级用法：rebase、bisect、hook等",
+    difficulty: "advanced",
+    commands: ["git"],
+    startPath: "/home/user/projects",
+    tasks: [
+      {
+        id: 1,
+        title: "交互式Rebase",
+        description: "使用git rebase -i编辑提交历史",
+        goal: "交互式变基以整理提交",
+        hint: "git rebase -i HEAD~3",
+        expectedCommand: "git rebase -i HEAD~3",
+        validation: {
+          type: "contains",
+          command: "git rebase",
+          options: ["-i"],
+        },
+      },
+      {
+        id: 2,
+        title: "二分查找Bug",
+        description: "使用git bisect定位引入Bug的提交",
+        goal: "开始二分查找",
+        hint: "git bisect start",
+        expectedCommand: "git bisect start",
+        validation: {
+          type: "contains",
+          command: "git bisect",
+          args: ["start"],
+        },
+      },
+      {
+        id: 3,
+        title: "标记好提交",
+        description: "标记当前提交为正常的",
+        goal: "git bisect good",
+        hint: "git bisect good",
+        expectedCommand: "git bisect good",
+        validation: {
+          type: "exact",
+          command: "git bisect good",
+        },
+      },
+      {
+        id: 4,
+        title: "标记坏提交",
+        description: "标记当前提交为有Bug的",
+        goal: "git bisect bad",
+        hint: "git bisect bad",
+        expectedCommand: "git bisect bad",
+        validation: {
+          type: "exact",
+          command: "git bisect bad",
+        },
+      },
+      {
+        id: 5,
+        title: "结束Bisect",
+        description: "使用git bisect reset结束二分查找",
+        goal: "重置bisect状态",
+        hint: "git bisect reset",
+        expectedCommand: "git bisect reset",
+        validation: {
+          type: "exact",
+          command: "git bisect reset",
+        },
+      },
+      {
+        id: 6,
+        title: "使用Reflog恢复",
+        description: "使用git reflog查看操作历史",
+        goal: "找回丢失的提交",
+        hint: "git reflog",
+        expectedCommand: "git reflog",
+        validation: {
+          type: "exact",
+          command: "git reflog",
+        },
+      },
+      {
+        id: 7,
+        title: "重置到指定提交",
+        description: "使用git reset --hard回退到指定提交",
+        goal: "强硬重置到某个状态",
+        hint: "git reset --hard HEAD~2",
+        expectedCommand: "git reset --hard HEAD~2",
+        validation: {
+          type: "contains",
+          command: "git reset",
+          options: ["--hard"],
+        },
+      },
+      {
+        id: 8,
+        title: "软重置保留更改",
+        description: "使用git reset --soft保留更改在暂存区",
+        goal: "重置提交但保留更改",
+        hint: "git reset --soft HEAD~1",
+        expectedCommand: "git reset --soft HEAD~1",
+        validation: {
+          type: "contains",
+          command: "git reset",
+          options: ["--soft"],
+        },
+      },
+      {
+        id: 9,
+        title: "使用Worktree",
+        description: "创建额外工作目录",
+        goal: "git worktree添加并行开发目录",
+        hint: "git worktree add ../feature feature",
+        expectedCommand: "git worktree add ../hotfix hotfix",
+        validation: {
+          type: "contains",
+          command: "git worktree add",
+        },
+      },
+      {
+        id: 10,
+        title: "列出Worktree",
+        description: "查看所有工作树",
+        goal: "git worktree list",
+        hint: "git worktree list",
+        expectedCommand: "git worktree list",
+        validation: {
+          type: "exact",
+          command: "git worktree list",
+        },
+      },
+      {
+        id: 11,
+        title: "子模块初始化",
+        description: "初始化Git子模块",
+        goal: "git submodule init",
+        hint: "git submodule init",
+        expectedCommand: "git submodule init",
+        validation: {
+          type: "exact",
+          command: "git submodule init",
+        },
+      },
+      {
+        id: 12,
+        title: "更新子模块",
+        description: "更新子模块到最新提交",
+        goal: "git submodule update",
+        hint: "git submodule update --recursive",
+        expectedCommand: "git submodule update --recursive",
+        validation: {
+          type: "contains",
+          command: "git submodule update",
+          options: ["--recursive"],
+        },
+      },
+    ],
+  },
+  {
+    id: 16,
+    name: "Docker进阶应用",
+    description: "深入学习Docker多容器编排、数据管理与网络配置",
+    difficulty: "advanced",
+    commands: ["docker"],
+    startPath: "/home/user",
+    tasks: [
+      {
+        id: 1,
+        title: "使用Docker Compose",
+        description: "使用docker compose启动多容器应用",
+        goal: "编排多个服务",
+        hint: "docker compose up -d",
+        expectedCommand: "docker compose up -d",
+        validation: {
+          type: "contains",
+          command: "docker compose",
+          options: ["up", "-d"],
+        },
+      },
+      {
+        id: 2,
+        title: "停止Compose服务",
+        description: "使用docker compose down停止并清理",
+        goal: "停止并移除容器网络",
+        hint: "docker compose down",
+        expectedCommand: "docker compose down",
+        validation: {
+          type: "exact",
+          command: "docker compose down",
+        },
+      },
+      {
+        id: 3,
+        title: "查看Compose日志",
+        description: "使用docker compose logs查看服务日志",
+        goal: "查看编排服务的日志",
+        hint: "docker compose logs -f",
+        expectedCommand: "docker compose logs -f",
+        validation: {
+          type: "contains",
+          command: "docker compose logs",
+          options: ["-f"],
+        },
+      },
+      {
+        id: 4,
+        title: "运行带资源限制",
+        description: "运行容器时限制内存和CPU",
+        goal: "设置容器资源上限",
+        hint: "docker run --memory=512m --cpus=1 nginx",
+        expectedCommand: "docker run --memory=512m --cpus=1 nginx",
+        validation: {
+          type: "contains",
+          command: "docker run",
+          options: ["--memory", "--cpus"],
+        },
+      },
+      {
+        id: 5,
+        title: "挂载本地目录",
+        description: "运行容器并挂载当前目录",
+        goal: "将本地目录挂载到容器",
+        hint: "docker run -v $(pwd):/app nginx",
+        expectedCommand: "docker run -v $(pwd):/app nginx",
+        validation: {
+          type: "contains",
+          command: "docker run",
+          options: ["-v"],
+        },
+      },
+      {
+        id: 6,
+        title: "设置环境变量",
+        description: "运行容器时设置环境变量",
+        goal: "使用-e传递环境变量",
+        hint: "docker run -e DB_HOST=localhost mysql",
+        expectedCommand: "docker run -e DB_HOST=localhost mysql",
+        validation: {
+          type: "contains",
+          command: "docker run",
+          options: ["-e"],
+        },
+      },
+      {
+        id: 7,
+        title: "查看镜像历史",
+        description: "使用docker history查看镜像层",
+        goal: "了解镜像构建历史",
+        hint: "docker history nginx",
+        expectedCommand: "docker history nginx",
+        validation: {
+          type: "contains",
+          command: "docker history",
+          args: ["nginx"],
+        },
+      },
+      {
+        id: 8,
+        title: "提交容器为镜像",
+        description: "使用docker commit保存容器为镜像",
+        goal: "将运行的容器保存为新镜像",
+        hint: "docker commit web01 myapp:v2",
+        expectedCommand: "docker commit web01 myapp:v2",
+        validation: {
+          type: "contains",
+          command: "docker commit",
+        },
+      },
+      {
+        id: 9,
+        title: "创建自定义网络",
+        description: "创建bridge类型的网络",
+        goal: "docker network create --driver bridge",
+        hint: "docker network create --driver bridge mynet",
+        expectedCommand: "docker network create --driver bridge mynet",
+        validation: {
+          type: "contains",
+          command: "docker network create",
+          options: ["--driver"],
+        },
+      },
+      {
+        id: 10,
+        title: "连接容器到网络",
+        description: "将现有容器连接到网络",
+        goal: "docker network connect",
+        hint: "docker network connect mynet web01",
+        expectedCommand: "docker network connect mynet web01",
+        validation: {
+          type: "contains",
+          command: "docker network connect",
+        },
+      },
+      {
+        id: 11,
+        title: "断开网络连接",
+        description: "从网络断开容器连接",
+        goal: "docker network disconnect",
+        hint: "docker network disconnect mynet web01",
+        expectedCommand: "docker network disconnect mynet web01",
+        validation: {
+          type: "contains",
+          command: "docker network disconnect",
+        },
+      },
+      {
+        id: 12,
+        title: "查看Docker磁盘使用",
+        description: "使用docker system df查看磁盘占用",
+        goal: "检查Docker资源使用情况",
+        hint: "docker system df",
+        expectedCommand: "docker system df",
+        validation: {
+          type: "exact",
+          command: "docker system df",
+        },
+      },
+    ],
+  },
+  {
+    id: 17,
+    name: "团队协作开发规范",
+    description: "学习GitFlow工作流、代码审查和团队开发规范",
+    difficulty: "advanced",
+    commands: ["git"],
+    startPath: "/home/user/projects",
+    tasks: [
+      {
+        id: 1,
+        title: "创建开发分支",
+        description: "基于master创建develop分支",
+        goal: "创建开发主线分支",
+        hint: "git checkout -b develop master",
+        expectedCommand: "git checkout -b develop master",
+        validation: {
+          type: "contains",
+          command: "git checkout",
+          options: ["-b"],
+          args: ["develop", "master"],
+        },
+      },
+      {
+        id: 2,
+        title: "创建发布分支",
+        description: "从develop创建release分支",
+        goal: "准备发布版本",
+        hint: "git checkout -b release/v1.0.0 develop",
+        expectedCommand: "git checkout -b release/v1.0.0 develop",
+        validation: {
+          type: "contains",
+          command: "git checkout",
+          options: ["-b"],
+        },
+      },
+      {
+        id: 3,
+        title: "创建热修复分支",
+        description: "基于master创建hotfix分支",
+        goal: "紧急修复生产问题",
+        hint: "git checkout -b hotfix/critical-bug master",
+        expectedCommand: "git checkout -b hotfix/critical-bug master",
+        validation: {
+          type: "contains",
+          command: "git checkout",
+          options: ["-b"],
+          args: ["hotfix/critical-bug", "master"],
+        },
+      },
+      {
+        id: 4,
+        title: "合并到develop",
+        description: "将feature分支合并到develop",
+        goal: "集成特性到开发分支",
+        hint: "git merge feature/user-auth",
+        expectedCommand: "git merge feature/user-auth",
+        validation: {
+          type: "contains",
+          command: "git merge",
+          args: ["feature/user-auth"],
+        },
+      },
+      {
+        id: 5,
+        title: "合并到master",
+        description: "将hotfix分支合并到master",
+        goal: "修复生产代码",
+        hint: "git merge hotfix/critical-bug",
+        expectedCommand: "git merge hotfix/critical-bug",
+        validation: {
+          type: "contains",
+          command: "git merge",
+          args: ["hotfix/critical-bug"],
+        },
+      },
+      {
+        id: 6,
+        title: "创建带注释标签",
+        description: "为发布版本创建带注释的标签",
+        goal: "git tag -a标注版本",
+        hint: 'git tag -a v1.0.0 -m "Release 1.0"',
+        expectedCommand: 'git tag -a v1.0.0 -m "Release 1.0.0"',
+        validation: {
+          type: "contains",
+          command: "git tag",
+          options: ["-a", "-m"],
+        },
+      },
+      {
+        id: 7,
+        title: "推送所有分支",
+        description: "推送所有本地分支到远程",
+        goal: "同步所有分支",
+        hint: "git push --all origin",
+        expectedCommand: "git push --all origin",
+        validation: {
+          type: "contains",
+          command: "git push",
+          options: ["--all"],
+        },
+      },
+      {
+        id: 8,
+        title: "推送所有标签",
+        description: "推送所有标签到远程",
+        goal: "git push --tags",
+        hint: "git push --tags",
+        expectedCommand: "git push --tags",
+        validation: {
+          type: "contains",
+          command: "git push",
+          options: ["--tags"],
+        },
+      },
+      {
+        id: 9,
+        title: "清理本地分支",
+        description: "删除已合并到master的分支",
+        goal: "清理过期的本地分支",
+        hint: 'git branch --merged | grep -v "master" | xargs git branch -d',
+        expectedCommand: "git branch -d feature/completed",
+        validation: {
+          type: "contains",
+          command: "git branch",
+          options: ["-d"],
+        },
+      },
+      {
+        id: 10,
+        title: "清理远程分支",
+        description: "修剪远程已删除的分支引用",
+        goal: "git remote prune origin",
+        hint: "git remote prune origin",
+        expectedCommand: "git remote prune origin",
+        validation: {
+          type: "contains",
+          command: "git remote",
+          options: ["prune"],
+        },
+      },
+      {
+        id: 11,
+        title: "配置Git别名",
+        description: "设置常用Git命令别名",
+        goal: "提高日常操作效率",
+        hint: "git config --global alias.st status",
+        expectedCommand: "git config --global alias.st status",
+        validation: {
+          type: "contains",
+          command: "git config",
+          options: ["--global"],
+        },
+      },
+      {
+        id: 12,
+        title: "查看提交统计",
+        description: "使用git shortstat查看整体统计",
+        goal: "查看仓库变更统计",
+        hint: 'git log --oneline --since="1 week ago" | wc -l',
+        expectedCommand: "git log --oneline --shortstat",
+        validation: {
+          type: "contains",
+          command: "git log",
+          options: ["--oneline", "--shortstat"],
+        },
+      },
+    ],
+  },
+  {
+    id: 18,
+    name: "Shell脚本自动化",
+    description: "学习编写Shell脚本实现自动化任务",
+    difficulty: "intermediate",
+    commands: ["bash", "chmod"],
+    startPath: "/home/user",
+    tasks: [
+      {
+        id: 1,
+        title: "创建脚本文件",
+        description: "创建backup.sh脚本文件",
+        goal: "创建shell脚本文件",
+        hint: "touch scripts/backup.sh",
+        expectedCommand: "touch backup.sh",
+        validation: {
+          type: "contains",
+          command: "touch",
+          args: ["backup.sh"],
+        },
+      },
+      {
+        id: 2,
+        title: "添加执行权限",
+        description: "给脚本文件添加执行权限",
+        goal: "chmod +x backup.sh",
+        hint: "chmod +x backup.sh",
+        expectedCommand: "chmod +x backup.sh",
+        validation: {
+          type: "contains",
+          command: "chmod",
+          args: ["+x", "backup.sh"],
+        },
+      },
+      {
+        id: 3,
+        title: "执行脚本",
+        description: "执行当前目录下的脚本文件",
+        goal: "./backup.sh",
+        hint: "使用./执行当前目录脚本",
+        expectedCommand: "./backup.sh",
+        validation: {
+          type: "contains",
+          command: "./backup.sh",
+        },
+      },
+      {
+        id: 4,
+        title: "使用Bash执行",
+        description: "使用bash命令执行脚本",
+        goal: "bash backup.sh",
+        hint: "bash script.sh",
+        expectedCommand: "bash backup.sh",
+        validation: {
+          type: "contains",
+          command: "bash",
+          args: ["backup.sh"],
+        },
+      },
+      {
+        id: 5,
+        title: "创建Crontab任务",
+        description: "编辑定时任务",
+        goal: "crontab -e编辑定时任务",
+        hint: "crontab -e",
+        expectedCommand: "crontab -e",
+        validation: {
+          type: "exact",
+          command: "crontab -e",
+        },
+      },
+      {
+        id: 6,
+        title: "查看Crontab",
+        description: "查看当前用户的定时任务",
+        goal: "crontab -l",
+        hint: "crontab -l",
+        expectedCommand: "crontab -l",
+        validation: {
+          type: "exact",
+          command: "crontab -l",
+        },
+      },
+      {
+        id: 7,
+        title: "删除Crontab",
+        description: "删除所有定时任务",
+        goal: "crontab -r",
+        hint: "crontab -r删除所有任务",
+        expectedCommand: "crontab -r",
+        validation: {
+          type: "exact",
+          command: "crontab -r",
+        },
+      },
+      {
+        id: 8,
+        title: "管道操作",
+        description: "使用管道连接两个命令",
+        goal: "ls | grep txt",
+        hint: "命令1 | 命令2",
+        expectedCommand: "ls | grep txt",
+        validation: {
+          type: "contains",
+          command: "ls",
+          options: ["|"],
+        },
+      },
+      {
+        id: 9,
+        title: "重定向输出",
+        description: "将命令输出重定向到文件",
+        goal: "ls > output.txt",
+        hint: "使用>重定向",
+        expectedCommand: "ls > output.txt",
+        validation: {
+          type: "contains",
+          command: "ls",
+          args: ["output.txt"],
+        },
+      },
+      {
+        id: 10,
+        title: "追加到文件",
+        description: "将输出追加到文件末尾",
+        goal: 'echo "test" >> output.txt',
+        hint: "使用>>追加",
+        expectedCommand: 'echo "test" >> output.txt',
+        validation: {
+          type: "contains",
+          command: "echo",
+          args: ["output.txt"],
+        },
+      },
+      {
+        id: 11,
+        title: "环境变量",
+        description: "设置环境变量",
+        goal: "export PATH=$PATH:/usr/local/bin",
+        hint: "export VAR=value",
+        expectedCommand: "export PATH=$PATH:/usr/local/bin",
+        validation: {
+          type: "contains",
+          command: "export",
+        },
+      },
+      {
+        id: 12,
+        title: "查看环境变量",
+        description: "查看所有环境变量",
+        goal: "env或printenv",
+        hint: "env",
+        expectedCommand: "env",
+        validation: {
+          type: "exact",
+          command: "env",
+        },
+      },
+    ],
+  },
+  {
+    id: 19,
+    name: "Linux进程与性能管理",
+    description: "学习进程管理、性能监控和系统调优",
+    difficulty: "intermediate",
+    commands: ["ps", "top", "kill", "nice", "free", "df"],
+    startPath: "/home/user",
+    tasks: [
+      {
+        id: 1,
+        title: "查看进程列表",
+        description: "使用ps aux查看所有进程",
+        goal: "列出系统所有运行进程",
+        hint: "ps aux",
+        expectedCommand: "ps aux",
+        validation: {
+          type: "exact",
+          command: "ps aux",
+        },
+      },
+      {
+        id: 2,
+        title: "查找特定进程",
+        description: "使用ps grep查找nginx进程",
+        goal: "过滤特定进程",
+        hint: "ps aux | grep nginx",
+        expectedCommand: "ps aux | grep nginx",
+        validation: {
+          type: "contains",
+          command: "ps",
+          options: ["|"],
+        },
+      },
+      {
+        id: 3,
+        title: "实时进程监控",
+        description: "使用top查看实时进程状态",
+        goal: "动态监控CPU和内存使用",
+        hint: "top",
+        expectedCommand: "top",
+        validation: {
+          type: "exact",
+          command: "top",
+        },
+      },
+      {
+        id: 4,
+        title: "终止进程",
+        description: "使用kill终止进程",
+        goal: "结束PID为1234的进程",
+        hint: "kill 1234",
+        expectedCommand: "kill 1234",
+        validation: {
+          type: "contains",
+          command: "kill",
+          args: ["1234"],
+        },
+      },
+      {
+        id: 5,
+        title: "强制终止进程",
+        description: "使用kill -9强制杀死进程",
+        goal: "强制结束进程",
+        hint: "kill -9 1234",
+        expectedCommand: "kill -9 1234",
+        validation: {
+          type: "contains",
+          command: "kill",
+          options: ["-9"],
+        },
+      },
+      {
+        id: 6,
+        title: "设置进程优先级",
+        description: "使用nice设置命令优先级",
+        goal: "以较低优先级运行任务",
+        hint: "nice -n 10 ./task.sh",
+        expectedCommand: "nice -n 10 ./task.sh",
+        validation: {
+          type: "contains",
+          command: "nice",
+          options: ["-n"],
+        },
+      },
+      {
+        id: 7,
+        title: "修改运行进程优先级",
+        description: "使用renice修改运行中进程优先级",
+        goal: "调整进程优先级",
+        hint: "renice -n 5 -p 1234",
+        expectedCommand: "renice -n 5 -p 1234",
+        validation: {
+          type: "contains",
+          command: "renice",
+          options: ["-n", "-p"],
+        },
+      },
+      {
+        id: 8,
+        title: "查看内存使用",
+        description: "使用free -h查看内存使用情况",
+        goal: "显示人类可读的内存信息",
+        hint: "free -h",
+        expectedCommand: "free -h",
+        validation: {
+          type: "exact",
+          command: "free -h",
+        },
+      },
+      {
+        id: 9,
+        title: "查看磁盘空间",
+        description: "使用df -h查看磁盘使用情况",
+        goal: "显示人类可读的磁盘信息",
+        hint: "df -h",
+        expectedCommand: "df -h",
+        validation: {
+          type: "exact",
+          command: "df -h",
+        },
+      },
+      {
+        id: 10,
+        title: "查看目录大小",
+        description: "使用du -sh查看目录占用空间",
+        goal: "查看指定目录大小",
+        hint: "du -sh /home/user",
+        expectedCommand: "du -sh /home/user",
+        validation: {
+          type: "contains",
+          command: "du",
+          options: ["-sh"],
+        },
+      },
+      {
+        id: 11,
+        title: "查看系统负载",
+        description: "使用uptime查看系统负载",
+        goal: "显示系统运行时间和负载",
+        hint: "uptime",
+        expectedCommand: "uptime",
+        validation: {
+          type: "exact",
+          command: "uptime",
+        },
+      },
+      {
+        id: 12,
+        title: "查看网络状态",
+        description: "使用netstat查看网络连接",
+        goal: "显示网络状态",
+        hint: "netstat -tuln",
+        expectedCommand: "netstat -tuln",
+        validation: {
+          type: "contains",
+          command: "netstat",
+          options: ["-tuln"],
+        },
+      },
+    ],
+  },
+  {
+    id: 20,
+    name: "CI/CD基础与自动化部署",
+    description: "学习持续集成/持续部署的概念和实践",
+    difficulty: "advanced",
+    commands: ["git", "docker", "bash"],
+    startPath: "/home/user/projects",
+    tasks: [
+      {
+        id: 1,
+        title: "创建部署脚本",
+        description: "创建deploy.sh部署脚本",
+        goal: "touch scripts/deploy.sh",
+        hint: "创建部署脚本文件",
+        expectedCommand: "touch deploy.sh",
+        validation: {
+          type: "contains",
+          command: "touch",
+          args: ["deploy.sh"],
+        },
+      },
+      {
+        id: 2,
+        title: "设置执行权限",
+        description: "给部署脚本添加执行权限",
+        goal: "chmod +x deploy.sh",
+        hint: "添加执行权限",
+        expectedCommand: "chmod +x deploy.sh",
+        validation: {
+          type: "contains",
+          command: "chmod",
+          args: ["+x", "deploy.sh"],
+        },
+      },
+      {
+        id: 3,
+        title: "拉取最新代码",
+        description: "从远程仓库拉取最新代码",
+        goal: "git pull origin main",
+        hint: "拉取最新代码",
+        expectedCommand: "git pull origin main",
+        validation: {
+          type: "contains",
+          command: "git pull",
+          args: ["origin", "main"],
+        },
+      },
+      {
+        id: 4,
+        title: "构建Docker镜像",
+        description: "使用Dockerfile构建新镜像",
+        goal: "docker build -t myapp:latest .",
+        hint: "构建镜像并打标签",
+        expectedCommand: "docker build -t myapp:latest .",
+        validation: {
+          type: "contains",
+          command: "docker build",
+          options: ["-t"],
+        },
+      },
+      {
+        id: 5,
+        title: "停止旧容器",
+        description: "停止正在运行的旧版本容器",
+        goal: "docker stop myapp",
+        hint: "停止容器",
+        expectedCommand: "docker stop myapp",
+        validation: {
+          type: "contains",
+          command: "docker stop",
+          args: ["myapp"],
+        },
+      },
+      {
+        id: 6,
+        title: "删除旧容器",
+        description: "删除已停止的容器",
+        goal: "docker rm myapp",
+        hint: "删除容器",
+        expectedCommand: "docker rm myapp",
+        validation: {
+          type: "contains",
+          command: "docker rm",
+          args: ["myapp"],
+        },
+      },
+      {
+        id: 7,
+        title: "启动新容器",
+        description: "启动新版本容器",
+        goal: "docker run -d --name myapp -p 8080:80 myapp:latest",
+        hint: "启动容器并映射端口",
+        expectedCommand: "docker run -d --name myapp -p 8080:80 myapp:latest",
+        validation: {
+          type: "contains",
+          command: "docker run",
+          options: ["-d", "--name", "-p"],
+        },
+      },
+      {
+        id: 8,
+        title: "检查容器状态",
+        description: "验证容器是否正常启动",
+        goal: "docker ps",
+        hint: "查看容器状态",
+        expectedCommand: "docker ps",
+        validation: {
+          type: "exact",
+          command: "docker ps",
+        },
+      },
+      {
+        id: 9,
+        title: "查看部署日志",
+        description: "查看新容器的运行日志",
+        goal: "docker logs myapp",
+        hint: "查看容器日志",
+        expectedCommand: "docker logs myapp",
+        validation: {
+          type: "contains",
+          command: "docker logs",
+          args: ["myapp"],
+        },
+      },
+      {
+        id: 10,
+        title: "健康检查",
+        description: "使用curl检查服务健康状态",
+        goal: "curl http://localhost:8080/health",
+        hint: "健康检查接口",
+        expectedCommand: "curl http://localhost:8080/health",
+        validation: {
+          type: "contains",
+          command: "curl",
+        },
+      },
+      {
+        id: 11,
+        title: "回滚版本",
+        description: "使用旧镜像回滚部署",
+        goal: "docker run -d --name myapp myapp:v1.0",
+        hint: "使用旧版本镜像",
+        expectedCommand: "docker run -d --name myapp myapp:v1.0",
+        validation: {
+          type: "contains",
+          command: "docker run",
+          options: ["-d", "--name"],
+        },
+      },
+      {
+        id: 12,
+        title: "清理旧镜像",
+        description: "删除不再使用的旧镜像",
+        goal: "docker rmi myapp:v0.9",
+        hint: "删除旧镜像",
+        expectedCommand: "docker rmi myapp:v0.9",
+        validation: {
+          type: "contains",
+          command: "docker rmi",
+        },
+      },
+    ],
+  },
+  {
+    id: 21,
+    name: "GCC编译器入门",
+    description: "学习使用GCC编译C语言程序",
+    difficulty: "intermediate",
+    commands: ["gcc"],
+    startPath: "/home/user/projects/c_project",
+    tasks: [
+      {
+        id: 1,
+        title: "查看GCC版本",
+        description: "使用gcc --version查看编译器版本信息",
+        goal: "确认GCC已正确安装",
+        hint: "gcc --version",
+        expectedCommand: "gcc --version",
+        validation: {
+          type: "exact",
+          command: "gcc --version",
+        },
+      },
+      {
+        id: 2,
+        title: "编译单个文件",
+        description: "将hello.c编译为可执行文件hello",
+        goal: "gcc hello.c -o hello",
+        hint: "使用-o指定输出文件名",
+        expectedCommand: "gcc hello.c -o hello",
+        validation: {
+          type: "contains",
+          command: "gcc",
+          options: ["-o"],
+          args: ["hello"],
+        },
+      },
+      {
+        id: 3,
+        title: "编译并显示警告",
+        description: "使用-Wall选项编译main.c并显示所有警告",
+        goal: "gcc -Wall main.c -o main",
+        hint: "-Wall开启所有常见警告",
+        expectedCommand: "gcc -Wall main.c -o main",
+        validation: {
+          type: "contains",
+          command: "gcc",
+          options: ["-Wall", "-o"],
+        },
+      },
+      {
+        id: 4,
+        title: "生成调试信息",
+        description: "使用-g选项编译程序以便调试",
+        goal: "gcc -g debug.c -o debug",
+        hint: "-g生成调试信息",
+        expectedCommand: "gcc -g debug.c -o debug",
+        validation: {
+          type: "contains",
+          command: "gcc",
+          options: ["-g"],
+        },
+      },
+      {
+        id: 5,
+        title: "优化编译",
+        description: "使用-O2优化级别编译程序",
+        goal: "gcc -O2 optimize.c -o optimize",
+        hint: "-O2是常用的优化级别",
+        expectedCommand: "gcc -O2 optimize.c -o optimize",
+        validation: {
+          type: "contains",
+          command: "gcc",
+          options: ["-O2"],
+        },
+      },
+      {
+        id: 6,
+        title: "编译到目标文件",
+        description: "只编译不链接，生成.o目标文件",
+        goal: "gcc -c utils.c -o utils.o",
+        hint: "-c选项只编译不链接",
+        expectedCommand: "gcc -c utils.c -o utils.o",
+        validation: {
+          type: "contains",
+          command: "gcc",
+          options: ["-c"],
+        },
+      },
+      {
+        id: 7,
+        title: "链接多个目标文件",
+        description: "将main.o和utils.o链接成可执行文件",
+        goal: "gcc main.o utils.o -o program",
+        hint: "直接链接目标文件",
+        expectedCommand: "gcc main.o utils.o -o program",
+        validation: {
+          type: "contains",
+          command: "gcc",
+          args: ["main.o", "utils.o"],
+        },
+      },
+      {
+        id: 8,
+        title: "指定头文件路径",
+        description: "使用-I指定额外的头文件搜索路径",
+        goal: "gcc -I./include main.c -o main",
+        hint: "-I添加头文件搜索路径",
+        expectedCommand: "gcc -I./include main.c -o main",
+        validation: {
+          type: "contains",
+          command: "gcc",
+          options: ["-I./include"],
+        },
+      },
+      {
+        id: 9,
+        title: "链接库文件",
+        description: "链接math库编译数学程序",
+        goal: "gcc math_prog.c -o math_prog -lm",
+        hint: "-lm链接数学库",
+        expectedCommand: "gcc math_prog.c -o math_prog -lm",
+        validation: {
+          type: "contains",
+          command: "gcc",
+          options: ["-lm"],
+        },
+      },
+      {
+        id: 10,
+        title: "生成汇编代码",
+        description: "使用-S生成汇编代码文件",
+        goal: "gcc -S hello.c -o hello.s",
+        hint: "-S生成汇编代码",
+        expectedCommand: "gcc -S hello.c -o hello.s",
+        validation: {
+          type: "contains",
+          command: "gcc",
+          options: ["-S"],
+        },
+      },
+    ],
+  },
+  {
+    id: 22,
+    name: "Java开发工具",
+    description: "学习使用javac和java命令编译运行Java程序",
+    difficulty: "intermediate",
+    commands: ["javac", "java"],
+    startPath: "/home/user/projects/java_project",
+    tasks: [
+      {
+        id: 1,
+        title: "查看Java版本",
+        description: "使用java -version查看Java运行时版本",
+        goal: "确认Java已正确安装",
+        hint: "java -version",
+        expectedCommand: "java -version",
+        validation: {
+          type: "exact",
+          command: "java -version",
+        },
+      },
+      {
+        id: 2,
+        title: "查看编译器版本",
+        description: "使用javac -version查看编译器版本",
+        goal: "确认javac已正确安装",
+        hint: "javac -version",
+        expectedCommand: "javac -version",
+        validation: {
+          type: "exact",
+          command: "javac -version",
+        },
+      },
+      {
+        id: 3,
+        title: "编译Java文件",
+        description: "使用javac编译Hello.java",
+        goal: "javac Hello.java",
+        hint: "javac编译生成.class文件",
+        expectedCommand: "javac Hello.java",
+        validation: {
+          type: "contains",
+          command: "javac",
+          args: ["Hello.java"],
+        },
+      },
+      {
+        id: 4,
+        title: "运行Java程序",
+        description: "使用java运行Hello类",
+        goal: "java Hello",
+        hint: "java命令后跟类名（不含.class）",
+        expectedCommand: "java Hello",
+        validation: {
+          type: "contains",
+          command: "java",
+          args: ["Hello"],
+        },
+      },
+      {
+        id: 5,
+        title: "指定类路径运行",
+        description: "使用-cp指定类路径运行程序",
+        goal: "java -cp ./bin MyApp",
+        hint: "-cp或-classpath指定类路径",
+        expectedCommand: "java -cp ./bin MyApp",
+        validation: {
+          type: "contains",
+          command: "java",
+          options: ["-cp"],
+        },
+      },
+      {
+        id: 6,
+        title: "编译到指定目录",
+        description: "使用-d指定编译输出目录",
+        goal: "javac -d ./bin Main.java",
+        hint: "-d指定class文件输出目录",
+        expectedCommand: "javac -d ./bin Main.java",
+        validation: {
+          type: "contains",
+          command: "javac",
+          options: ["-d"],
+        },
+      },
+      {
+        id: 7,
+        title: "编译多个文件",
+        description: "同时编译多个Java源文件",
+        goal: "javac Main.java Utils.java",
+        hint: "可以一次编译多个文件",
+        expectedCommand: "javac Main.java Utils.java",
+        validation: {
+          type: "contains",
+          command: "javac",
+          args: ["Main.java", "Utils.java"],
+        },
+      },
+      {
+        id: 8,
+        title: "设置堆内存大小",
+        description: "使用-Xmx设置JVM最大堆内存",
+        goal: "java -Xmx512m MyApp",
+        hint: "-Xmx设置最大堆内存",
+        expectedCommand: "java -Xmx512m MyApp",
+        validation: {
+          type: "contains",
+          command: "java",
+          options: ["-Xmx512m"],
+        },
+      },
+      {
+        id: 9,
+        title: "启用详细输出",
+        description: "使用-verbose:class查看类加载信息",
+        goal: "java -verbose:class Hello",
+        hint: "-verbose:class显示类加载详情",
+        expectedCommand: "java -verbose:class Hello",
+        validation: {
+          type: "contains",
+          command: "java",
+          options: ["-verbose:class"],
+        },
+      },
+      {
+        id: 10,
+        title: "传递程序参数",
+        description: "向Java程序传递命令行参数",
+        goal: "java ArgsDemo arg1 arg2",
+        hint: "类名后的参数会传递给main方法",
+        expectedCommand: "java ArgsDemo arg1 arg2",
+        validation: {
+          type: "contains",
+          command: "java",
+          args: ["ArgsDemo", "arg1", "arg2"],
+        },
+      },
+    ],
+  },
+  {
+    id: 23,
+    name: "Maven构建工具",
+    description: "学习使用Maven管理Java项目构建",
+    difficulty: "intermediate",
+    commands: ["mvn"],
+    startPath: "/home/user/projects/maven_project",
+    tasks: [
+      {
+        id: 1,
+        title: "查看Maven版本",
+        description: "使用mvn -version查看Maven版本信息",
+        goal: "确认Maven已正确安装",
+        hint: "mvn -version",
+        expectedCommand: "mvn -version",
+        validation: {
+          type: "exact",
+          command: "mvn -version",
+        },
+      },
+      {
+        id: 2,
+        title: "创建Maven项目",
+        description: "使用archetype生成新项目",
+        goal: "mvn archetype:generate -DgroupId=com.example -DartifactId=myapp",
+        hint: "archetype:generate创建项目骨架",
+        expectedCommand: "mvn archetype:generate",
+        validation: {
+          type: "contains",
+          command: "mvn archetype:generate",
+        },
+      },
+      {
+        id: 3,
+        title: "编译项目",
+        description: "使用mvn compile编译项目源代码",
+        goal: "mvn compile",
+        hint: "compile编译主代码",
+        expectedCommand: "mvn compile",
+        validation: {
+          type: "exact",
+          command: "mvn compile",
+        },
+      },
+      {
+        id: 4,
+        title: "运行测试",
+        description: "使用mvn test运行单元测试",
+        goal: "mvn test",
+        hint: "test执行所有测试用例",
+        expectedCommand: "mvn test",
+        validation: {
+          type: "exact",
+          command: "mvn test",
+        },
+      },
+      {
+        id: 5,
+        title: "打包项目",
+        description: "使用mvn package打包项目为jar/war",
+        goal: "mvn package",
+        hint: "package生成jar或war包",
+        expectedCommand: "mvn package",
+        validation: {
+          type: "exact",
+          command: "mvn package",
+        },
+      },
+      {
+        id: 6,
+        title: "安装到本地仓库",
+        description: "使用mvn install安装到本地Maven仓库",
+        goal: "mvn install",
+        hint: "install安装到~/.m2/repository",
+        expectedCommand: "mvn install",
+        validation: {
+          type: "exact",
+          command: "mvn install",
+        },
+      },
+      {
+        id: 7,
+        title: "清理构建",
+        description: "使用mvn clean清理target目录",
+        goal: "mvn clean",
+        hint: "clean删除target目录",
+        expectedCommand: "mvn clean",
+        validation: {
+          type: "exact",
+          command: "mvn clean",
+        },
+      },
+      {
+        id: 8,
+        title: "清理并打包",
+        description: "组合使用clean和package",
+        goal: "mvn clean package",
+        hint: "可以组合多个生命周期阶段",
+        expectedCommand: "mvn clean package",
+        validation: {
+          type: "exact",
+          command: "mvn clean package",
+        },
+      },
+      {
+        id: 9,
+        title: "跳过测试打包",
+        description: "使用-DskipTests跳过测试执行",
+        goal: "mvn package -DskipTests",
+        hint: "-DskipTests跳过测试",
+        expectedCommand: "mvn package -DskipTests",
+        validation: {
+          type: "contains",
+          command: "mvn package",
+          options: ["-DskipTests"],
+        },
+      },
+      {
+        id: 10,
+        title: "查看依赖树",
+        description: "使用mvn dependency:tree查看项目依赖",
+        goal: "mvn dependency:tree",
+        hint: "dependency:tree显示依赖层次",
+        expectedCommand: "mvn dependency:tree",
+        validation: {
+          type: "exact",
+          command: "mvn dependency:tree",
+        },
+      },
+      {
+        id: 11,
+        title: "更新依赖",
+        description: "使用mvn versions:display-dependency-updates检查依赖更新",
+        goal: "mvn versions:display-dependency-updates",
+        hint: "检查可用的依赖更新",
+        expectedCommand: "mvn versions:display-dependency-updates",
+        validation: {
+          type: "exact",
+          command: "mvn versions:display-dependency-updates",
+        },
+      },
+      {
+        id: 12,
+        title: "执行主类",
+        description: "使用mvn exec:java执行项目主类",
+        goal: "mvn exec:java -Dexec.mainClass=com.example.App",
+        hint: "exec:java运行指定的main方法",
+        expectedCommand: "mvn exec:java",
+        validation: {
+          type: "contains",
+          command: "mvn exec:java",
+        },
+      },
+    ],
+  },
+  {
+    id: 24,
+    name: "npm包管理器",
+    description: "学习使用npm管理Node.js项目依赖",
+    difficulty: "intermediate",
+    commands: ["npm"],
+    startPath: "/home/user/projects/node_project",
+    tasks: [
+      {
+        id: 1,
+        title: "查看npm版本",
+        description: "使用npm -v查看npm版本",
+        goal: "确认npm已正确安装",
+        hint: "npm -v 或 npm --version",
+        expectedCommand: "npm -v",
+        validation: {
+          type: "contains",
+          command: "npm",
+          options: ["-v"],
+        },
+      },
+      {
+        id: 2,
+        title: "初始化项目",
+        description: "使用npm init创建package.json",
+        goal: "npm init -y",
+        hint: "-y使用默认配置快速初始化",
+        expectedCommand: "npm init -y",
+        validation: {
+          type: "contains",
+          command: "npm init",
+          options: ["-y"],
+        },
+      },
+      {
+        id: 3,
+        title: "安装依赖",
+        description: "使用npm install安装package.json中的所有依赖",
+        goal: "npm install",
+        hint: "npm install 或 npm i",
+        expectedCommand: "npm install",
+        validation: {
+          type: "exact",
+          command: "npm install",
+        },
+      },
+      {
+        id: 4,
+        title: "安装指定包",
+        description: "安装lodash包",
+        goal: "npm install lodash",
+        hint: "npm install <package-name>",
+        expectedCommand: "npm install lodash",
+        validation: {
+          type: "contains",
+          command: "npm install",
+          args: ["lodash"],
+        },
+      },
+      {
+        id: 5,
+        title: "安装开发依赖",
+        description: "安装jest作为开发依赖",
+        goal: "npm install --save-dev jest",
+        hint: "--save-dev 或 -D 安装开发依赖",
+        expectedCommand: "npm install --save-dev jest",
+        validation: {
+          type: "contains",
+          command: "npm install",
+          options: ["--save-dev"],
+        },
+      },
+      {
+        id: 6,
+        title: "全局安装包",
+        description: "全局安装nodemon工具",
+        goal: "npm install -g nodemon",
+        hint: "-g 全局安装",
+        expectedCommand: "npm install -g nodemon",
+        validation: {
+          type: "contains",
+          command: "npm install",
+          options: ["-g"],
+        },
+      },
+      {
+        id: 7,
+        title: "卸载包",
+        description: "卸载已安装的lodash包",
+        goal: "npm uninstall lodash",
+        hint: "npm uninstall 或 npm remove",
+        expectedCommand: "npm uninstall lodash",
+        validation: {
+          type: "contains",
+          command: "npm uninstall",
+          args: ["lodash"],
+        },
+      },
+      {
+        id: 8,
+        title: "更新包",
+        description: "更新项目依赖到最新版本",
+        goal: "npm update",
+        hint: "npm update更新所有依赖",
+        expectedCommand: "npm update",
+        validation: {
+          type: "exact",
+          command: "npm update",
+        },
+      },
+      {
+        id: 9,
+        title: "查看已安装包",
+        description: "列出项目中已安装的依赖",
+        goal: "npm list",
+        hint: "npm list 或 npm ls",
+        expectedCommand: "npm list",
+        validation: {
+          type: "exact",
+          command: "npm list",
+        },
+      },
+      {
+        id: 10,
+        title: "查看包信息",
+        description: "查看express包的详细信息",
+        goal: "npm info express",
+        hint: "npm info 或 npm view",
+        expectedCommand: "npm info express",
+        validation: {
+          type: "contains",
+          command: "npm info",
+          args: ["express"],
+        },
+      },
+      {
+        id: 11,
+        title: "运行脚本",
+        description: "运行package.json中定义的start脚本",
+        goal: "npm run start",
+        hint: "npm run <script-name>",
+        expectedCommand: "npm run start",
+        validation: {
+          type: "contains",
+          command: "npm run",
+          args: ["start"],
+        },
+      },
+      {
+        id: 12,
+        title: "检查过时依赖",
+        description: "检查哪些依赖已过时",
+        goal: "npm outdated",
+        hint: "npm outdated显示可更新的包",
+        expectedCommand: "npm outdated",
+        validation: {
+          type: "exact",
+          command: "npm outdated",
+        },
+      },
+    ],
+  },
+  {
+    id: 25,
+    name: "Vue3 CLI实战",
+    description: "学习使用Vue CLI创建和管理Vue3项目",
+    difficulty: "intermediate",
+    commands: ["vue", "npm"],
+    startPath: "/home/user/projects",
+    tasks: [
+      {
+        id: 1,
+        title: "检查Vue CLI版本",
+        description: "使用vue --version查看Vue CLI版本",
+        goal: "确认Vue CLI已正确安装",
+        hint: "vue --version 或 vue -V",
+        expectedCommand: "vue --version",
+        validation: {
+          type: "exact",
+          command: "vue --version",
+        },
+      },
+      {
+        id: 2,
+        title: "创建Vue项目",
+        description: "使用vue create创建新项目",
+        goal: "vue create my-vue-app",
+        hint: "vue create <project-name>",
+        expectedCommand: "vue create my-vue-app",
+        validation: {
+          type: "contains",
+          command: "vue create",
+          args: ["my-vue-app"],
+        },
+      },
+      {
+        id: 3,
+        title: "使用Vite创建项目",
+        description: "使用create-vue快速创建Vue3项目",
+        goal: "npm create vue@latest my-app",
+        hint: "create-vue是官方推荐的新方式",
+        expectedCommand: "npm create vue@latest my-app",
+        validation: {
+          type: "contains",
+          command: "npm create",
+          args: ["vue@latest"],
+        },
+      },
+      {
+        id: 4,
+        title: "启动开发服务器",
+        description: "在Vue项目中启动开发服务器",
+        goal: "npm run dev",
+        hint: "Vite项目使用npm run dev",
+        expectedCommand: "npm run dev",
+        validation: {
+          type: "exact",
+          command: "npm run dev",
+        },
+      },
+      {
+        id: 5,
+        title: "构建生产版本",
+        description: "构建Vue项目用于生产环境",
+        goal: "npm run build",
+        hint: "npm run build生成dist目录",
+        expectedCommand: "npm run build",
+        validation: {
+          type: "exact",
+          command: "npm run build",
+        },
+      },
+      {
+        id: 6,
+        title: "预览生产构建",
+        description: "本地预览生产构建结果",
+        goal: "npm run preview",
+        hint: "Vite提供preview命令预览构建",
+        expectedCommand: "npm run preview",
+        validation: {
+          type: "exact",
+          command: "npm run preview",
+        },
+      },
+      {
+        id: 7,
+        title: "安装Vue Router",
+        description: "安装Vue Router路由库",
+        goal: "npm install vue-router@4",
+        hint: "Vue3使用vue-router@4",
+        expectedCommand: "npm install vue-router@4",
+        validation: {
+          type: "contains",
+          command: "npm install",
+          args: ["vue-router@4"],
+        },
+      },
+      {
+        id: 8,
+        title: "安装Pinia状态管理",
+        description: "安装Pinia作为状态管理库",
+        goal: "npm install pinia",
+        hint: "Pinia是Vue3推荐的状态管理",
+        expectedCommand: "npm install pinia",
+        validation: {
+          type: "contains",
+          command: "npm install",
+          args: ["pinia"],
+        },
+      },
+      {
+        id: 9,
+        title: "安装UI组件库",
+        description: "安装Element Plus组件库",
+        goal: "npm install element-plus",
+        hint: "Element Plus是Vue3的UI库",
+        expectedCommand: "npm install element-plus",
+        validation: {
+          type: "contains",
+          command: "npm install",
+          args: ["element-plus"],
+        },
+      },
+      {
+        id: 10,
+        title: "运行单元测试",
+        description: "运行Vue项目的单元测试",
+        goal: "npm run test:unit",
+        hint: "Vue项目通常使用Vitest",
+        expectedCommand: "npm run test:unit",
+        validation: {
+          type: "exact",
+          command: "npm run test:unit",
+        },
+      },
+      {
+        id: 11,
+        title: "代码格式化",
+        description: "使用Prettier格式化代码",
+        goal: "npm run format",
+        hint: "运行Prettier格式化",
+        expectedCommand: "npm run format",
+        validation: {
+          type: "exact",
+          command: "npm run format",
+        },
+      },
+      {
+        id: 12,
+        title: "代码检查",
+        description: "运行ESLint检查代码",
+        goal: "npm run lint",
+        hint: "ESLint检查代码规范",
+        expectedCommand: "npm run lint",
+        validation: {
+          type: "exact",
+          command: "npm run lint",
+        },
+      },
+    ],
+  },
+  {
+    id: 26,
+    name: "GitHub CLI工具",
+    description: "学习使用gh命令行工具操作GitHub",
+    difficulty: "intermediate",
+    commands: ["gh"],
+    startPath: "/home/user/projects",
+    tasks: [
+      {
+        id: 1,
+        title: "查看gh版本",
+        description: "使用gh --version查看GitHub CLI版本",
+        goal: "确认gh已正确安装",
+        hint: "gh --version",
+        expectedCommand: "gh --version",
+        validation: {
+          type: "exact",
+          command: "gh --version",
+        },
+      },
+      {
+        id: 2,
+        title: "登录GitHub",
+        description: "使用gh auth login登录GitHub账户",
+        goal: "gh auth login",
+        hint: "auth login进行身份认证",
+        expectedCommand: "gh auth login",
+        validation: {
+          type: "exact",
+          command: "gh auth login",
+        },
+      },
+      {
+        id: 3,
+        title: "查看认证状态",
+        description: "检查当前登录状态",
+        goal: "gh auth status",
+        hint: "auth status查看认证信息",
+        expectedCommand: "gh auth status",
+        validation: {
+          type: "exact",
+          command: "gh auth status",
+        },
+      },
+      {
+        id: 4,
+        title: "创建仓库",
+        description: "使用gh创建新的GitHub仓库",
+        goal: "gh repo create my-project --public",
+        hint: "repo create创建远程仓库",
+        expectedCommand: "gh repo create my-project --public",
+        validation: {
+          type: "contains",
+          command: "gh repo create",
+        },
+      },
+      {
+        id: 5,
+        title: "克隆仓库",
+        description: "使用gh克隆仓库",
+        goal: "gh repo clone owner/repo",
+        hint: "repo clone克隆仓库",
+        expectedCommand: "gh repo clone owner/repo",
+        validation: {
+          type: "contains",
+          command: "gh repo clone",
+        },
+      },
+      {
+        id: 6,
+        title: "创建Issue",
+        description: "使用gh创建新的Issue",
+        goal: 'gh issue create --title "Bug report" --body "Description"',
+        hint: "issue create创建问题",
+        expectedCommand: "gh issue create",
+        validation: {
+          type: "contains",
+          command: "gh issue create",
+        },
+      },
+      {
+        id: 7,
+        title: "列出Issues",
+        description: "查看仓库的Issue列表",
+        goal: "gh issue list",
+        hint: "issue list列出所有Issue",
+        expectedCommand: "gh issue list",
+        validation: {
+          type: "exact",
+          command: "gh issue list",
+        },
+      },
+      {
+        id: 8,
+        title: "创建Pull Request",
+        description: "使用gh创建Pull Request",
+        goal: 'gh pr create --title "Feature" --body "Description"',
+        hint: "pr create创建PR",
+        expectedCommand: "gh pr create",
+        validation: {
+          type: "contains",
+          command: "gh pr create",
+        },
+      },
+      {
+        id: 9,
+        title: "查看PR列表",
+        description: "列出仓库的Pull Request",
+        goal: "gh pr list",
+        hint: "pr list列出所有PR",
+        expectedCommand: "gh pr list",
+        validation: {
+          type: "exact",
+          command: "gh pr list",
+        },
+      },
+      {
+        id: 10,
+        title: "检出PR",
+        description: "检出某个PR到本地分支",
+        goal: "gh pr checkout 123",
+        hint: "pr checkout检出PR",
+        expectedCommand: "gh pr checkout 123",
+        validation: {
+          type: "contains",
+          command: "gh pr checkout",
+        },
+      },
+      {
+        id: 11,
+        title: "查看工作流",
+        description: "查看GitHub Actions工作流运行情况",
+        goal: "gh run list",
+        hint: "run list查看工作流运行",
+        expectedCommand: "gh run list",
+        validation: {
+          type: "exact",
+          command: "gh run list",
+        },
+      },
+      {
+        id: 12,
+        title: "查看Release",
+        description: "查看仓库的Release列表",
+        goal: "gh release list",
+        hint: "release list列出所有发布",
+        expectedCommand: "gh release list",
+        validation: {
+          type: "exact",
+          command: "gh release list",
+        },
+      },
+    ],
+  },
+  {
+    id: 27,
+    name: "OpenClaw工具",
+    description: "学习使用OpenClaw进行游戏开发和调试",
+    difficulty: "intermediate",
+    commands: ["openclaw"],
+    startPath: "/home/user/projects/game_project",
+    tasks: [
+      {
+        id: 1,
+        title: "查看OpenClaw版本",
+        description: "使用openclaw --version查看版本信息",
+        goal: "确认OpenClaw已正确安装",
+        hint: "openclaw --version",
+        expectedCommand: "openclaw --version",
+        validation: {
+          type: "exact",
+          command: "openclaw --version",
+        },
+      },
+      {
+        id: 2,
+        title: "启动游戏",
+        description: "使用openclaw启动游戏",
+        goal: "openclaw",
+        hint: "直接运行openclaw启动游戏",
+        expectedCommand: "openclaw",
+        validation: {
+          type: "exact",
+          command: "openclaw",
+        },
+      },
+      {
+        id: 3,
+        title: "指定配置文件",
+        description: "使用-c指定配置文件启动",
+        goal: "openclaw -c custom.ini",
+        hint: "-c指定配置文件路径",
+        expectedCommand: "openclaw -c custom.ini",
+        validation: {
+          type: "contains",
+          command: "openclaw",
+          options: ["-c"],
+        },
+      },
+      {
+        id: 4,
+        title: "窗口模式运行",
+        description: "以窗口模式启动游戏",
+        goal: "openclaw --windowed",
+        hint: "--windowed窗口模式",
+        expectedCommand: "openclaw --windowed",
+        validation: {
+          type: "contains",
+          command: "openclaw",
+          options: ["--windowed"],
+        },
+      },
+      {
+        id: 5,
+        title: "指定分辨率",
+        description: "设置游戏运行分辨率",
+        goal: "openclaw --resolution 1920x1080",
+        hint: "--resolution设置分辨率",
+        expectedCommand: "openclaw --resolution 1920x1080",
+        validation: {
+          type: "contains",
+          command: "openclaw",
+          options: ["--resolution"],
+        },
+      },
+      {
+        id: 6,
+        title: "启用调试模式",
+        description: "启用调试输出",
+        goal: "openclaw --debug",
+        hint: "--debug启用调试信息",
+        expectedCommand: "openclaw --debug",
+        validation: {
+          type: "contains",
+          command: "openclaw",
+          options: ["--debug"],
+        },
+      },
+      {
+        id: 7,
+        title: "显示帮助信息",
+        description: "查看OpenClaw帮助文档",
+        goal: "openclaw --help",
+        hint: "--help显示帮助",
+        expectedCommand: "openclaw --help",
+        validation: {
+          type: "exact",
+          command: "openclaw --help",
+        },
+      },
+      {
+        id: 8,
+        title: "指定数据目录",
+        description: "指定游戏数据文件目录",
+        goal: "openclaw --data-dir ./assets",
+        hint: "--data-dir指定资源目录",
+        expectedCommand: "openclaw --data-dir ./assets",
+        validation: {
+          type: "contains",
+          command: "openclaw",
+          options: ["--data-dir"],
+        },
+      },
+      {
+        id: 9,
+        title: "禁用音频",
+        description: "启动时禁用音频",
+        goal: "openclaw --no-sound",
+        hint: "--no-sound禁用音频",
+        expectedCommand: "openclaw --no-sound",
+        validation: {
+          type: "contains",
+          command: "openclaw",
+          options: ["--no-sound"],
+        },
+      },
+      {
+        id: 10,
+        title: "全屏模式",
+        description: "以全屏模式启动游戏",
+        goal: "openclaw --fullscreen",
+        hint: "--fullscreen全屏运行",
+        expectedCommand: "openclaw --fullscreen",
+        validation: {
+          type: "contains",
+          command: "openclaw",
+          options: ["--fullscreen"],
+        },
+      },
+    ],
+  },
+  {
+    id: 28,
+    name: "Claude CLI助手",
+    description: "学习使用Claude CLI进行AI辅助开发",
+    difficulty: "intermediate",
+    commands: ["claude"],
+    startPath: "/home/user/projects",
+    tasks: [
+      {
+        id: 1,
+        title: "查看Claude版本",
+        description: "使用claude --version查看版本",
+        goal: "确认Claude CLI已正确安装",
+        hint: "claude --version",
+        expectedCommand: "claude --version",
+        validation: {
+          type: "exact",
+          command: "claude --version",
+        },
+      },
+      {
+        id: 2,
+        title: "启动交互模式",
+        description: "启动Claude交互式对话",
+        goal: "claude",
+        hint: "直接运行claude进入交互模式",
+        expectedCommand: "claude",
+        validation: {
+          type: "exact",
+          command: "claude",
+        },
+      },
+      {
+        id: 3,
+        title: "单次提问",
+        description: "向Claude提问单个问题",
+        goal: 'claude "解释什么是递归"',
+        hint: 'claude "你的问题"',
+        expectedCommand: 'claude "解释什么是递归"',
+        validation: {
+          type: "contains",
+          command: "claude",
+        },
+      },
+      {
+        id: 4,
+        title: "代码审查",
+        description: "让Claude审查代码文件",
+        goal: "claude --review main.py",
+        hint: "--review审查代码",
+        expectedCommand: "claude --review main.py",
+        validation: {
+          type: "contains",
+          command: "claude",
+          options: ["--review"],
+        },
+      },
+      {
+        id: 5,
+        title: "生成代码",
+        description: "让Claude生成代码",
+        goal: 'claude --generate "Python快速排序"',
+        hint: "--generate生成代码",
+        expectedCommand: 'claude --generate "Python快速排序"',
+        validation: {
+          type: "contains",
+          command: "claude",
+          options: ["--generate"],
+        },
+      },
+      {
+        id: 6,
+        title: "解释代码",
+        description: "让Claude解释代码文件",
+        goal: "claude --explain app.js",
+        hint: "--explain解释代码",
+        expectedCommand: "claude --explain app.js",
+        validation: {
+          type: "contains",
+          command: "claude",
+          options: ["--explain"],
+        },
+      },
+      {
+        id: 7,
+        title: "重构代码",
+        description: "让Claude建议代码重构",
+        goal: "claude --refactor utils.py",
+        hint: "--refactor重构建议",
+        expectedCommand: "claude --refactor utils.py",
+        validation: {
+          type: "contains",
+          command: "claude",
+          options: ["--refactor"],
+        },
+      },
+      {
+        id: 8,
+        title: "编写测试",
+        description: "让Claude为代码生成测试",
+        goal: "claude --test calculator.py",
+        hint: "--test生成测试用例",
+        expectedCommand: "claude --test calculator.py",
+        validation: {
+          type: "contains",
+          command: "claude",
+          options: ["--test"],
+        },
+      },
+      {
+        id: 9,
+        title: "文档生成",
+        description: "让Claude生成代码文档",
+        goal: "claude --document api.py",
+        hint: "--document生成文档",
+        expectedCommand: "claude --document api.py",
+        validation: {
+          type: "contains",
+          command: "claude",
+          options: ["--document"],
+        },
+      },
+      {
+        id: 10,
+        title: "显示帮助",
+        description: "查看Claude CLI帮助信息",
+        goal: "claude --help",
+        hint: "--help显示帮助",
+        expectedCommand: "claude --help",
+        validation: {
+          type: "exact",
+          command: "claude --help",
+        },
+      },
+    ],
+  },
 ];
 
 const practiceScenarios = [
-    {
+  {
+    id: 1,
+    name: "新员工入职",
+    description: "作为新员工，你需要熟悉公司的文件系统结构",
+    story:
+      "欢迎加入公司！作为新员工，你需要了解公司的文件系统结构，创建自己的工作目录，并熟悉基本的文件操作。",
+    requiredLevels: [],
+    startPath: "/home/user",
+    tasks: [
+      {
         id: 1,
-        name: '新员工入职',
-        description: '作为新员工，你需要熟悉公司的文件系统结构',
-        story: '欢迎加入公司！作为新员工，你需要了解公司的文件系统结构，创建自己的工作目录，并熟悉基本的文件操作。',
-        requiredLevels: [],
-        startPath: '/home/user',
-        tasks: [
-            {
-                id: 1,
-                title: '查看当前位置',
-                description: '首先，查看你当前所在的目录位置',
-                goal: '显示当前工作目录',
-                hint: '使用pwd命令',
-                expectedCommand: 'pwd',
-                validation: {
-                    type: 'exact',
-                    command: 'pwd'
-                }
-            },
-            {
-                id: 2,
-                title: '查看目录结构',
-                description: '查看当前目录下有哪些文件和目录',
-                goal: '列出当前目录的内容',
-                hint: '使用ls命令',
-                expectedCommand: 'ls',
-                validation: {
-                    type: 'contains',
-                    command: 'ls'
-                }
-            },
-            {
-                id: 3,
-                title: '创建工作目录',
-                description: '在projects目录下创建一个名为mywork的目录',
-                goal: '在projects目录下创建mywork目录',
-                hint: '先切换到projects目录，然后使用mkdir命令',
-                expectedCommand: 'mkdir mywork',
-                validation: {
-                    type: 'contains',
-                    command: 'mkdir',
-                    args: ['mywork'],
-                    requiredPath: '/home/user/projects'
-                }
-            },
-            {
-                id: 4,
-                title: '创建工作文件',
-                description: '在mywork目录下创建一个名为todo.txt的文件',
-                goal: '在mywork目录创建todo.txt文件',
-                hint: '使用touch命令创建文件',
-                expectedCommand: 'touch todo.txt',
-                validation: {
-                    type: 'contains',
-                    command: 'touch',
-                    args: ['todo.txt'],
-                    requiredPath: '/home/user/projects/mywork'
-                }
-            },
-            {
-                id: 5,
-                title: '查看文件内容',
-                description: '查看documents目录下的readme.txt文件内容',
-                goal: '查看readme.txt文件内容',
-                hint: '使用cat命令查看文件',
-                expectedCommand: 'cat readme.txt',
-                validation: {
-                    type: 'contains',
-                    command: 'cat',
-                    args: ['readme.txt'],
-                    requiredPath: '/home/user/documents'
-                }
-            },
-            {
-                id: 6,
-                title: '返回主目录',
-                description: '完成所有任务后，返回到你的主目录',
-                goal: '切换到/home/user目录',
-                hint: '使用cd命令切换目录',
-                expectedCommand: 'cd /home/user',
-                validation: {
-                    type: 'contains',
-                    command: 'cd',
-                    args: ['/home/user', '~']
-                }
-            }
-        ]
-    },
-    {
+        title: "查看当前位置",
+        description: "首先，查看你当前所在的目录位置",
+        goal: "显示当前工作目录",
+        hint: "使用pwd命令",
+        expectedCommand: "pwd",
+        validation: {
+          type: "exact",
+          command: "pwd",
+        },
+      },
+      {
         id: 2,
-        name: '日志分析员',
-        description: '作为日志分析员，你需要分析系统日志文件',
-        story: '公司服务器出现了一些问题，作为日志分析员，你需要分析日志文件找出问题所在。',
-        requiredLevels: [1, 4],
-        startPath: '/home/user/logs',
-        tasks: [
-            {
-                id: 1,
-                title: '进入日志目录',
-                description: '切换到logs目录查看日志文件',
-                goal: '切换到/home/user/logs目录',
-                hint: '使用cd命令切换目录',
-                expectedCommand: 'cd logs',
-                validation: {
-                    type: 'contains',
-                    command: 'cd',
-                    args: ['logs']
-                }
-            },
-            {
-                id: 2,
-                title: '查看日志文件',
-                description: '查看app.log文件的内容',
-                goal: '显示app.log文件内容',
-                hint: '使用cat命令查看文件',
-                expectedCommand: 'cat app.log',
-                validation: {
-                    type: 'contains',
-                    command: 'cat',
-                    args: ['app.log'],
-                    requiredPath: '/home/user/logs'
-                }
-            },
-            {
-                id: 3,
-                title: '查找错误信息',
-                description: '在app.log中查找所有ERROR信息',
-                goal: '搜索包含ERROR的行',
-                hint: '使用grep命令搜索文本',
-                expectedCommand: 'grep ERROR app.log',
-                validation: {
-                    type: 'contains',
-                    command: 'grep',
-                    args: ['ERROR', 'app.log'],
-                    requiredPath: '/home/user/logs'
-                }
-            },
-            {
-                id: 4,
-                title: '查看最近的日志',
-                description: '查看app.log文件的最后5行',
-                goal: '显示app.log最后5行',
-                hint: '使用tail命令查看文件末尾',
-                expectedCommand: 'tail -n 5 app.log',
-                validation: {
-                    type: 'contains',
-                    command: 'tail',
-                    options: ['-n'],
-                    args: ['5', 'app.log'],
-                    requiredPath: '/home/user/logs'
-                }
-            },
-            {
-                id: 5,
-                title: '查找所有日志文件',
-                description: '查找logs目录下所有的.log文件',
-                goal: '查找所有.log文件',
-                hint: '使用find命令查找文件',
-                expectedCommand: 'find . -name "*.log"',
-                validation: {
-                    type: 'contains',
-                    command: 'find',
-                    options: ['-name'],
-                    args: ['*.log'],
-                    requiredPath: '/home/user/logs'
-                }
-            }
-        ]
-    },
-    {
+        title: "查看目录结构",
+        description: "查看当前目录下有哪些文件和目录",
+        goal: "列出当前目录的内容",
+        hint: "使用ls命令",
+        expectedCommand: "ls",
+        validation: {
+          type: "contains",
+          command: "ls",
+        },
+      },
+      {
         id: 3,
-        name: '项目部署',
-        description: '作为运维工程师，你需要部署一个新项目',
-        story: '公司开发了一个新项目，需要你将项目文件打包部署到服务器上。',
-        requiredLevels: [5, 6],
-        startPath: '/home/user/projects/myapp',
-        tasks: [
-            {
-                id: 1,
-                title: '进入项目目录',
-                description: '切换到projects/myapp目录',
-                goal: '切换到myapp目录',
-                hint: '使用cd命令切换目录',
-                expectedCommand: 'cd projects/myapp',
-                validation: {
-                    type: 'contains',
-                    command: 'cd',
-                    args: ['projects/myapp', 'myapp']
-                }
-            },
-            {
-                id: 2,
-                title: '查看项目文件',
-                description: '查看项目目录下的所有文件',
-                goal: '列出myapp目录内容',
-                hint: '使用ls命令',
-                expectedCommand: 'ls',
-                validation: {
-                    type: 'contains',
-                    command: 'ls',
-                    requiredPath: '/home/user/projects/myapp'
-                }
-            },
-            {
-                id: 3,
-                title: '打包项目文件',
-                description: '将项目文件打包为myapp.tar.gz',
-                goal: '打包并压缩项目文件',
-                hint: '使用tar命令打包',
-                expectedCommand: 'tar -czvf myapp.tar.gz .',
-                validation: {
-                    type: 'contains',
-                    command: 'tar',
-                    options: ['-c', '-z', '-v', '-f'],
-                    requiredPath: '/home/user/projects/myapp'
-                }
-            },
-            {
-                id: 4,
-                title: '设置文件权限',
-                description: '给main.c文件添加执行权限',
-                goal: '设置main.c的权限为可执行',
-                hint: '使用chmod命令',
-                expectedCommand: 'chmod +x main.c',
-                validation: {
-                    type: 'contains',
-                    command: 'chmod',
-                    args: ['+x', 'main.c'],
-                    requiredPath: '/home/user/projects/myapp'
-                }
-            },
-            {
-                id: 5,
-                title: '移动打包文件',
-                description: '将myapp.tar.gz移动到上级目录',
-                goal: '移动打包文件到projects目录',
-                hint: '使用mv命令移动文件',
-                expectedCommand: 'mv myapp.tar.gz ..',
-                validation: {
-                    type: 'contains',
-                    command: 'mv',
-                    args: ['myapp.tar.gz', '..'],
-                    requiredPath: '/home/user/projects/myapp'
-                }
-            },
-            {
-                id: 6,
-                title: '返回上级目录',
-                description: '返回到projects目录',
-                goal: '切换到projects目录',
-                hint: '使用cd命令',
-                expectedCommand: 'cd ..',
-                validation: {
-                    type: 'contains',
-                    command: 'cd',
-                    args: ['..']
-                }
-            }
-        ]
-    },
-    {
+        title: "创建工作目录",
+        description: "在projects目录下创建一个名为mywork的目录",
+        goal: "在projects目录下创建mywork目录",
+        hint: "先切换到projects目录，然后使用mkdir命令",
+        expectedCommand: "mkdir mywork",
+        validation: {
+          type: "contains",
+          command: "mkdir",
+          args: ["mywork"],
+          requiredPath: "/home/user/projects",
+        },
+      },
+      {
         id: 4,
-        name: '系统维护',
-        description: '作为系统管理员，你需要清理和维护系统',
-        story: '系统运行一段时间后，需要清理临时文件和备份重要数据。',
-        requiredLevels: [2, 6],
-        startPath: '/home/user',
-        tasks: [
-            {
-                id: 1,
-                title: '查看临时目录',
-                description: '切换到/tmp目录查看临时文件',
-                goal: '切换到/tmp目录',
-                hint: '使用cd命令',
-                expectedCommand: 'cd /tmp',
-                validation: {
-                    type: 'contains',
-                    command: 'cd',
-                    args: ['/tmp']
-                }
-            },
-            {
-                id: 2,
-                title: '创建备份目录',
-                description: '在/home/user目录下创建backup目录',
-                goal: '创建backup目录',
-                hint: '使用mkdir命令',
-                expectedCommand: 'mkdir backup',
-                validation: {
-                    type: 'contains',
-                    command: 'mkdir',
-                    args: ['backup']
-                }
-            },
-            {
-                id: 3,
-                title: '备份重要文件',
-                description: '将documents目录复制到backup目录',
-                goal: '复制documents到backup',
-                hint: '使用cp -r命令复制目录',
-                expectedCommand: 'cp -r documents backup',
-                validation: {
-                    type: 'contains',
-                    command: 'cp',
-                    options: ['-r'],
-                    args: ['documents', 'backup'],
-                    requiredPath: '/home/user'
-                }
-            },
-            {
-                id: 4,
-                title: '打包备份文件',
-                description: '将backup目录打包为backup.tar.gz',
-                goal: '打包备份目录',
-                hint: '使用tar命令',
-                expectedCommand: 'tar -czvf backup.tar.gz backup',
-                validation: {
-                    type: 'contains',
-                    command: 'tar',
-                    options: ['-c', '-z', '-v', '-f'],
-                    args: ['backup.tar.gz', 'backup'],
-                    requiredPath: '/home/user'
-                }
-            },
-            {
-                id: 5,
-                title: '清理临时文件',
-                description: '删除/tmp目录下的所有文件',
-                goal: '清理临时目录',
-                hint: '使用rm -rf命令删除',
-                expectedCommand: 'rm -rf *',
-                validation: {
-                    type: 'contains',
-                    command: 'rm',
-                    options: ['-r', '-f'],
-                    requiredPath: '/tmp'
-                }
-            }
-        ]
-    },
-    {
+        title: "创建工作文件",
+        description: "在mywork目录下创建一个名为todo.txt的文件",
+        goal: "在mywork目录创建todo.txt文件",
+        hint: "使用touch命令创建文件",
+        expectedCommand: "touch todo.txt",
+        validation: {
+          type: "contains",
+          command: "touch",
+          args: ["todo.txt"],
+          requiredPath: "/home/user/projects/mywork",
+        },
+      },
+      {
         id: 5,
-        name: '配置文件编辑',
-        description: '作为开发人员，你需要使用Vim编辑配置文件',
-        story: '项目需要修改配置文件，作为开发人员，你需要使用Vim编辑器快速修改配置。',
-        requiredLevels: [7],
-        startPath: '/home/user',
-        tasks: [
-            {
-                id: 1,
-                title: '打开配置文件',
-                description: '使用vim打开config.conf文件',
-                goal: '用Vim打开config.conf文件',
-                hint: 'vim 文件名',
-                expectedCommand: 'vim config.conf',
-                validation: {
-                    type: 'contains',
-                    command: 'vim',
-                    args: ['config.conf'],
-                    checkExists: false
-                }
-            },
-            {
-                id: 2,
-                title: '进入插入模式',
-                description: '按i键进入插入模式准备编辑',
-                goal: '进入插入模式',
-                hint: '按i键',
-                expectedCommand: 'i',
-                validation: {
-                    type: 'exact',
-                    command: 'i'
-                }
-            },
-            {
-                id: 3,
-                title: '保存修改',
-                description: '按ESC退出插入模式，然后输入:w保存文件',
-                goal: '保存文件修改',
-                hint: '先按ESC，再输入:w',
-                expectedCommand: ':w',
-                validation: {
-                    type: 'exact',
-                    command: ':w'
-                }
-            },
-            {
-                id: 4,
-                title: '退出编辑器',
-                description: '输入:q退出Vim编辑器',
-                goal: '退出Vim',
-                hint: '输入:q退出',
-                expectedCommand: ':q',
-                validation: {
-                    type: 'exact',
-                    command: ':q'
-                }
-            }
-        ]
-    },
-    {
+        title: "查看文件内容",
+        description: "查看documents目录下的readme.txt文件内容",
+        goal: "查看readme.txt文件内容",
+        hint: "使用cat命令查看文件",
+        expectedCommand: "cat readme.txt",
+        validation: {
+          type: "contains",
+          command: "cat",
+          args: ["readme.txt"],
+          requiredPath: "/home/user/documents",
+        },
+      },
+      {
         id: 6,
-        name: '容器化部署',
-        description: '作为DevOps工程师，你需要使用Docker部署应用',
-        story: '公司需要将应用容器化部署，作为DevOps工程师，你需要使用Docker完成部署任务。',
-        requiredLevels: [8],
-        startPath: '/home/user',
-        tasks: [
-            {
-                id: 1,
-                title: '检查Docker环境',
-                description: '查看Docker版本确认环境正常',
-                goal: '验证Docker已正确安装',
-                hint: '使用docker --version',
-                expectedCommand: 'docker --version',
-                validation: {
-                    type: 'exact',
-                    command: 'docker --version'
-                }
-            },
-            {
-                id: 2,
-                title: '查看可用镜像',
-                description: '列出本地所有Docker镜像',
-                goal: '查看本地镜像列表',
-                hint: '使用docker images',
-                expectedCommand: 'docker images',
-                validation: {
-                    type: 'exact',
-                    command: 'docker images'
-                }
-            },
-            {
-                id: 3,
-                title: '拉取应用镜像',
-                description: '从Docker Hub拉取nginx镜像',
-                goal: '下载nginx镜像',
-                hint: '使用docker pull nginx',
-                expectedCommand: 'docker pull nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'docker pull',
-                    args: ['nginx']
-                }
-            },
-            {
-                id: 4,
-                title: '运行应用容器',
-                description: '运行nginx容器并映射端口8080:80',
-                goal: '启动nginx容器',
-                hint: 'docker run -d -p 8080:80 nginx',
-                expectedCommand: 'docker run -d -p 8080:80 nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'docker run',
-                    options: ['-d', '-p']
-                }
-            },
-            {
-                id: 5,
-                title: '检查容器状态',
-                description: '查看正在运行的容器',
-                goal: '确认容器正常运行',
-                hint: '使用docker ps',
-                expectedCommand: 'docker ps',
-                validation: {
-                    type: 'exact',
-                    command: 'docker ps'
-                }
-            },
-            {
-                id: 6,
-                title: '停止容器',
-                description: '停止nginx容器（容器ID为web01）',
-                goal: '停止运行中的容器',
-                hint: '使用docker stop web01',
-                expectedCommand: 'docker stop web01',
-                validation: {
-                    type: 'contains',
-                    command: 'docker stop',
-                    args: ['web01']
-                }
-            }
-        ]
-    },
-    {
+        title: "返回主目录",
+        description: "完成所有任务后，返回到你的主目录",
+        goal: "切换到/home/user目录",
+        hint: "使用cd命令切换目录",
+        expectedCommand: "cd /home/user",
+        validation: {
+          type: "contains",
+          command: "cd",
+          args: ["/home/user", "~"],
+        },
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "日志分析员",
+    description: "作为日志分析员，你需要分析系统日志文件",
+    story:
+      "公司服务器出现了一些问题，作为日志分析员，你需要分析日志文件找出问题所在。",
+    requiredLevels: [1, 4],
+    startPath: "/home/user/logs",
+    tasks: [
+      {
+        id: 1,
+        title: "进入日志目录",
+        description: "切换到logs目录查看日志文件",
+        goal: "切换到/home/user/logs目录",
+        hint: "使用cd命令切换目录",
+        expectedCommand: "cd logs",
+        validation: {
+          type: "contains",
+          command: "cd",
+          args: ["logs"],
+        },
+      },
+      {
+        id: 2,
+        title: "查看日志文件",
+        description: "查看app.log文件的内容",
+        goal: "显示app.log文件内容",
+        hint: "使用cat命令查看文件",
+        expectedCommand: "cat app.log",
+        validation: {
+          type: "contains",
+          command: "cat",
+          args: ["app.log"],
+          requiredPath: "/home/user/logs",
+        },
+      },
+      {
+        id: 3,
+        title: "查找错误信息",
+        description: "在app.log中查找所有ERROR信息",
+        goal: "搜索包含ERROR的行",
+        hint: "使用grep命令搜索文本",
+        expectedCommand: "grep ERROR app.log",
+        validation: {
+          type: "contains",
+          command: "grep",
+          args: ["ERROR", "app.log"],
+          requiredPath: "/home/user/logs",
+        },
+      },
+      {
+        id: 4,
+        title: "查看最近的日志",
+        description: "查看app.log文件的最后5行",
+        goal: "显示app.log最后5行",
+        hint: "使用tail命令查看文件末尾",
+        expectedCommand: "tail -n 5 app.log",
+        validation: {
+          type: "contains",
+          command: "tail",
+          options: ["-n"],
+          args: ["5", "app.log"],
+          requiredPath: "/home/user/logs",
+        },
+      },
+      {
+        id: 5,
+        title: "查找所有日志文件",
+        description: "查找logs目录下所有的.log文件",
+        goal: "查找所有.log文件",
+        hint: "使用find命令查找文件",
+        expectedCommand: 'find . -name "*.log"',
+        validation: {
+          type: "contains",
+          command: "find",
+          options: ["-name"],
+          args: ["*.log"],
+          requiredPath: "/home/user/logs",
+        },
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: "项目部署",
+    description: "作为运维工程师，你需要部署一个新项目",
+    story: "公司开发了一个新项目，需要你将项目文件打包部署到服务器上。",
+    requiredLevels: [5, 6],
+    startPath: "/home/user/projects/myapp",
+    tasks: [
+      {
+        id: 1,
+        title: "进入项目目录",
+        description: "切换到projects/myapp目录",
+        goal: "切换到myapp目录",
+        hint: "使用cd命令切换目录",
+        expectedCommand: "cd projects/myapp",
+        validation: {
+          type: "contains",
+          command: "cd",
+          args: ["projects/myapp", "myapp"],
+        },
+      },
+      {
+        id: 2,
+        title: "查看项目文件",
+        description: "查看项目目录下的所有文件",
+        goal: "列出myapp目录内容",
+        hint: "使用ls命令",
+        expectedCommand: "ls",
+        validation: {
+          type: "contains",
+          command: "ls",
+          requiredPath: "/home/user/projects/myapp",
+        },
+      },
+      {
+        id: 3,
+        title: "打包项目文件",
+        description: "将项目文件打包为myapp.tar.gz",
+        goal: "打包并压缩项目文件",
+        hint: "使用tar命令打包",
+        expectedCommand: "tar -czvf myapp.tar.gz .",
+        validation: {
+          type: "contains",
+          command: "tar",
+          options: ["-c", "-z", "-v", "-f"],
+          requiredPath: "/home/user/projects/myapp",
+        },
+      },
+      {
+        id: 4,
+        title: "设置文件权限",
+        description: "给main.c文件添加执行权限",
+        goal: "设置main.c的权限为可执行",
+        hint: "使用chmod命令",
+        expectedCommand: "chmod +x main.c",
+        validation: {
+          type: "contains",
+          command: "chmod",
+          args: ["+x", "main.c"],
+          requiredPath: "/home/user/projects/myapp",
+        },
+      },
+      {
+        id: 5,
+        title: "移动打包文件",
+        description: "将myapp.tar.gz移动到上级目录",
+        goal: "移动打包文件到projects目录",
+        hint: "使用mv命令移动文件",
+        expectedCommand: "mv myapp.tar.gz ..",
+        validation: {
+          type: "contains",
+          command: "mv",
+          args: ["myapp.tar.gz", ".."],
+          requiredPath: "/home/user/projects/myapp",
+        },
+      },
+      {
+        id: 6,
+        title: "返回上级目录",
+        description: "返回到projects目录",
+        goal: "切换到projects目录",
+        hint: "使用cd命令",
+        expectedCommand: "cd ..",
+        validation: {
+          type: "contains",
+          command: "cd",
+          args: [".."],
+        },
+      },
+    ],
+  },
+  {
+    id: 4,
+    name: "系统维护",
+    description: "作为系统管理员，你需要清理和维护系统",
+    story: "系统运行一段时间后，需要清理临时文件和备份重要数据。",
+    requiredLevels: [2, 6],
+    startPath: "/home/user",
+    tasks: [
+      {
+        id: 1,
+        title: "查看临时目录",
+        description: "切换到/tmp目录查看临时文件",
+        goal: "切换到/tmp目录",
+        hint: "使用cd命令",
+        expectedCommand: "cd /tmp",
+        validation: {
+          type: "contains",
+          command: "cd",
+          args: ["/tmp"],
+        },
+      },
+      {
+        id: 2,
+        title: "创建备份目录",
+        description: "在/home/user目录下创建backup目录",
+        goal: "创建backup目录",
+        hint: "使用mkdir命令",
+        expectedCommand: "mkdir backup",
+        validation: {
+          type: "contains",
+          command: "mkdir",
+          args: ["backup"],
+        },
+      },
+      {
+        id: 3,
+        title: "备份重要文件",
+        description: "将documents目录复制到backup目录",
+        goal: "复制documents到backup",
+        hint: "使用cp -r命令复制目录",
+        expectedCommand: "cp -r documents backup",
+        validation: {
+          type: "contains",
+          command: "cp",
+          options: ["-r"],
+          args: ["documents", "backup"],
+          requiredPath: "/home/user",
+        },
+      },
+      {
+        id: 4,
+        title: "打包备份文件",
+        description: "将backup目录打包为backup.tar.gz",
+        goal: "打包备份目录",
+        hint: "使用tar命令",
+        expectedCommand: "tar -czvf backup.tar.gz backup",
+        validation: {
+          type: "contains",
+          command: "tar",
+          options: ["-c", "-z", "-v", "-f"],
+          args: ["backup.tar.gz", "backup"],
+          requiredPath: "/home/user",
+        },
+      },
+      {
+        id: 5,
+        title: "清理临时文件",
+        description: "删除/tmp目录下的所有文件",
+        goal: "清理临时目录",
+        hint: "使用rm -rf命令删除",
+        expectedCommand: "rm -rf *",
+        validation: {
+          type: "contains",
+          command: "rm",
+          options: ["-r", "-f"],
+          requiredPath: "/tmp",
+        },
+      },
+    ],
+  },
+  {
+    id: 5,
+    name: "配置文件编辑",
+    description: "作为开发人员，你需要使用Vim编辑配置文件",
+    story:
+      "项目需要修改配置文件，作为开发人员，你需要使用Vim编辑器快速修改配置。",
+    requiredLevels: [7],
+    startPath: "/home/user",
+    tasks: [
+      {
+        id: 1,
+        title: "打开配置文件",
+        description: "使用vim打开config.conf文件",
+        goal: "用Vim打开config.conf文件",
+        hint: "vim 文件名",
+        expectedCommand: "vim config.conf",
+        validation: {
+          type: "contains",
+          command: "vim",
+          args: ["config.conf"],
+          checkExists: false,
+        },
+      },
+      {
+        id: 2,
+        title: "进入插入模式",
+        description: "按i键进入插入模式准备编辑",
+        goal: "进入插入模式",
+        hint: "按i键",
+        expectedCommand: "i",
+        validation: {
+          type: "exact",
+          command: "i",
+        },
+      },
+      {
+        id: 3,
+        title: "保存修改",
+        description: "按ESC退出插入模式，然后输入:w保存文件",
+        goal: "保存文件修改",
+        hint: "先按ESC，再输入:w",
+        expectedCommand: ":w",
+        validation: {
+          type: "exact",
+          command: ":w",
+        },
+      },
+      {
+        id: 4,
+        title: "退出编辑器",
+        description: "输入:q退出Vim编辑器",
+        goal: "退出Vim",
+        hint: "输入:q退出",
+        expectedCommand: ":q",
+        validation: {
+          type: "exact",
+          command: ":q",
+        },
+      },
+    ],
+  },
+  {
+    id: 6,
+    name: "容器化部署",
+    description: "作为DevOps工程师，你需要使用Docker部署应用",
+    story:
+      "公司需要将应用容器化部署，作为DevOps工程师，你需要使用Docker完成部署任务。",
+    requiredLevels: [8],
+    startPath: "/home/user",
+    tasks: [
+      {
+        id: 1,
+        title: "检查Docker环境",
+        description: "查看Docker版本确认环境正常",
+        goal: "验证Docker已正确安装",
+        hint: "使用docker --version",
+        expectedCommand: "docker --version",
+        validation: {
+          type: "exact",
+          command: "docker --version",
+        },
+      },
+      {
+        id: 2,
+        title: "查看可用镜像",
+        description: "列出本地所有Docker镜像",
+        goal: "查看本地镜像列表",
+        hint: "使用docker images",
+        expectedCommand: "docker images",
+        validation: {
+          type: "exact",
+          command: "docker images",
+        },
+      },
+      {
+        id: 3,
+        title: "拉取应用镜像",
+        description: "从Docker Hub拉取nginx镜像",
+        goal: "下载nginx镜像",
+        hint: "使用docker pull nginx",
+        expectedCommand: "docker pull nginx",
+        validation: {
+          type: "contains",
+          command: "docker pull",
+          args: ["nginx"],
+        },
+      },
+      {
+        id: 4,
+        title: "运行应用容器",
+        description: "运行nginx容器并映射端口8080:80",
+        goal: "启动nginx容器",
+        hint: "docker run -d -p 8080:80 nginx",
+        expectedCommand: "docker run -d -p 8080:80 nginx",
+        validation: {
+          type: "contains",
+          command: "docker run",
+          options: ["-d", "-p"],
+        },
+      },
+      {
+        id: 5,
+        title: "检查容器状态",
+        description: "查看正在运行的容器",
+        goal: "确认容器正常运行",
+        hint: "使用docker ps",
+        expectedCommand: "docker ps",
+        validation: {
+          type: "exact",
+          command: "docker ps",
+        },
+      },
+      {
+        id: 6,
+        title: "停止容器",
+        description: "停止nginx容器（容器ID为web01）",
+        goal: "停止运行中的容器",
+        hint: "使用docker stop web01",
+        expectedCommand: "docker stop web01",
+        validation: {
+          type: "contains",
+          command: "docker stop",
+          args: ["web01"],
+        },
+      },
+    ],
+  },
+  {
+    id: 7,
+    name: "Git项目协作",
+    description: "作为开发人员，你需要使用Git进行项目协作",
+    story: "团队正在开发一个新项目，你需要使用Git进行代码管理和团队协作。",
+    requiredLevels: [9],
+    startPath: "/home/user/projects",
+    tasks: [
+      {
+        id: 1,
+        title: "配置Git用户",
+        description: "设置Git用户名和邮箱",
+        goal: "配置Git用户信息",
+        hint: "使用git config配置",
+        expectedCommand: 'git config --global user.name "开发者"',
+        validation: {
+          type: "contains",
+          command: "git config",
+          options: ["--global"],
+        },
+      },
+      {
+        id: 2,
+        title: "初始化项目",
+        description: "初始化Git仓库",
+        goal: "创建Git仓库",
+        hint: "使用git init",
+        expectedCommand: "git init",
+        validation: {
+          type: "exact",
+          command: "git init",
+        },
+      },
+      {
+        id: 3,
+        title: "查看状态",
+        description: "查看工作区状态",
+        goal: "检查文件状态",
+        hint: "使用git status",
+        expectedCommand: "git status",
+        validation: {
+          type: "exact",
+          command: "git status",
+        },
+      },
+      {
+        id: 4,
+        title: "添加文件",
+        description: "将所有文件添加到暂存区",
+        goal: "暂存所有更改",
+        hint: "使用git add .",
+        expectedCommand: "git add .",
+        validation: {
+          type: "contains",
+          command: "git add",
+        },
+      },
+      {
+        id: 5,
+        title: "提交更改",
+        description: "提交暂存的更改",
+        goal: "创建提交",
+        hint: "使用git commit -m",
+        expectedCommand: 'git commit -m "初始提交"',
+        validation: {
+          type: "contains",
+          command: "git commit",
+          options: ["-m"],
+        },
+      },
+      {
+        id: 6,
+        title: "创建分支",
+        description: "创建并切换到新分支feature",
+        goal: "创建功能分支",
+        hint: "使用git checkout -b",
+        expectedCommand: "git checkout -b feature",
+        validation: {
+          type: "contains",
+          command: "git checkout",
+          options: ["-b"],
+        },
+      },
+      {
         id: 7,
-        name: 'Git项目协作',
-        description: '作为开发人员，你需要使用Git进行项目协作',
-        story: '团队正在开发一个新项目，你需要使用Git进行代码管理和团队协作。',
-        requiredLevels: [9],
-        startPath: '/home/user/projects',
-        tasks: [
-            {
-                id: 1,
-                title: '配置Git用户',
-                description: '设置Git用户名和邮箱',
-                goal: '配置Git用户信息',
-                hint: '使用git config配置',
-                expectedCommand: 'git config --global user.name "开发者"',
-                validation: {
-                    type: 'contains',
-                    command: 'git config',
-                    options: ['--global']
-                }
-            },
-            {
-                id: 2,
-                title: '初始化项目',
-                description: '初始化Git仓库',
-                goal: '创建Git仓库',
-                hint: '使用git init',
-                expectedCommand: 'git init',
-                validation: {
-                    type: 'exact',
-                    command: 'git init'
-                }
-            },
-            {
-                id: 3,
-                title: '查看状态',
-                description: '查看工作区状态',
-                goal: '检查文件状态',
-                hint: '使用git status',
-                expectedCommand: 'git status',
-                validation: {
-                    type: 'exact',
-                    command: 'git status'
-                }
-            },
-            {
-                id: 4,
-                title: '添加文件',
-                description: '将所有文件添加到暂存区',
-                goal: '暂存所有更改',
-                hint: '使用git add .',
-                expectedCommand: 'git add .',
-                validation: {
-                    type: 'contains',
-                    command: 'git add'
-                }
-            },
-            {
-                id: 5,
-                title: '提交更改',
-                description: '提交暂存的更改',
-                goal: '创建提交',
-                hint: '使用git commit -m',
-                expectedCommand: 'git commit -m "初始提交"',
-                validation: {
-                    type: 'contains',
-                    command: 'git commit',
-                    options: ['-m']
-                }
-            },
-            {
-                id: 6,
-                title: '创建分支',
-                description: '创建并切换到新分支feature',
-                goal: '创建功能分支',
-                hint: '使用git checkout -b',
-                expectedCommand: 'git checkout -b feature',
-                validation: {
-                    type: 'contains',
-                    command: 'git checkout',
-                    options: ['-b']
-                }
-            },
-            {
-                id: 7,
-                title: '查看分支',
-                description: '查看所有分支',
-                goal: '列出所有分支',
-                hint: '使用git branch',
-                expectedCommand: 'git branch',
-                validation: {
-                    type: 'exact',
-                    command: 'git branch'
-                }
-            },
-            {
-                id: 8,
-                title: '切换回主分支',
-                description: '切换回master分支',
-                goal: '切换到主分支',
-                hint: '使用git checkout master',
-                expectedCommand: 'git checkout master',
-                validation: {
-                    type: 'contains',
-                    command: 'git checkout',
-                    args: ['master']
-                }
-            },
-            {
-                id: 9,
-                title: '合并分支',
-                description: '合并feature分支到master',
-                goal: '合并功能分支',
-                hint: '使用git merge',
-                expectedCommand: 'git merge feature',
-                validation: {
-                    type: 'contains',
-                    command: 'git merge',
-                    args: ['feature']
-                }
-            },
-            {
-                id: 10,
-                title: '查看历史',
-                description: '查看提交历史',
-                goal: '查看提交记录',
-                hint: '使用git log',
-                expectedCommand: 'git log',
-                validation: {
-                    type: 'exact',
-                    command: 'git log'
-                }
-            }
-        ]
-    },
-    {
+        title: "查看分支",
+        description: "查看所有分支",
+        goal: "列出所有分支",
+        hint: "使用git branch",
+        expectedCommand: "git branch",
+        validation: {
+          type: "exact",
+          command: "git branch",
+        },
+      },
+      {
         id: 8,
-        name: '服务管理维护',
-        description: '作为系统管理员，你需要管理服务器服务',
-        story: '服务器上的服务需要管理和维护，作为系统管理员，你需要确保服务正常运行。',
-        requiredLevels: [10],
-        startPath: '/home/user',
-        tasks: [
-            {
-                id: 1,
-                title: '检查服务状态',
-                description: '查看nginx服务状态',
-                goal: '检查服务是否正常运行',
-                hint: '使用systemctl status',
-                expectedCommand: 'systemctl status nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'systemctl status',
-                    args: ['nginx']
-                }
-            },
-            {
-                id: 2,
-                title: '启动服务',
-                description: '启动nginx服务',
-                goal: '启动服务',
-                hint: '使用systemctl start',
-                expectedCommand: 'systemctl start nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'systemctl start',
-                    args: ['nginx']
-                }
-            },
-            {
-                id: 3,
-                title: '设置开机自启',
-                description: '设置nginx开机自动启动',
-                goal: '配置开机自启',
-                hint: '使用systemctl enable',
-                expectedCommand: 'systemctl enable nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'systemctl enable',
-                    args: ['nginx']
-                }
-            },
-            {
-                id: 4,
-                title: '查看所有服务',
-                description: '列出所有运行中的服务',
-                goal: '查看系统服务',
-                hint: '使用systemctl list-units',
-                expectedCommand: 'systemctl list-units --type=service',
-                validation: {
-                    type: 'contains',
-                    command: 'systemctl list-units',
-                    options: ['--type=service']
-                }
-            },
-            {
-                id: 5,
-                title: '重启服务',
-                description: '重启nginx服务',
-                goal: '重新启动服务',
-                hint: '使用systemctl restart',
-                expectedCommand: 'systemctl restart nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'systemctl restart',
-                    args: ['nginx']
-                }
-            },
-            {
-                id: 6,
-                title: '查看服务日志',
-                description: '查看nginx服务日志',
-                goal: '检查服务日志',
-                hint: '使用journalctl -u',
-                expectedCommand: 'journalctl -u nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'journalctl',
-                    options: ['-u']
-                }
-            },
-            {
-                id: 7,
-                title: '停止服务',
-                description: '停止nginx服务',
-                goal: '停止运行的服务',
-                hint: '使用systemctl stop',
-                expectedCommand: 'systemctl stop nginx',
-                validation: {
-                    type: 'contains',
-                    command: 'systemctl stop',
-                    args: ['nginx']
-                }
-            },
-            {
-                id: 8,
-                title: '检查失败服务',
-                description: '查看所有启动失败的服务',
-                goal: '排查服务问题',
-                hint: '使用systemctl --failed',
-                expectedCommand: 'systemctl --failed',
-                validation: {
-                    type: 'exact',
-                    command: 'systemctl --failed'
-                }
-            }
-        ]
-    }
+        title: "切换回主分支",
+        description: "切换回master分支",
+        goal: "切换到主分支",
+        hint: "使用git checkout master",
+        expectedCommand: "git checkout master",
+        validation: {
+          type: "contains",
+          command: "git checkout",
+          args: ["master"],
+        },
+      },
+      {
+        id: 9,
+        title: "合并分支",
+        description: "合并feature分支到master",
+        goal: "合并功能分支",
+        hint: "使用git merge",
+        expectedCommand: "git merge feature",
+        validation: {
+          type: "contains",
+          command: "git merge",
+          args: ["feature"],
+        },
+      },
+      {
+        id: 10,
+        title: "查看历史",
+        description: "查看提交历史",
+        goal: "查看提交记录",
+        hint: "使用git log",
+        expectedCommand: "git log",
+        validation: {
+          type: "exact",
+          command: "git log",
+        },
+      },
+    ],
+  },
+  {
+    id: 8,
+    name: "服务管理维护",
+    description: "作为系统管理员，你需要管理服务器服务",
+    story:
+      "服务器上的服务需要管理和维护，作为系统管理员，你需要确保服务正常运行。",
+    requiredLevels: [10],
+    startPath: "/home/user",
+    tasks: [
+      {
+        id: 1,
+        title: "检查服务状态",
+        description: "查看nginx服务状态",
+        goal: "检查服务是否正常运行",
+        hint: "使用systemctl status",
+        expectedCommand: "systemctl status nginx",
+        validation: {
+          type: "contains",
+          command: "systemctl status",
+          args: ["nginx"],
+        },
+      },
+      {
+        id: 2,
+        title: "启动服务",
+        description: "启动nginx服务",
+        goal: "启动服务",
+        hint: "使用systemctl start",
+        expectedCommand: "systemctl start nginx",
+        validation: {
+          type: "contains",
+          command: "systemctl start",
+          args: ["nginx"],
+        },
+      },
+      {
+        id: 3,
+        title: "设置开机自启",
+        description: "设置nginx开机自动启动",
+        goal: "配置开机自启",
+        hint: "使用systemctl enable",
+        expectedCommand: "systemctl enable nginx",
+        validation: {
+          type: "contains",
+          command: "systemctl enable",
+          args: ["nginx"],
+        },
+      },
+      {
+        id: 4,
+        title: "查看所有服务",
+        description: "列出所有运行中的服务",
+        goal: "查看系统服务",
+        hint: "使用systemctl list-units",
+        expectedCommand: "systemctl list-units --type=service",
+        validation: {
+          type: "contains",
+          command: "systemctl list-units",
+          options: ["--type=service"],
+        },
+      },
+      {
+        id: 5,
+        title: "重启服务",
+        description: "重启nginx服务",
+        goal: "重新启动服务",
+        hint: "使用systemctl restart",
+        expectedCommand: "systemctl restart nginx",
+        validation: {
+          type: "contains",
+          command: "systemctl restart",
+          args: ["nginx"],
+        },
+      },
+      {
+        id: 6,
+        title: "查看服务日志",
+        description: "查看nginx服务日志",
+        goal: "检查服务日志",
+        hint: "使用journalctl -u",
+        expectedCommand: "journalctl -u nginx",
+        validation: {
+          type: "contains",
+          command: "journalctl",
+          options: ["-u"],
+        },
+      },
+      {
+        id: 7,
+        title: "停止服务",
+        description: "停止nginx服务",
+        goal: "停止运行的服务",
+        hint: "使用systemctl stop",
+        expectedCommand: "systemctl stop nginx",
+        validation: {
+          type: "contains",
+          command: "systemctl stop",
+          args: ["nginx"],
+        },
+      },
+      {
+        id: 8,
+        title: "检查失败服务",
+        description: "查看所有启动失败的服务",
+        goal: "排查服务问题",
+        hint: "使用systemctl --failed",
+        expectedCommand: "systemctl --failed",
+        validation: {
+          type: "exact",
+          command: "systemctl --failed",
+        },
+      },
+    ],
+  },
+  {
+    id: 9,
+    name: "Git合并冲突解决",
+    description: "处理复杂的代码合并冲突场景",
+    story:
+      "团队开发中，你正在合并feature分支时遇到了代码冲突。你需要识别冲突文件、理解冲突原因并正确解决冲突，确保代码完整性。",
+    requiredLevels: [12],
+    difficulty: "advanced",
+    startPath: "/home/user/projects/myapp",
+    tasks: [
+      {
+        id: 1,
+        title: "查看冲突状态",
+        description: "检查哪些文件存在合并冲突",
+        goal: "git status查看冲突文件",
+        hint: "冲突文件会标记为both modified",
+        expectedCommand: "git status",
+        validation: {
+          type: "exact",
+          command: "git status",
+        },
+      },
+      {
+        id: 2,
+        title: "查看冲突详情",
+        description: "查看冲突文件的具体内容",
+        goal: "git diff查看冲突标记",
+        hint: "冲突标记包含<<<<<<< ======= >>>>>>>",
+        expectedCommand: "git diff",
+        validation: {
+          type: "exact",
+          command: "git diff",
+        },
+      },
+      {
+        id: 3,
+        title: "接受本地更改",
+        description: "使用--ours接受本地版本解决冲突",
+        goal: "git checkout --ours conflicted_file.txt",
+        hint: "--ours保留当前分支的更改",
+        expectedCommand: "git checkout --ours config.txt",
+        validation: {
+          type: "contains",
+          command: "git checkout",
+          options: ["--ours"],
+        },
+      },
+      {
+        id: 4,
+        title: "接受远程更改",
+        description: "使用--theirs接受远程版本",
+        goal: "git checkout --theirs conflicted_file.txt",
+        hint: "--theirs保留合并分支的更改",
+        expectedCommand: "git checkout --theirs utils.js",
+        validation: {
+          type: "contains",
+          command: "git checkout",
+          options: ["--theirs"],
+        },
+      },
+      {
+        id: 5,
+        title: "标记冲突已解决",
+        description: "将解决冲突后的文件添加到暂存区",
+        goal: "git add标记冲突已解决",
+        hint: "git add表示冲突已解决",
+        expectedCommand: "git add .",
+        validation: {
+          type: "contains",
+          command: "git add",
+        },
+      },
+      {
+        id: 6,
+        title: "完成合并提交",
+        description: "提交合并结果",
+        goal: "git commit完成合并",
+        hint: "解决所有冲突后提交",
+        expectedCommand: "git commit",
+        validation: {
+          type: "exact",
+          command: "git commit",
+        },
+      },
+      {
+        id: 7,
+        title: "中止合并",
+        description: "放弃当前合并操作",
+        goal: "git merge --abort取消合并",
+        hint: "冲突太复杂时可以中止",
+        expectedCommand: "git merge --abort",
+        validation: {
+          type: "exact",
+          command: "git merge --abort",
+        },
+      },
+      {
+        id: 8,
+        title: "查看合并日志",
+        description: "查看合并提交的历史",
+        goal: "git log --merges查看合并记录",
+        hint: "--merges只显示合并提交",
+        expectedCommand: "git log --merges",
+        validation: {
+          type: "contains",
+          command: "git log",
+          options: ["--merges"],
+        },
+      },
+    ],
+  },
+  {
+    id: 10,
+    name: "Docker生产环境故障排查",
+    description: "诊断和解决Docker容器运行问题",
+    story:
+      "生产环境的Docker容器出现异常，服务无法正常访问。你需要排查容器状态、日志、网络配置等问题，恢复服务正常运行。",
+    requiredLevels: [16],
+    difficulty: "advanced",
+    startPath: "/home/user",
+    tasks: [
+      {
+        id: 1,
+        title: "检查容器状态",
+        description: "查看所有容器运行状态",
+        goal: "docker ps -a查看容器",
+        hint: "-a显示所有容器包括已停止的",
+        expectedCommand: "docker ps -a",
+        validation: {
+          type: "exact",
+          command: "docker ps -a",
+        },
+      },
+      {
+        id: 2,
+        title: "查看容器日志",
+        description: "检查异常容器的日志输出",
+        goal: "docker logs查看错误信息",
+        hint: "日志中包含错误堆栈",
+        expectedCommand: "docker logs webapp --tail 100",
+        validation: {
+          type: "contains",
+          command: "docker logs",
+        },
+      },
+      {
+        id: 3,
+        title: "检查容器资源",
+        description: "查看容器资源使用情况",
+        goal: "docker stats监控资源",
+        hint: "高CPU/内存可能导致问题",
+        expectedCommand: "docker stats --no-stream",
+        validation: {
+          type: "contains",
+          command: "docker stats",
+        },
+      },
+      {
+        id: 4,
+        title: "进入容器调试",
+        description: "进入容器内部检查配置",
+        goal: "docker exec进入容器",
+        hint: "检查配置文件和进程",
+        expectedCommand: "docker exec -it webapp bash",
+        validation: {
+          type: "contains",
+          command: "docker exec",
+          options: ["-it"],
+        },
+      },
+      {
+        id: 5,
+        title: "检查网络配置",
+        description: "查看容器网络连接",
+        goal: "docker network inspect检查网络",
+        hint: "网络配置错误可能导致无法访问",
+        expectedCommand: "docker network inspect bridge",
+        validation: {
+          type: "contains",
+          command: "docker network inspect",
+        },
+      },
+      {
+        id: 6,
+        title: "重启容器",
+        description: "尝试重启异常容器",
+        goal: "docker restart重启服务",
+        hint: "重启可能解决临时问题",
+        expectedCommand: "docker restart webapp",
+        validation: {
+          type: "contains",
+          command: "docker restart",
+        },
+      },
+      {
+        id: 7,
+        title: "检查端口映射",
+        description: "确认端口映射是否正确",
+        goal: "docker port查看端口",
+        hint: "端口映射错误导致无法访问",
+        expectedCommand: "docker port webapp",
+        validation: {
+          type: "exact",
+          command: "docker port webapp",
+        },
+      },
+      {
+        id: 8,
+        title: "清理无用资源",
+        description: "清理悬空镜像和停止的容器",
+        goal: "docker system prune释放空间",
+        hint: "磁盘空间不足可能导致问题",
+        expectedCommand: "docker system prune -f",
+        validation: {
+          type: "contains",
+          command: "docker system prune",
+        },
+      },
+    ],
+  },
+  {
+    id: 11,
+    name: "CI/CD流水线故障排查",
+    description: "诊断和修复CI/CD构建失败问题",
+    story:
+      "项目的CI/CD流水线构建失败了，你需要分析构建日志、定位错误原因并修复问题，让流水线恢复正常运行。",
+    requiredLevels: [20],
+    difficulty: "advanced",
+    startPath: "/home/user/projects/myapp",
+    tasks: [
+      {
+        id: 1,
+        title: "查看构建状态",
+        description: "检查最近的构建记录",
+        goal: "查看CI构建状态",
+        hint: "使用gh run list查看工作流",
+        expectedCommand: "gh run list --limit 5",
+        validation: {
+          type: "contains",
+          command: "gh run list",
+        },
+      },
+      {
+        id: 2,
+        title: "查看失败详情",
+        description: "查看失败构建的详细日志",
+        goal: "gh run view查看日志",
+        hint: "分析错误堆栈定位问题",
+        expectedCommand: "gh run view",
+        validation: {
+          type: "exact",
+          command: "gh run view",
+        },
+      },
+      {
+        id: 3,
+        title: "本地复现问题",
+        description: "在本地运行测试复现问题",
+        goal: "npm test运行测试",
+        hint: "本地复现更容易调试",
+        expectedCommand: "npm test",
+        validation: {
+          type: "exact",
+          command: "npm test",
+        },
+      },
+      {
+        id: 4,
+        title: "检查依赖版本",
+        description: "确认依赖版本是否一致",
+        goal: "npm list查看依赖",
+        hint: "版本不一致可能导致问题",
+        expectedCommand: "npm list --depth=0",
+        validation: {
+          type: "contains",
+          command: "npm list",
+        },
+      },
+      {
+        id: 5,
+        title: "清理构建缓存",
+        description: "清理可能损坏的缓存",
+        goal: "删除node_modules重新安装",
+        hint: "缓存问题可能导致构建失败",
+        expectedCommand: "rm -rf node_modules",
+        validation: {
+          type: "contains",
+          command: "rm",
+          options: ["-rf"],
+        },
+      },
+      {
+        id: 6,
+        title: "重新安装依赖",
+        description: "重新安装所有依赖",
+        goal: "npm ci干净安装",
+        hint: "npm ci比install更干净",
+        expectedCommand: "npm ci",
+        validation: {
+          type: "exact",
+          command: "npm ci",
+        },
+      },
+      {
+        id: 7,
+        title: "检查环境变量",
+        description: "确认CI环境变量配置",
+        goal: "查看环境变量设置",
+        hint: "缺失环境变量可能导致失败",
+        expectedCommand: "env | grep CI",
+        validation: {
+          type: "contains",
+          command: "env",
+        },
+      },
+      {
+        id: 8,
+        title: "提交修复",
+        description: "提交修复并推送",
+        goal: "git push触发新构建",
+        hint: "推送后观察新构建状态",
+        expectedCommand: "git push origin main",
+        validation: {
+          type: "contains",
+          command: "git push",
+        },
+      },
+    ],
+  },
+  {
+    id: 12,
+    name: "服务器性能问题诊断",
+    description: "诊断和解决服务器性能瓶颈",
+    story:
+      "服务器响应变慢，CPU和内存使用率异常。你需要诊断性能问题，找出瓶颈并优化系统性能。",
+    requiredLevels: [19],
+    difficulty: "advanced",
+    startPath: "/home/user",
+    tasks: [
+      {
+        id: 1,
+        title: "查看系统负载",
+        description: "检查系统整体负载情况",
+        goal: "uptime查看负载",
+        hint: "load average显示系统负载",
+        expectedCommand: "uptime",
+        validation: {
+          type: "exact",
+          command: "uptime",
+        },
+      },
+      {
+        id: 2,
+        title: "查看CPU使用",
+        description: "实时监控CPU使用情况",
+        goal: "top查看CPU占用",
+        hint: "按P按CPU使用率排序",
+        expectedCommand: "top -b -n 1",
+        validation: {
+          type: "contains",
+          command: "top",
+        },
+      },
+      {
+        id: 3,
+        title: "查看内存使用",
+        description: "检查内存使用情况",
+        goal: "free -h查看内存",
+        hint: "关注available而非free",
+        expectedCommand: "free -h",
+        validation: {
+          type: "exact",
+          command: "free -h",
+        },
+      },
+      {
+        id: 4,
+        title: "查看磁盘IO",
+        description: "检查磁盘读写情况",
+        goal: "iostat查看IO统计",
+        hint: "高IO可能导致性能问题",
+        expectedCommand: "iostat -x 1 3",
+        validation: {
+          type: "contains",
+          command: "iostat",
+        },
+      },
+      {
+        id: 5,
+        title: "查找高CPU进程",
+        description: "找出占用CPU最多的进程",
+        goal: "ps aux排序找高CPU进程",
+        hint: "使用--sort排序",
+        expectedCommand: "ps aux --sort=-%cpu | head -10",
+        validation: {
+          type: "contains",
+          command: "ps aux",
+        },
+      },
+      {
+        id: 6,
+        title: "查找高内存进程",
+        description: "找出占用内存最多的进程",
+        goal: "ps aux排序找高内存进程",
+        hint: "内存泄漏可能导致问题",
+        expectedCommand: "ps aux --sort=-%mem | head -10",
+        validation: {
+          type: "contains",
+          command: "ps aux",
+        },
+      },
+      {
+        id: 7,
+        title: "检查磁盘空间",
+        description: "检查磁盘空间使用情况",
+        goal: "df -h查看磁盘空间",
+        hint: "磁盘满可能导致问题",
+        expectedCommand: "df -h",
+        validation: {
+          type: "exact",
+          command: "df -h",
+        },
+      },
+      {
+        id: 8,
+        title: "查看网络连接",
+        description: "检查网络连接状态",
+        goal: "netstat查看连接数",
+        hint: "大量连接可能导致问题",
+        expectedCommand: "netstat -an | grep ESTABLISHED | wc -l",
+        validation: {
+          type: "contains",
+          command: "netstat",
+        },
+      },
+    ],
+  },
+  {
+    id: 13,
+    name: "系统安全加固",
+    description: "加固系统安全配置",
+    story:
+      "服务器需要进行安全加固，你需要检查并修复安全漏洞，配置防火墙规则，确保系统安全。",
+    requiredLevels: [5],
+    difficulty: "advanced",
+    startPath: "/home/user",
+    tasks: [
+      {
+        id: 1,
+        title: "检查开放端口",
+        description: "查看系统开放的端口",
+        goal: "netstat查看监听端口",
+        hint: "关闭不必要的端口",
+        expectedCommand: "netstat -tuln",
+        validation: {
+          type: "contains",
+          command: "netstat",
+          options: ["-tuln"],
+        },
+      },
+      {
+        id: 2,
+        title: "检查SSH配置",
+        description: "检查SSH服务配置",
+        goal: "查看sshd配置文件",
+        hint: "禁用root登录和密码认证",
+        expectedCommand: "cat /etc/ssh/sshd_config",
+        validation: {
+          type: "contains",
+          command: "cat",
+        },
+      },
+      {
+        id: 3,
+        title: "检查用户账户",
+        description: "查看系统用户列表",
+        goal: "检查是否有异常账户",
+        hint: "删除不需要的用户",
+        expectedCommand: "cat /etc/passwd",
+        validation: {
+          type: "contains",
+          command: "cat",
+        },
+      },
+      {
+        id: 4,
+        title: "检查sudo权限",
+        description: "查看sudo配置",
+        goal: "检查sudoers配置",
+        hint: "限制sudo权限",
+        expectedCommand: "sudo -l",
+        validation: {
+          type: "exact",
+          command: "sudo -l",
+        },
+      },
+      {
+        id: 5,
+        title: "检查文件权限",
+        description: "查找权限过大的文件",
+        goal: "find查找777权限文件",
+        hint: "world writable文件有风险",
+        expectedCommand: "find / -perm -777 -type f 2>/dev/null",
+        validation: {
+          type: "contains",
+          command: "find",
+          options: ["-perm"],
+        },
+      },
+      {
+        id: 6,
+        title: "检查SUID文件",
+        description: "查找SUID权限文件",
+        goal: "find查找SUID文件",
+        hint: "SUID文件可能被利用",
+        expectedCommand: "find / -perm -4000 -type f 2>/dev/null",
+        validation: {
+          type: "contains",
+          command: "find",
+          options: ["-perm"],
+        },
+      },
+      {
+        id: 7,
+        title: "查看登录日志",
+        description: "检查登录尝试记录",
+        goal: "last查看登录历史",
+        hint: "检查异常登录",
+        expectedCommand: "last -n 20",
+        validation: {
+          type: "contains",
+          command: "last",
+        },
+      },
+      {
+        id: 8,
+        title: "检查失败登录",
+        description: "查看失败登录尝试",
+        goal: "lastb查看失败登录",
+        hint: "暴力破解尝试",
+        expectedCommand: "lastb -n 20",
+        validation: {
+          type: "contains",
+          command: "lastb",
+        },
+      },
+    ],
+  },
+  {
+    id: 14,
+    name: "数据库备份与恢复",
+    description: "执行数据库备份和恢复操作",
+    story:
+      "数据库需要定期备份，你需要创建备份策略、执行备份操作，并在数据丢失时进行恢复。",
+    requiredLevels: [6],
+    difficulty: "advanced",
+    startPath: "/home/user",
+    tasks: [
+      {
+        id: 1,
+        title: "创建备份目录",
+        description: "创建数据库备份存储目录",
+        goal: "mkdir创建备份目录",
+        hint: "备份目录应该有适当权限",
+        expectedCommand: "mkdir -p /backup/db",
+        validation: {
+          type: "contains",
+          command: "mkdir",
+          options: ["-p"],
+        },
+      },
+      {
+        id: 2,
+        title: "执行数据库备份",
+        description: "使用mysqldump备份数据库",
+        goal: "mysqldump导出数据库",
+        hint: "备份所有数据库",
+        expectedCommand:
+          "mysqldump -u root -p --all-databases > /backup/db/all.sql",
+        validation: {
+          type: "contains",
+          command: "mysqldump",
+        },
+      },
+      {
+        id: 3,
+        title: "压缩备份文件",
+        description: "压缩备份文件节省空间",
+        goal: "gzip压缩备份文件",
+        hint: "压缩可以节省磁盘空间",
+        expectedCommand: "gzip /backup/db/all.sql",
+        validation: {
+          type: "contains",
+          command: "gzip",
+        },
+      },
+      {
+        id: 4,
+        title: "验证备份完整性",
+        description: "检查备份文件是否完整",
+        goal: "ls -lh查看备份文件",
+        hint: "确认文件大小合理",
+        expectedCommand: "ls -lh /backup/db/",
+        validation: {
+          type: "contains",
+          command: "ls",
+          options: ["-lh"],
+        },
+      },
+      {
+        id: 5,
+        title: "解压备份文件",
+        description: "解压备份文件准备恢复",
+        goal: "gunzip解压备份",
+        hint: "恢复前需要解压",
+        expectedCommand: "gunzip /backup/db/all.sql.gz",
+        validation: {
+          type: "contains",
+          command: "gunzip",
+        },
+      },
+      {
+        id: 6,
+        title: "恢复数据库",
+        description: "从备份恢复数据库",
+        goal: "mysql导入备份",
+        hint: "恢复到数据库",
+        expectedCommand: "mysql -u root -p < /backup/db/all.sql",
+        validation: {
+          type: "contains",
+          command: "mysql",
+        },
+      },
+      {
+        id: 7,
+        title: "设置定时备份",
+        description: "配置定时备份任务",
+        goal: "crontab设置定时任务",
+        hint: "每天自动备份",
+        expectedCommand: "crontab -e",
+        validation: {
+          type: "exact",
+          command: "crontab -e",
+        },
+      },
+      {
+        id: 8,
+        title: "清理旧备份",
+        description: "删除过期的备份文件",
+        goal: "find删除旧备份",
+        hint: "保留最近7天的备份",
+        expectedCommand: 'find /backup/db -name "*.sql.gz" -mtime +7 -delete',
+        validation: {
+          type: "contains",
+          command: "find",
+          options: ["-mtime", "-delete"],
+        },
+      },
+    ],
+  },
+  {
+    id: 15,
+    name: "多环境部署实战",
+    description: "管理开发、测试、生产多环境部署",
+    story:
+      "项目需要在开发、测试、生产三个环境中部署。你需要管理不同环境的配置，确保正确部署到对应环境。",
+    requiredLevels: [20],
+    difficulty: "advanced",
+    startPath: "/home/user/projects/myapp",
+    tasks: [
+      {
+        id: 1,
+        title: "查看环境配置",
+        description: "检查不同环境的配置文件",
+        goal: "ls查看配置目录",
+        hint: "配置文件按环境区分",
+        expectedCommand: "ls -la config/",
+        validation: {
+          type: "contains",
+          command: "ls",
+          options: ["-la"],
+        },
+      },
+      {
+        id: 2,
+        title: "切换到开发环境",
+        description: "使用开发环境配置",
+        goal: "设置开发环境变量",
+        hint: "NODE_ENV=development",
+        expectedCommand: "export NODE_ENV=development",
+        validation: {
+          type: "contains",
+          command: "export",
+        },
+      },
+      {
+        id: 3,
+        title: "构建开发版本",
+        description: "构建开发环境版本",
+        goal: "npm run build:dev",
+        hint: "开发版本包含调试信息",
+        expectedCommand: "npm run build:dev",
+        validation: {
+          type: "exact",
+          command: "npm run build:dev",
+        },
+      },
+      {
+        id: 4,
+        title: "切换到生产环境",
+        description: "使用生产环境配置",
+        goal: "设置生产环境变量",
+        hint: "NODE_ENV=production",
+        expectedCommand: "export NODE_ENV=production",
+        validation: {
+          type: "contains",
+          command: "export",
+        },
+      },
+      {
+        id: 5,
+        title: "构建生产版本",
+        description: "构建生产环境版本",
+        goal: "npm run build",
+        hint: "生产版本经过优化",
+        expectedCommand: "npm run build",
+        validation: {
+          type: "exact",
+          command: "npm run build",
+        },
+      },
+      {
+        id: 6,
+        title: "部署到测试环境",
+        description: "部署到测试服务器",
+        goal: "scp传输到测试服务器",
+        hint: "使用scp传输文件",
+        expectedCommand: "scp -r dist/ test-server:/var/www/",
+        validation: {
+          type: "contains",
+          command: "scp",
+          options: ["-r"],
+        },
+      },
+      {
+        id: 7,
+        title: "部署到生产环境",
+        description: "部署到生产服务器",
+        goal: "rsync同步到生产服务器",
+        hint: "rsync增量同步",
+        expectedCommand: "rsync -avz dist/ prod-server:/var/www/",
+        validation: {
+          type: "contains",
+          command: "rsync",
+          options: ["-avz"],
+        },
+      },
+      {
+        id: 8,
+        title: "验证部署结果",
+        description: "检查部署是否成功",
+        goal: "curl检查服务状态",
+        hint: "验证服务可访问",
+        expectedCommand: "curl -I https://myapp.example.com",
+        validation: {
+          type: "contains",
+          command: "curl",
+          options: ["-I"],
+        },
+      },
+    ],
+  },
+  {
+    id: 16,
+    name: "npm依赖冲突解决",
+    description: "解决npm依赖版本冲突问题",
+    story:
+      "项目安装依赖时出现版本冲突，你需要分析依赖树、解决版本冲突并确保项目正常运行。",
+    requiredLevels: [24],
+    difficulty: "advanced",
+    startPath: "/home/user/projects/node_project",
+    tasks: [
+      {
+        id: 1,
+        title: "查看依赖树",
+        description: "分析项目依赖结构",
+        goal: "npm list查看依赖",
+        hint: "查看依赖层级关系",
+        expectedCommand: "npm list --depth=5",
+        validation: {
+          type: "contains",
+          command: "npm list",
+        },
+      },
+      {
+        id: 2,
+        title: "检查重复依赖",
+        description: "查找重复安装的依赖",
+        goal: "npm dedupe检查重复",
+        hint: "重复依赖占用空间",
+        expectedCommand: "npm dedupe",
+        validation: {
+          type: "exact",
+          command: "npm dedupe",
+        },
+      },
+      {
+        id: 3,
+        title: "查看过时依赖",
+        description: "检查哪些依赖需要更新",
+        goal: "npm outdated查看过时包",
+        hint: "查看可更新的依赖",
+        expectedCommand: "npm outdated",
+        validation: {
+          type: "exact",
+          command: "npm outdated",
+        },
+      },
+      {
+        id: 4,
+        title: "检查安全漏洞",
+        description: "扫描依赖的安全漏洞",
+        goal: "npm audit检查漏洞",
+        hint: "修复已知安全漏洞",
+        expectedCommand: "npm audit",
+        validation: {
+          type: "exact",
+          command: "npm audit",
+        },
+      },
+      {
+        id: 5,
+        title: "自动修复漏洞",
+        description: "自动修复安全漏洞",
+        goal: "npm audit fix修复漏洞",
+        hint: "自动更新到安全版本",
+        expectedCommand: "npm audit fix",
+        validation: {
+          type: "exact",
+          command: "npm audit fix",
+        },
+      },
+      {
+        id: 6,
+        title: "强制更新依赖",
+        description: "强制更新所有依赖",
+        goal: "npm update更新依赖",
+        hint: "更新到兼容的最新版本",
+        expectedCommand: "npm update",
+        validation: {
+          type: "exact",
+          command: "npm update",
+        },
+      },
+      {
+        id: 7,
+        title: "清理依赖缓存",
+        description: "清理npm缓存",
+        goal: "npm cache clean清理缓存",
+        hint: "缓存可能导致问题",
+        expectedCommand: "npm cache clean --force",
+        validation: {
+          type: "contains",
+          command: "npm cache clean",
+        },
+      },
+      {
+        id: 8,
+        title: "重新安装依赖",
+        description: "删除并重新安装所有依赖",
+        goal: "rm node_modules && npm install",
+        hint: "彻底重新安装",
+        expectedCommand: "rm -rf node_modules package-lock.json",
+        validation: {
+          type: "contains",
+          command: "rm",
+          options: ["-rf"],
+        },
+      },
+    ],
+  },
+  {
+    id: 17,
+    name: "生产环境紧急回滚",
+    description: "生产环境出现严重问题需要紧急回滚",
+    story:
+      "生产环境部署的新版本出现严重Bug，你需要快速回滚到上一个稳定版本，最小化业务影响。",
+    requiredLevels: [9, 20],
+    difficulty: "advanced",
+    startPath: "/home/user/projects/myapp",
+    tasks: [
+      {
+        id: 1,
+        title: "确认问题版本",
+        description: "确认当前部署的版本",
+        goal: "git log查看最新提交",
+        hint: "确认问题版本号",
+        expectedCommand: "git log --oneline -5",
+        validation: {
+          type: "contains",
+          command: "git log",
+          options: ["--oneline"],
+        },
+      },
+      {
+        id: 2,
+        title: "查找稳定版本",
+        description: "找到上一个稳定版本",
+        goal: "git tag查看发布标签",
+        hint: "找到上一个稳定tag",
+        expectedCommand: 'git tag -l "v*"',
+        validation: {
+          type: "contains",
+          command: "git tag",
+        },
+      },
+      {
+        id: 3,
+        title: "本地测试回滚",
+        description: "在本地测试回滚版本",
+        goal: "git checkout切换到稳定版本",
+        hint: "先在本地验证",
+        expectedCommand: "git checkout v1.2.0",
+        validation: {
+          type: "contains",
+          command: "git checkout",
+        },
+      },
+      {
+        id: 4,
+        title: "停止当前服务",
+        description: "停止生产环境服务",
+        goal: "docker stop停止容器",
+        hint: "优雅停止服务",
+        expectedCommand: "docker stop myapp-prod",
+        validation: {
+          type: "contains",
+          command: "docker stop",
+        },
+      },
+      {
+        id: 5,
+        title: "回滚代码",
+        description: "回滚到稳定版本",
+        goal: "git reset回滚代码",
+        hint: "使用--hard强制回滚",
+        expectedCommand: "git reset --hard v1.2.0",
+        validation: {
+          type: "contains",
+          command: "git reset",
+          options: ["--hard"],
+        },
+      },
+      {
+        id: 6,
+        title: "重新构建",
+        description: "构建稳定版本",
+        goal: "npm run build重新构建",
+        hint: "构建稳定版本",
+        expectedCommand: "npm run build",
+        validation: {
+          type: "exact",
+          command: "npm run build",
+        },
+      },
+      {
+        id: 7,
+        title: "重新部署",
+        description: "部署稳定版本",
+        goal: "docker启动新容器",
+        hint: "使用稳定版本镜像",
+        expectedCommand: "docker run -d --name myapp-prod myapp:v1.2.0",
+        validation: {
+          type: "contains",
+          command: "docker run",
+          options: ["-d"],
+        },
+      },
+      {
+        id: 8,
+        title: "验证服务",
+        description: "验证回滚是否成功",
+        goal: "curl检查服务状态",
+        hint: "确认服务正常",
+        expectedCommand: "curl -I https://myapp.example.com/health",
+        validation: {
+          type: "contains",
+          command: "curl",
+          options: ["-I"],
+        },
+      },
+    ],
+  },
+  {
+    id: 18,
+    name: "实时日志分析",
+    description: "分析和监控系统日志",
+    story: "系统出现异常，你需要实时分析日志，找出问题根源并进行处理。",
+    requiredLevels: [2, 4],
+    difficulty: "intermediate",
+    startPath: "/home/user/logs",
+    tasks: [
+      {
+        id: 1,
+        title: "实时查看日志",
+        description: "实时跟踪日志输出",
+        goal: "tail -f实时查看",
+        hint: "tail -f持续显示新内容",
+        expectedCommand: "tail -f app.log",
+        validation: {
+          type: "contains",
+          command: "tail",
+          options: ["-f"],
+        },
+      },
+      {
+        id: 2,
+        title: "过滤错误日志",
+        description: "只显示ERROR级别日志",
+        goal: "grep过滤ERROR",
+        hint: "使用grep过滤关键字",
+        expectedCommand: "tail -f app.log | grep ERROR",
+        validation: {
+          type: "contains",
+          command: "tail",
+          options: ["-f"],
+        },
+      },
+      {
+        id: 3,
+        title: "统计错误数量",
+        description: "统计各类错误出现次数",
+        goal: "grep统计错误",
+        hint: "使用-c统计数量",
+        expectedCommand: 'grep -c "ERROR" app.log',
+        validation: {
+          type: "contains",
+          command: "grep",
+          options: ["-c"],
+        },
+      },
+      {
+        id: 4,
+        title: "查找特定时间段日志",
+        description: "查找某个时间段的日志",
+        goal: "sed提取时间段日志",
+        hint: "使用sed提取范围",
+        expectedCommand:
+          "sed -n '/2024-01-15 10:00/,/2024-01-15 11:00/p' app.log",
+        validation: {
+          type: "contains",
+          command: "sed",
+          options: ["-n"],
+        },
+      },
+      {
+        id: 5,
+        title: "分析访问日志",
+        description: "分析HTTP访问日志",
+        goal: "awk统计访问量",
+        hint: "使用awk处理列数据",
+        expectedCommand:
+          "awk '{print $1}' access.log | sort | uniq -c | sort -rn | head -10",
+        validation: {
+          type: "contains",
+          command: "awk",
+        },
+      },
+      {
+        id: 6,
+        title: "查找慢请求",
+        description: "找出响应时间长的请求",
+        goal: "awk过滤慢请求",
+        hint: "过滤响应时间超过1秒的",
+        expectedCommand: "awk '$NF > 1000 {print $0}' access.log",
+        validation: {
+          type: "contains",
+          command: "awk",
+        },
+      },
+      {
+        id: 7,
+        title: "日志归档",
+        description: "压缩归档旧日志",
+        goal: "tar打包压缩日志",
+        hint: "定期归档旧日志",
+        expectedCommand: "tar -czf logs-$(date +%Y%m%d).tar.gz *.log",
+        validation: {
+          type: "contains",
+          command: "tar",
+          options: ["-czf"],
+        },
+      },
+      {
+        id: 8,
+        title: "发送告警",
+        description: "发现错误时发送告警",
+        goal: "mail发送告警邮件",
+        hint: "配置告警通知",
+        expectedCommand:
+          'echo "Error detected" | mail -s "Alert" admin@example.com',
+        validation: {
+          type: "contains",
+          command: "mail",
+        },
+      },
+    ],
+  },
 ];
 
 window.tutorialLevels = tutorialLevels;

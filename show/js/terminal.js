@@ -189,24 +189,16 @@ class Terminal {
         const promptHTML = this.getPromptHTML();
         this.printHTML(`<div class="terminal-line command-line">${promptHTML}${this.escapeHTML(command)}</div>`);
 
-        // 让外部决定是否显示模拟器输出
-        let skipSimOutput = false;
-        if (this.onBeforeSimulate) {
-            skipSimOutput = this.onBeforeSimulate(command);
-        }
-
         const result = this.simulator.execute(command);
 
-        if (!skipSimOutput) {
-            if (result.clear) {
-                this.clear();
-            } else if (result.output) {
-                this.printOutput(result.output, result.success ? 'success' : 'error');
-            }
+        if (result.clear) {
+            this.clear();
+        } else if (result.output) {
+            this.printOutput(result.output, result.success ? 'success' : 'error');
+        }
 
-            if (result.exit) {
-                this.printOutput('再见！', 'info');
-            }
+        if (result.exit) {
+            this.printOutput('再见！', 'info');
         }
 
         this.updatePrompt();
