@@ -1348,7 +1348,21 @@ class CommandSimulator {
     }
 
     help(args) {
-        const commands = [
+        const navCommands = [
+            'tutorial  - 进入教程模式 (缩写: t)',
+            'practice  - 进入实战模式 (缩写: p)',
+            'home      - 返回首页 (缩写: back, b)',
+            'random    - 随机挑战 (缩写: r)',
+            'goto <n>  - 跳转到指定关卡/场景 (缩写: go)',
+            'next      - 下一关卡/场景 (缩写: n)',
+            'prev      - 上一关卡/场景',
+            'list      - 列出所有关卡/场景',
+            'status    - 查看学习进度 (缩写: info)',
+            'hint      - 显示当前任务提示 (缩写: h)',
+            'skip      - 跳过当前任务',
+            'reset     - 重置所有进度',
+        ];
+        const linuxCommands = [
             'ls        - 列出目录内容',
             'pwd       - 显示当前工作目录',
             'cd        - 切换目录',
@@ -1365,22 +1379,19 @@ class CommandSimulator {
             'whereis   - 查找命令位置',
             'head      - 显示文件开头',
             'tail      - 显示文件末尾',
-            'more      - 分页显示',
-            'less      - 分页显示',
+            'more/less - 分页显示',
             'tar       - 打包文件',
             'git       - Git版本控制',
             'docker    - Docker容器管理',
             'vim/vi    - Vim编辑器',
             'systemctl - 系统服务管理',
             'journalctl- 查看系统日志',
-            'clear     - 清屏',
-            'help      - 显示帮助',
-            'exit      - 退出'
+            'clear     - 清屏 (快捷键: Ctrl+L)',
         ];
 
         return {
             success: true,
-            output: '可用命令:\n' + commands.join('\n')
+            output: '🧭 导航命令:\n' + navCommands.join('\n') + '\n\n🐧 Linux命令:\n' + linuxCommands.join('\n')
         };
     }
 

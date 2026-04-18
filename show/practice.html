@@ -7,35 +7,36 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-brand">
-            <div class="logo">🐧</div>
-            <span>Linux命令学习</span>
-        </div>
-        <ul class="navbar-nav">
-            <li><a href="index.html">首页</a></li>
-            <li><a href="tutorial.html">教程版</a></li>
-            <li><a href="practice.html" class="active">实战版</a></li>
-        </ul>
-        <div class="navbar-actions">
-            <button class="btn btn-primary" id="randomBtn">🎲 随机</button>
-            <button class="btn btn-secondary" id="helpBtn">帮助</button>
-            <button class="btn btn-danger" id="resetBtn">重置</button>
-        </div>
-    </nav>
-
-    <div class="container">
-        <div class="sidebar">
-            <div class="sidebar-title">场景列表</div>
-            <div class="level-list" id="levelList"></div>
-        </div>
-
-        <div class="main-content">
-            <div class="terminal-container">
-                <div id="terminalContainer"></div>
+    <div class="terminal-fullscreen">
+        <div class="sidebar-panel" id="sidebarPanel">
+            <div class="sidebar-header">
+                <div class="sidebar-header-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <span class="sidebar-header-title">Practice</span>
+                <span class="sidebar-header-badge" id="progressBadge">0%</span>
             </div>
-
-            <div class="feedback-container" id="feedbackContainer"></div>
+            <div id="sidebarContent"></div>
+            <div class="sidebar-footer">
+                <div class="sidebar-footer-actions">
+                    <button class="sidebar-action-btn" onclick="app.prevScenario()">◀ 上一场景</button>
+                    <button class="sidebar-action-btn" onclick="app.nextScenario()">下一场景 ▶</button>
+                    <button class="sidebar-action-btn" onclick="app.goHome()">🏠 首页</button>
+                </div>
+            </div>
+        </div>
+        <div class="terminal-area">
+            <div class="terminal-titlebar">
+                <div class="terminal-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <span class="terminal-titletext">user@linux:~ — Practice Mode</span>
+            </div>
+            <div id="terminalContainer"></div>
         </div>
     </div>
 

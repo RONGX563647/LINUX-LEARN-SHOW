@@ -7,35 +7,18 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-brand">
-            <div class="logo">🐧</div>
-            <span>Linux命令学习</span>
-        </div>
-        <ul class="navbar-nav">
-            <li><a href="index.html">首页</a></li>
-            <li><a href="tutorial.html" class="active">教程版</a></li>
-            <li><a href="practice.html">实战版</a></li>
-        </ul>
-        <div class="navbar-actions">
-            <button class="btn btn-primary" id="randomBtn">🎲 随机</button>
-            <button class="btn btn-secondary" id="helpBtn">帮助</button>
-            <button class="btn btn-danger" id="resetBtn">重置</button>
-        </div>
-    </nav>
-
-    <div class="container">
-        <div class="sidebar">
-            <div class="sidebar-title">关卡列表</div>
-            <div class="level-list" id="levelList"></div>
-        </div>
-
-        <div class="main-content">
-            <div class="terminal-container">
-                <div id="terminalContainer"></div>
+    <div class="terminal-fullscreen">
+        <div class="terminal-mode-bar">
+            <span class="terminal-mode-title">📚 教程模式</span>
+            <div class="terminal-mode-actions">
+                <button class="btn btn-sm" id="randomBtn">🎲 随机</button>
+                <button class="btn btn-sm" id="helpBtn">帮助</button>
+                <button class="btn btn-sm btn-danger" id="resetBtn">重置</button>
             </div>
-
-            <div class="feedback-container" id="feedbackContainer"></div>
+        </div>
+        <div id="terminalContainer"></div>
+        <div class="terminal-footer">
+            <span class="footer-hint">输入 <span class="hint-key">help</span> 查看帮助 | <span class="hint-key">list</span> 查看关卡 | <span class="hint-key">goto [n]</span> 跳转关卡</span>
         </div>
     </div>
 

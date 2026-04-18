@@ -7,190 +7,46 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-brand">
-            <div class="logo">🐧</div>
-            <span>Linux命令学习</span>
-        </div>
-        <ul class="navbar-nav">
-            <li><a href="index.html" class="active">首页</a></li>
-            <li><a href="tutorial.html">教程版</a></li>
-            <li><a href="practice.html">实战版</a></li>
-        </ul>
-        <div class="navbar-actions">
-            <button class="btn btn-secondary" onclick="resetProgress()">重置进度</button>
-        </div>
-    </nav>
-
-    <div class="home-container">
-        <h1 class="home-title">交互式 Linux 命令学习系统</h1>
-        <p class="home-description">
-            通过实践学习Linux命令，掌握操作系统基础技能。<br>
-            选择适合你的学习模式，开始你的Linux之旅！
-        </p>
-
-        <div class="mode-selector">
-            <div class="mode-card" onclick="location.href='tutorial.html'">
-                <div class="mode-icon">📚</div>
-                <div class="mode-title">教程版</div>
-                <div class="mode-desc">
-                    从零开始学习Linux命令<br>
-                    每个命令都有详细讲解<br>
-                    适合初学者循序渐进
+    <div class="terminal-fullscreen">
+        <!-- 左侧信息面板 -->
+        <div class="sidebar-panel" id="sidebarPanel">
+            <div class="sidebar-header">
+                <div class="sidebar-header-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
                 </div>
+                <span class="sidebar-header-title">Linux Learn</span>
+                <span class="sidebar-header-badge" id="progressBadge">0%</span>
             </div>
-
-            <div class="mode-card" onclick="location.href='practice.html'">
-                <div class="mode-icon">🎯</div>
-                <div class="mode-title">实战版</div>
-                <div class="mode-desc">
-                    真实场景模拟练习<br>
-                    解决实际问题<br>
-                    适合有一定基础的学习者
-                </div>
-            </div>
-
-            <div class="mode-card" onclick="randomSelect()">
-                <div class="mode-icon">🎲</div>
-                <div class="mode-title">随机挑战</div>
-                <div class="mode-desc">
-                    随机选择关卡或场景<br>
-                    测试你的Linux技能<br>
-                    适合想要挑战的学习者
+            <div id="sidebarContent" class="sidebar-home-content"></div>
+            <div class="sidebar-footer">
+                <div class="sidebar-footer-actions">
+                    <button class="sidebar-action-btn primary" onclick="app.startTutorial()">📖 教程</button>
+                    <button class="sidebar-action-btn primary" onclick="app.startPractice()">🎯 实战</button>
+                    <button class="sidebar-action-btn" onclick="app.randomChallenge()">🎲 随机</button>
+                    <button class="sidebar-action-btn" onclick="app.goHome()">🏠 首页</button>
                 </div>
             </div>
         </div>
-
-        <div class="progress-info" id="progressInfo">
-            <div class="progress-title">学习进度</div>
-            <div class="progress-stats">
-                <div class="progress-stat">
-                    <div class="progress-stat-value">0/6</div>
-                    <div class="progress-stat-label">教程关卡</div>
+        <!-- 右侧终端 -->
+        <div class="terminal-area">
+            <div class="terminal-titlebar">
+                <div class="terminal-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
                 </div>
-                <div class="progress-stat">
-                    <div class="progress-stat-value">0/4</div>
-                    <div class="progress-stat-label">实战场景</div>
-                </div>
+                <span class="terminal-titletext">user@linux:~ — Terminal</span>
             </div>
+            <div id="terminalContainer"></div>
         </div>
     </div>
 
+    <script src="js/commands.js"></script>
     <script src="js/scenarios.js"></script>
-    <script>
-        function loadProgress() {
-            const saved = localStorage.getItem('linuxLearn_progress');
-            if (saved) {
-                try {
-                    return JSON.parse(saved);
-                } catch (e) {
-                    return getDefaultProgress();
-                }
-            }
-            return getDefaultProgress();
-        }
-
-        function getDefaultProgress() {
-            return {
-                version: '1.0',
-                tutorial: {
-                    currentLevel: 1,
-                    completedLevels: [],
-                    levelScores: {}
-                },
-                practice: {
-                    currentScenario: 1,
-                    completedScenarios: [],
-                    scenarioProgress: {}
-                },
-                settings: {
-                    terminalTheme: 'classic',
-                    lastVisit: new Date().toISOString().split('T')[0]
-                }
-            };
-        }
-
-        function resetProgress() {
-            if (confirm('确定要重置所有学习进度吗？')) {
-                localStorage.removeItem('linuxLearn_progress');
-                updateProgressDisplay();
-                alert('进度已重置！');
-            }
-        }
-
-        function randomSelect() {
-            const progress = loadProgress();
-            const isRandomTutorial = Math.random() > 0.5;
-            
-            if (isRandomTutorial) {
-                const availableLevels = tutorialLevels.filter(level => {
-                    return !progress.tutorial.completedLevels.includes(level.id);
-                });
-                
-                if (availableLevels.length === 0) {
-                    alert('恭喜！你已完成所有教程关卡！');
-                    return;
-                }
-                
-                const randomLevel = availableLevels[Math.floor(Math.random() * availableLevels.length)];
-                progress.tutorial.currentLevel = randomLevel.id;
-                localStorage.setItem('linuxLearn_progress', JSON.stringify(progress));
-                
-                alert(`随机选择：教程关卡 ${randomLevel.id} - ${randomLevel.name}`);
-                location.href = 'tutorial.html';
-            } else {
-                const availableScenarios = practiceScenarios.filter(scenario => {
-                    if (progress.practice.completedScenarios.includes(scenario.id)) {
-                        return false;
-                    }
-                    if (scenario.requiredLevels && scenario.requiredLevels.length > 0) {
-                        for (const levelId of scenario.requiredLevels) {
-                            if (!progress.tutorial.completedLevels.includes(levelId)) {
-                                return false;
-                            }
-                        }
-                    }
-                    return true;
-                });
-                
-                if (availableScenarios.length === 0) {
-                    alert('没有可用的实战场景！请先完成相关教程关卡。');
-                    return;
-                }
-                
-                const randomScenario = availableScenarios[Math.floor(Math.random() * availableScenarios.length)];
-                progress.practice.currentScenario = randomScenario.id;
-                localStorage.setItem('linuxLearn_progress', JSON.stringify(progress));
-                
-                alert(`随机选择：实战场景 ${randomScenario.id} - ${randomScenario.name}`);
-                location.href = 'practice.html';
-            }
-        }
-
-        function updateProgressDisplay() {
-            const progress = loadProgress();
-            const tutorialCompleted = progress.tutorial.completedLevels.length;
-            const practiceCompleted = progress.practice.completedScenarios.length;
-
-            const progressInfo = document.getElementById('progressInfo');
-            if (progressInfo) {
-                progressInfo.innerHTML = `
-                    <div class="progress-title">学习进度</div>
-                    <div class="progress-stats">
-                        <div class="progress-stat">
-                            <div class="progress-stat-value">${tutorialCompleted}/${tutorialLevels.length}</div>
-                            <div class="progress-stat-label">教程关卡</div>
-                        </div>
-                        <div class="progress-stat">
-                            <div class="progress-stat-value">${practiceCompleted}/${practiceScenarios.length}</div>
-                            <div class="progress-stat-label">实战场景</div>
-                        </div>
-                    </div>
-                `;
-            }
-        }
-
-        updateProgressDisplay();
-    </script>
+    <script src="js/validator.js"></script>
+    <script src="js/terminal.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
