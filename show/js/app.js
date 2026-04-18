@@ -5,6 +5,7 @@ class App {
         this.mode = 'tutorial';
         this.currentLevel = null;
         this.currentTask = null;
+        this.currentTaskIndex = 0;
         this.currentScenario = null;
 
         this.terminal = null;
@@ -214,14 +215,19 @@ class App {
         this.currentLevel = level;
         this.currentTask = null;
 
-        const levelScore = this.progress.tutorial.levelScores[levelId] || { completed: 0, total: level.tasks.length };
-        const nextTaskIndex = levelScore.completed;
+        if (level.startPath && this.terminal) {
+            this.terminal.setCurrentPath(level.startPath);
+        }
 
-        if (nextTaskIndex < level.tasks.length) {
-            this.currentTask = level.tasks[nextTaskIndex];
+        const levelScore = this.progress.tutorial.levelScores[levelId] || { completed: 0, total: level.tasks.length };
+        this.currentTaskIndex = levelScore.completed;
+
+        if (this.currentTaskIndex < level.tasks.length) {
+            this.currentTask = level.tasks[this.currentTaskIndex];
         }
 
         this.renderTask();
+        this.navigateToTaskPath();
     }
 
     selectScenario(scenarioId) {
@@ -238,76 +244,104 @@ class App {
         this.currentScenario = scenario;
         this.currentTask = null;
 
-        const scenarioProgress = this.progress.practice.scenarioProgress[scenarioId] || { completedTasks: 0, totalTasks: scenario.tasks.length };
-        const nextTaskIndex = scenarioProgress.completedTasks;
+        if (scenario.startPath && this.terminal) {
+            this.terminal.setCurrentPath(scenario.startPath);
+        }
 
-        if (nextTaskIndex < scenario.tasks.length) {
-            this.currentTask = scenario.tasks[nextTaskIndex];
+        const scenarioProgress = this.progress.practice.scenarioProgress[scenarioId] || { completedTasks: 0, totalTasks: scenario.tasks.length };
+        this.currentTaskIndex = scenarioProgress.completedTasks;
+
+        if (this.currentTaskIndex < scenario.tasks.length) {
+            this.currentTask = scenario.tasks[this.currentTaskIndex];
         }
 
         this.renderTask();
+        this.navigateToTaskPath();
+    }
+
+    prevTask() {
+        const tasks = this.mode === 'tutorial' ? this.currentLevel?.tasks : this.currentScenario?.tasks;
+        if (!tasks || this.currentTaskIndex <= 0) return;
+
+        this.currentTaskIndex--;
+        this.currentTask = tasks[this.currentTaskIndex];
+        this.renderTask();
+        this.clearFeedback();
+    }
+
+    nextTask() {
+        const tasks = this.mode === 'tutorial' ? this.currentLevel?.tasks : this.currentScenario?.tasks;
+        if (!tasks || this.currentTaskIndex >= tasks.length - 1) return;
+
+        this.currentTaskIndex++;
+        this.currentTask = tasks[this.currentTaskIndex];
+        this.renderTask();
+        this.clearFeedback();
+    }
+
+    clearFeedback() {
+        if (this.terminal) {
+            // Remove any feedback lines from terminal output
+            const feedbackLines = this.terminal.outputElement.querySelectorAll('.terminal-line.success, .terminal-line.error, .terminal-line.info');
+            feedbackLines.forEach(line => {
+                if (line.textContent.includes('通过') || line.textContent.includes('失败') || line.textContent.includes('提示:')) {
+                    line.remove();
+                }
+            });
+        }
     }
 
     renderTask() {
-        const taskCard = document.getElementById('taskCard');
-        if (!taskCard) return;
+        if (!this.terminal) return;
 
         if (!this.currentTask) {
             const isLevelComplete = this.currentLevel && this.progress.tutorial.completedLevels.includes(this.currentLevel.id);
             const isScenarioComplete = this.currentScenario && this.progress.practice.completedScenarios.includes(this.currentScenario.id);
 
+            this.terminal.clear();
             if (isLevelComplete || isScenarioComplete) {
-                taskCard.innerHTML = `
-                    <div class="task-header">
-                        <div class="task-title">🎉 已完成！</div>
+                this.terminal.printHTML(`
+                    <div class="terminal-task-wrapper">
+                        <div class="terminal-task-info">
+                            <span class="terminal-task-title" style="color:#51cf66;">🎉 已完成！</span>
+                        </div>
                     </div>
-                    <div class="task-description">
-                        ${this.mode === 'tutorial' ? '恭喜！你已完成本关卡的所有任务。' : '恭喜！你已完成本场景的所有任务。'}
-                    </div>
-                    <div class="task-goal">
-                        <div class="task-goal-title">下一步</div>
-                        <p>${this.mode === 'tutorial' ? '继续学习下一个关卡，或尝试实战场景。' : '继续挑战下一个实战场景。'}</p>
-                    </div>
-                `;
+                `);
             } else {
-                taskCard.innerHTML = `
-                    <div class="task-header">
-                        <div class="task-title">选择关卡</div>
-                    </div>
-                    <div class="task-description">
-                        请从左侧列表选择一个关卡开始学习。
-                    </div>
-                `;
+                this.terminal.showTaskInfo(null);
             }
             return;
         }
 
         const task = this.currentTask;
-        const progress = this.mode === 'tutorial'
-            ? this.progress.tutorial.levelScores[this.currentLevel.id]
-            : this.progress.practice.scenarioProgress[this.currentScenario.id];
+        const tasks = this.mode === 'tutorial' ? this.currentLevel.tasks : this.currentScenario.tasks;
+        const totalTasks = tasks.length;
+        const currentIndex = this.currentTaskIndex + 1;
+        const hasPrev = this.currentTaskIndex > 0;
+        const hasNext = this.currentTaskIndex < tasks.length - 1;
 
-        taskCard.innerHTML = `
-            <div class="task-header">
-                <div class="task-title">${task.title}</div>
-                <div class="task-progress">任务 ${progress ? progress.completed + 1 : 1} / ${this.mode === 'tutorial' ? this.currentLevel.tasks.length : this.currentScenario.tasks.length}</div>
-            </div>
-            <div class="task-description">${task.description}</div>
-            <div class="task-goal">
-                <div class="task-goal-title">目标</div>
-                <p>${task.goal}</p>
-            </div>
-            <div class="task-hint">
-                <div class="task-hint-title">提示</div>
-                <p>${task.hint}</p>
-            </div>
-        `;
+        this.terminal.clear();
+        this.terminal.showTaskInfo(task, currentIndex, totalTasks, hasPrev, hasNext);
+    }
+
+    navigateToTaskPath() {
+        if (!this.currentTask || !this.terminal) return;
+
+        const validation = this.currentTask.validation;
+        if (validation && validation.requiredPath) {
+            this.terminal.setCurrentPath(validation.requiredPath);
+        }
     }
 
     handleCommandExecuted(command, result) {
         if (!this.currentTask) return;
 
-        const validationResult = this.validator.validate(command, this.currentTask.validation);
+        const context = {
+            currentPath: this.terminal.getFileSystem().currentPath,
+            fileSystem: this.terminal.getFileSystem()
+        };
+
+        const validationResult = this.validator.validate(command, this.currentTask.validation, context);
 
         this.showFeedback(validationResult);
 
@@ -348,28 +382,23 @@ class App {
             this.loadScenario(this.progress.practice.currentScenario);
             this.renderScenarioList();
         }
+        
+        if (this.terminal) {
+            this.terminal.focus();
+        }
     }
 
     showFeedback(result) {
-        const feedbackContainer = document.getElementById('feedbackContainer');
-        if (!feedbackContainer) return;
-
-        feedbackContainer.innerHTML = `
-            <div class="feedback ${result.success ? 'success' : 'error'}">
-                <div class="feedback-title">${result.success ? '✓ 通过' : '✗ 失败'}</div>
-                <div class="feedback-content">${result.message}</div>
-                ${result.hint ? `<div class="feedback-answer">提示：${result.hint}</div>` : ''}
-                ${!result.success ? `<button class="btn btn-primary" onclick="app.retryTask()" style="margin-top: 15px;">重新尝试</button>` : ''}
-            </div>
-        `;
+        if (this.terminal) {
+            this.terminal.showFeedback(result);
+            if (!result.success && result.hint) {
+                this.terminal.showHint(result.hint);
+            }
+        }
     }
 
     retryTask() {
         this.renderTask();
-        const feedbackContainer = document.getElementById('feedbackContainer');
-        if (feedbackContainer) {
-            feedbackContainer.innerHTML = '';
-        }
         if (this.terminal) {
             this.terminal.focus();
         }
